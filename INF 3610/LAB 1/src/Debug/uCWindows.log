@@ -1,0 +1,33 @@
+﻿La génération a démarré 2015-09-04 11:41:24.
+     1>Projet "Y:\INF 3610\LAB 1\src\uCWindows.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt exo4.c
+         exo4.c
+     1>y:\inf 3610\lab 1\src\exo4.c(95): warning C4047: 'fonction' : les niveaux d'indirection de 'void **' et de 'void *(*)[10]' sont différents
+     1>y:\inf 3610\lab 1\src\exo4.c(95): warning C4022: 'OSQCreate' : incompatibilité de pointeur pour le paramètre réel 1
+     1>y:\inf 3610\lab 1\src\exo4.c(97): warning C4047: 'fonction' : les niveaux d'indirection de 'void **' et de 'void *(*)[10]' sont différents
+     1>y:\inf 3610\lab 1\src\exo4.c(97): warning C4022: 'OSQCreate' : incompatibilité de pointeur pour le paramètre réel 1
+     1>y:\inf 3610\lab 1\src\exo4.c(99): warning C4047: 'fonction' : les niveaux d'indirection de 'void **' et de 'void *(*)[10]' sont différents
+     1>y:\inf 3610\lab 1\src\exo4.c(99): warning C4022: 'OSQCreate' : incompatibilité de pointeur pour le paramètre réel 1
+     1>y:\inf 3610\lab 1\src\exo4.c(91): warning C4101: 'err' : variable locale non référencée
+     1>y:\inf 3610\lab 1\src\exo4.c(193): warning C4101: 'err' : variable locale non référencée
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\uCWindows.exe" /INCREMENTAL /NOLOGO winmm.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug\uCWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\uCWindows.lib" /MACHINE:X86 /SAFESEH .\Debug\exo4.obj
+         .\Debug\os_core.obj
+         .\Debug\os_cpu_c.obj
+         .\Debug\os_flag.obj
+         .\Debug\os_mbox.obj
+         .\Debug\os_mem.obj
+         .\Debug\os_mutex.obj
+         .\Debug\os_q.obj
+         .\Debug\os_sem.obj
+         .\Debug\os_task.obj
+         .\Debug\os_time.obj
+         .\Debug\os_trace.obj
+     1>exo4.obj : warning LNK4075: ' /EDITANDCONTINUE' ignorÚ Ó cause de la spÚcification '/SAFESEH'
+         uCWindows.vcxproj -> Y:\INF 3610\LAB 1\src\.\Debug\uCWindows.exe
+     1>Génération du projet "Y:\INF 3610\LAB 1\src\uCWindows.vcxproj" terminée (Build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:53.84
