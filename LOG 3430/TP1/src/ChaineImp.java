@@ -168,7 +168,8 @@ public class ChaineImp implements Chaine {
 
 	@Override
 	public boolean isValide() {
-		// TODO Auto-generated method stub
+		//parcours la liste et verifie que les valeurs des noeuds sont le resultat de l'operation
+		
 		return false;
 	}
 	
@@ -189,5 +190,87 @@ public class ChaineImp implements Chaine {
 		
 		return str;	
 	}
-
+	
+	public int add(int a, int b){
+		int res=a;
+		
+		if(b>0){
+			while(b-- !=0){
+				res++;
+			}
+		}
+		else if(b<0){
+			while(b++ !=0){
+				res--;
+			}
+		}
+		return res;
+	}
+	
+	public int substract(int a, int b){
+		return add(a,-b);
+		
+	}
+	
+	public int multiply(int a, int b){
+		int res=a;
+		if(b>0){
+			while(b-- !=0){
+				res=add(res,a);
+			}
+		}
+		else if(b<0){
+			while(b++ !=0){
+				res=add(res,a);
+				res=-res;
+			}
+		}
+		else{
+			res=0;
+		}
+		return res;
+		
+	}
+	
+	public int divide(int a, int b) throws Exception
+	{
+		int res=a,test=b,a0=1,b0=1,N=0,n=1,next=1;
+		if(b==0){
+			throw new Exception("Erreur divide() : a="+a+" b="+b+" -- division nulle impossible\n");
+		}
+		if(b>a)
+		{
+			return 0;
+		}
+		//voir https://fr.wikipedia.org/wiki/Division_euclidienne#M.C3.A9thode_d.C3.A9cimale
+		
+		//recherche plus petite puissqnce de  10
+		 
+	
+		do{
+			test=multiply(test,2);
+			a0=multiply(a0,2);
+			b0=multiply(b0,2);
+			N++;
+			
+		}while(test<a);
+		
+		a0=substract(a0,2);
+		while((n<N)&&(b0-a0==1)){
+			next=1;
+			while(multiply(2,next)!=(a0+b0)){
+				next++;
+			}
+			if(multiply(add(a0,b0),b)<=multiply(a,2)){
+				a0=next;	
+			}
+			else{
+				b0=next;
+			}
+			n++;
+		}
+		
+		
+		return a0;
+	}
 }

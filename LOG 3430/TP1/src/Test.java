@@ -39,6 +39,8 @@ public class Test {
 			ch1.reset();
 			System.out.println(ch1.toString());
 			System.out.println(ch1.getSize());
+			
+			System.out.println(ch1.divide(1,1));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
