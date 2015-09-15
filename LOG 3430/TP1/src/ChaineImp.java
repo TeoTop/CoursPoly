@@ -212,15 +212,16 @@ public class ChaineImp implements Chaine {
 		
 	}
 	
-	public int multiply(int a, int b){
+	public int multiply(int a, int b){//NOT WORKING
+		
 		int res=a;
 		if(b>0){
-			while(b-- !=0){
+			while(b-- >1){
 				res=add(res,a);
 			}
 		}
 		else if(b<0){
-			while(b++ !=0){
+			while(b++ <-1){
 				res=add(res,a);
 				res=-res;
 			}
@@ -233,7 +234,7 @@ public class ChaineImp implements Chaine {
 	}
 	
 	public int divide(int a, int b) throws Exception
-	{
+	{//NOT WORKING
 		int res=a,test=b,a0=1,b0=1,N=0,n=1,next=1;
 		if(b==0){
 			throw new Exception("Erreur divide() : a="+a+" b="+b+" -- division nulle impossible\n");
@@ -241,6 +242,10 @@ public class ChaineImp implements Chaine {
 		if(b>a)
 		{
 			return 0;
+		}
+		if(b==1)
+		{
+			return a;
 		}
 		//voir https://fr.wikipedia.org/wiki/Division_euclidienne#M.C3.A9thode_d.C3.A9cimale
 		
@@ -256,6 +261,8 @@ public class ChaineImp implements Chaine {
 		}while(test<a);
 		
 		a0=substract(a0,2);
+		System.out.println("a0 1 :"+a0);
+		System.out.println("b0 1 :"+b0);
 		while((n<N)&&(b0-a0==1)){
 			next=1;
 			while(multiply(2,next)!=(a0+b0)){
