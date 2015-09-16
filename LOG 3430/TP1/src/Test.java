@@ -40,8 +40,10 @@ public class Test {
 			System.out.println(ch1.toString());
 			System.out.println(ch1.getSize());
 			
-			System.out.println("multiply : "+ch1.multiply(-3,6));
-			System.out.println("division : "+ch1.divide(6,3));
+			System.out.println("add : "+ch1.add(1,-1));
+			System.out.println("substrqct : "+ch1.substract(-1,1));
+			System.out.println("multiply : "+ch1.multiply(0,1));
+			System.out.println("division : "+ch1.divide(-5,2));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
