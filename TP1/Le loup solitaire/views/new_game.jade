@@ -4,8 +4,85 @@ block link
   -var selected = 'new game';
 
 block content
-  h1= title
+  h1 Création d'une nouvelle partie
 
-  p Présenation du jeu et règle
+  form(name="new-game", method="post", action="/new_game_post")
+    div(class='forms-controller')
+      label(for='name') Name :
+      input(id='name',type='text',placeholder='Name',name='name')
 
-  a(href='/chap/1') Démarrer
+    div(class='forms-controller')
+      label(for='kai') Discipline de Kai :
+      ul
+        li
+          input(type="checkbox", name="kai", value="camouflage")
+          | Camouflage
+        li
+          input(type="checkbox", name="kai", value="hunting")
+          | Chasse
+        li
+          input(type="checkbox", name="kai", value="sense")
+          | Sixème sens
+        li
+          input(type="checkbox", name="kai", value="traking")
+          | Orientation
+        li
+          input(type="checkbox", name="kai", value="healing")
+          | Guérison
+        li
+          input(type="checkbox", name="kai", value="weaponskill")
+          | Maîtrise d'arme      
+        li
+          input(type="checkbox", name="kai", value="mindshield")
+          | Bouclier psychique         
+        li
+          input(type="checkbox", name="kai", value="mindblast")
+          | Puissance psychique   
+        li
+          input(type="checkbox", name="kai", value="animalkinship")
+          | Communication animale
+        li
+          input(type="checkbox", name="kai", value="mindovermatter")
+          | Maîtrise psychique de la matière  
+
+    div(class='forms-controller')
+      label(for='equipment') Equipement :
+      ul
+        li
+          input(type="checkbox", name="equipment", value="sword")
+          | Epee
+        li
+          input(type="checkbox", name="equipment", value="shortsword")
+          | Sabre
+        li
+          input(type="checkbox", name="equipment", value="spear")
+          | Lance
+        li
+          input(type="checkbox", name="equipment", value="mace")
+          | Masse d'armes
+        li
+          input(type="checkbox", name="equipment", value="warhammer")
+          | Marteau de guerre    
+        li
+          input(type="checkbox", name="equipment", value="axe")
+          | Hâche         
+        li
+          input(type="checkbox", name="equipment", value="broadsword")
+          | Glaive 
+        li
+          input(type="checkbox", name="equipment", value="quaterstaff")
+          | Bâton
+        li
+          input(type="checkbox", name="equipment", value="wastcost")
+          | Gilet de cuir matelassé
+        li
+          input(type="checkbox", name="equipment", value="potion")
+          | Potion de Lampur
+        li
+          input(type="checkbox", name="equipment", value="ration")
+          | Rations spéciales
+        li
+          input(type="checkbox", name="equipment", value="ration")
+          | Rations spéciales
+
+      input(type='submit',name='submit',value='Commencer le jeu')

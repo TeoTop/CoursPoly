@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
 
   block link
     -var selected = 'home'; //default
@@ -10,8 +10,8 @@ html
   -var menu = { 'home': '/', 'new game': '/new_game', 'chap': '/chap', 'help': '/help' };
 
   body
-    nav
-      ul
+    nav.navbar.navbar-default
+      ul.nav
         each val, key in menu
           li
             if selected === key
@@ -24,4 +24,6 @@ html
 
 
     footer
-      p Copyright (c) foobar
+      p 
+      | Footer
+      | Site créé avec Express, Jade et utilise NodeJS dans le cours de LOG4420.

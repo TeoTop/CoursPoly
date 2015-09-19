@@ -3,15 +3,14 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('chapter', { chap: 0 });
+  res.render('pages/page_0', { chap: 'Liste des pages' });
 });
 
 /* Dynamic route for chapters 
 *  :chap parameter can complete file name
-*  ex : view chapter1, chapter2 -> 'chapter' + req.params.chap 
+*  ex : view page_1, page_2 -> 'page_' + req.params.chap 
 */
 router.get('/:chap', function(req, res, next) {
-
   res.render('pages/page_'+req.params.chap, { chap: req.params.chap });
 });
 
