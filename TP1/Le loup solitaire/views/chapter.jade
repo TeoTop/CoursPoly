@@ -52,13 +52,23 @@ block content
    td Objet 1
    td Objet 2
 
- div(id="page_content")
- block page
-  
+ h2 Page #{chap}
+ div(id="story")
+  block story
+ 
+ div(id="fight")
+  block fight
+
+ div(id="turn")
+  block turn
+
+ div(id="picture")
+  block picture
+
+ h2 Historique des combats
  table
   tr
-   th Historique des combats
-
+   th Combats
   tr
    td Monstre
   tr
