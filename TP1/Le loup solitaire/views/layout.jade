@@ -10,8 +10,8 @@ html
   -var menu = { 'home': '/', 'new game': '/new_game', 'chap': '/chap', 'help': '/help' };
 
   body
-    nav.navbar.navbar-default
-      ul.nav
+    nav
+      ul
         each val, key in menu
           li
             if selected === key
