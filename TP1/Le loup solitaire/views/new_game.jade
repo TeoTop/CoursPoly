@@ -6,83 +6,83 @@ block link
 block content
   h1 Création d'une nouvelle partie
 
-  form(name="new-game", method="post", action="/new_game_post")
-    div(class='forms-controller')
-      label(for='name') Name :
-      input(id='name',type='text',placeholder='Name',name='name')
+  div(class='forms-controller')
+    form(name="new-game", method="post", action="/new_game_post")
+      div(class='field-controller')
+        label(for='name') Name :
+        input(id='name',type='text',placeholder='Name',name='name')
 
-    div(class='forms-controller')
-      label(for='kai') Discipline de Kai :
-      ul
-        li
+      div(class='field-controller')
+        label(for='kai') Discipline de Kai :
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="camouflage")
           | Camouflage
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="hunting")
           | Chasse
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="sense")
           | Sixème sens
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="traking")
           | Orientation
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="healing")
           | Guérison
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="weaponskill")
           | Maîtrise d'arme      
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="mindshield")
           | Bouclier psychique         
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="mindblast")
           | Puissance psychique   
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="animalkinship")
           | Communication animale
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="mindovermatter")
           | Maîtrise psychique de la matière  
 
-    div(class='forms-controller')
-      label(for='equipment') Equipement :
-      ul
-        li
+      div(class='field-controller')
+        label(for='equipment') Equipement :
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="sword")
           | Epee
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="shortsword")
           | Sabre
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="spear")
           | Lance
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="mace")
           | Masse d'armes
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="warhammer")
           | Marteau de guerre    
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="axe")
           | Hâche         
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="broadsword")
           | Glaive 
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="quaterstaff")
           | Bâton
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="wastcost")
           | Gilet de cuir matelassé
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="potion")
           | Potion de Lampur
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="ration")
           | Rations spéciales
-        li
+        div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="ration")
           | Rations spéciales
 
-      input(type='submit',name='submit',value='Commencer le jeu')
+      div(class='field-controller')
+        input(type='submit',name='submit',value='Commencer le jeu')

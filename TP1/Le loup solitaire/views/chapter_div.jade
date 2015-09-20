@@ -1,0 +1,69 @@
+extends layout
+
+block link
+  -var selected = 'chap';
+block content
+ h1 LE LOUP SOLITAIRE
+
+ h2 Sommaire du joueur
+
+ div 
+  span Habiletés
+  span 13
+
+ div 
+  span Endurance
+  span 18
+
+ div 
+  span Pièces d'or
+  span 48
+
+ div 
+  span Disciplines
+  span Camouflage
+  span Chasseur
+  span Sixième sens
+  span Orientation
+  span Guérison
+  
+ h2 Équipements
+  
+ div 
+  span Armes
+  span Marteau de guerre
+  span Glaive
+
+ div 
+  span Sac à dos
+  span Rations spéciales
+  span Potion de Lampsur
+  span Vide
+  span Vide
+  span Vide
+  span Vide
+  span Vide
+
+ div
+  span Objets spéciaux
+  span Gilet de cuir matelassé
+  span Objet 2
+
+ h2 Page #{chap}
+ div(id="story")
+  block story
+ 
+ div(id="fight")
+  block fight
+
+ div(id="turn")
+  block turn
+
+ div(id="picture")
+  block picture
+
+ h2 Historique des combats
+ div
+  span Combat
+  span Monstre
+  span Monstre 2
