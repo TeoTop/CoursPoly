@@ -1,7 +1,9 @@
-extends ../chapter
+extends layout
 
-block story
-  h3 Liste des chapitres
+block link
+  -var selected = 'chap';
+block content
+  h2 Liste des chapitres
   div 1-10 : 
     a(href='/chap/1') 1
   div 71-80 : 

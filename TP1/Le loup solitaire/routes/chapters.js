@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('pages/page_0', { chap: 'Liste des pages' });
+  res.render('list_pages');
 });
 
 /* Dynamic route for chapters 
