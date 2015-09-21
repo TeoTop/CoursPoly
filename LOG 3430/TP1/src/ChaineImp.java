@@ -212,6 +212,75 @@ public class ChaineImp implements Chaine {
 		
 	}
 	
+	
+	/**
+	 * Methode pour multiplier deux entiers (Par Théo)
+	 */
+	public int multiply(int a, int b){
+		
+		int res=0;
+		if(b>0){
+			while(b-- != 0){
+				res=add(res,a);
+			}
+		}
+		else if(b<0){
+			while(b++ != 0){
+				res=substract(res,a);
+			}
+		}
+		return res;
+		
+	}
+	
+	/**
+	 * On doit retourner le résultat d'une division entière. On ne gère pas le reste. (Par Théo)
+	 */
+	public int divide(int a, int b) throws Exception
+	{
+		int res=0;
+		
+		if(b==0){
+			throw new Exception("Erreur divide() : a="+a+" b="+b+" -- division nulle impossible\n");
+		}
+		
+		if(a==b){
+			res = 1;
+		} else if(a==-b){
+			res = -1;
+		} else if(a<0){
+			if(b<0){
+				while(a<=b){
+					res++;
+					a=substract(a, b);
+				}
+			}
+			if(b>0){
+				while(a<=-b){
+					res--;
+					a=add(a, b);
+				}
+			}
+		} else if(a>0){
+			if(b>0){
+				while(a>=b){
+					res++;
+					a=substract(a, b);
+				}
+			}
+			if(b<0){
+				while(a>=-b){
+					res--;
+					a=add(a, b);
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	/* Méthode multiply et divided by Timothée
+	 * 
 	public int multiply(int a, int b){//NOT WORKING
 		
 		int res=a;
@@ -301,5 +370,5 @@ public class ChaineImp implements Chaine {
 		
 		
 		return multiply(a0,sign);
-	}
+	}*/
 }

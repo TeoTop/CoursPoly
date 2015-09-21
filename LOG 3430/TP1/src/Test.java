@@ -42,8 +42,11 @@ public class Test {
 			
 			System.out.println("add : "+ch1.add(1,-1));
 			System.out.println("substrqct : "+ch1.substract(-1,1));
-			System.out.println("multiply : "+ch1.multiply(0,1));
-			System.out.println("division : "+ch1.divide(-5,2));
+			System.out.println("multiply : "+ch1.multiply(6,5));
+			System.out.println("division : "+ch1.divide(-11,6));
+			int test = -11/6;
+			System.out.println("division : "+ test);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
