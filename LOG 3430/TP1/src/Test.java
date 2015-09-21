@@ -41,6 +41,16 @@ public class Test {
 			System.out.println(ch1.toString());
 			System.out.println(ch1.getSize());
 			
+			ch1.suiteChaine("test", "add", 6, 2, 4, false);
+			System.out.println(ch1.toString());
+			System.out.println(ch1.getSize());
+			
+			ch1.suiteChaine("test", "sub", 18, 28, 5, false);
+			System.out.println(ch1.toString());
+			System.out.println(ch1.getSize());
+			 
+			System.out.println("Valide : "+ch1.isValide());
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,27 +1,23 @@
 /**
  * 
  * @author teoto_000
- * Singleton + ENUM finir la structure
+ * Singleton opérateur
  */
 public class Operateur {
-
-	private String op = null; 
 	
-	private Operateur(String op){
-		this.op = op;
-	}
+	private Operateur(){}
 	
 	private static Operateur OPERATEUR = null;
 	
-	public static Operateur getOperateur(String op){
-		if(OPERATEUR == null) OPERATEUR = new Operateur(op);
+	public static Operateur getOperateur(){
+		if(OPERATEUR == null) OPERATEUR = new Operateur();
 		return OPERATEUR;
 	}
 	
-	public int calcul(int a, int b){
+	public int calcul(String op, int a, int b){
 		int res = 0;
 		
-		switch(OPERATEUR.op){
+		switch(op){
 		case "add":
 			res = OPERATEUR.add(a, b);
 			break;
