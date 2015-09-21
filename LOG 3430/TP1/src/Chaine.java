@@ -1,7 +1,7 @@
 
 public interface Chaine {
 
-	Chaine SuiteChaine(String chemin, String operateur, int val1, int val2, int tailleListe, boolean vide);
+	Chaine SuiteChaine(String chemin, String operateur, int val1, int val2, int tailleListe, boolean vide) throws Exception;
 	
 	void add(Noeud elememt);
 	
@@ -18,15 +18,4 @@ public interface Chaine {
 	void reset();
 	
 	boolean isValide(); 
-	
-	int add(int a, int b);
-	
-	int substract(int a, int b);
-	
-	int multiply(int a, int b);
-	
-	int divide(int a, int b) throws Exception;
-	
-	
-	//void printList();
 }

@@ -7,10 +7,11 @@ public class Test {
 		Noeud nd3 = new NoeudImp(2, 12, null);
 		Noeud nd2 = new NoeudImp(1, 7, nd3);
 		Noeud nd1 = new NoeudImp(0, 5, nd2);
-		ChaineImp ch1 = new ChaineImp(nd1, nd1, "fichier", "op", 3);
+		ChaineImp ch1 = new ChaineImp(nd1, "fichier", "op", 3);
 		//ch1.SuiteChaine("f", "add", 1, 2, 5, true);
 		
 		try {
+			System.out.println(ch1.toString());
 			int val1 = ((NoeudImp)ch1.getAt(1)).getValue();
 			System.out.println("Test val1 :" + val1);
 			
@@ -39,13 +40,6 @@ public class Test {
 			ch1.reset();
 			System.out.println(ch1.toString());
 			System.out.println(ch1.getSize());
-			
-			System.out.println("add : "+ch1.add(1,-1));
-			System.out.println("substrqct : "+ch1.substract(-1,1));
-			System.out.println("multiply : "+ch1.multiply(6,5));
-			System.out.println("division : "+ch1.divide(-11,6));
-			int test = -11/6;
-			System.out.println("division : "+ test);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
