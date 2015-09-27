@@ -1,7 +1,11 @@
-
+/**
+ * 
+ * version 0.5
+ *
+ */
 public class ChaineImp implements Chaine {
 	
-	private static final int BEGININDEX = 0; 
+	private final int BEGININDEX = 0; 
 
 	private Noeud init;
 	private Noeud curseur;
@@ -27,12 +31,10 @@ public class ChaineImp implements Chaine {
 	}
 
 	@Override
-	/**
-	 * A TESTER PARCE QU' IL FAUT QUE J'AILLE EN COURS LA!
-	 */
 	public Chaine suiteChaine(String chemin, String operateur, int val1,
 			int val2, int tailleListe, boolean vide) throws Exception {
-		int nbCalcul = 0;
+		int nbCalcul = this.tailleChaine + tailleListe;
+		int newVal = 0;
 		
 		if(vide){
 			if(this.init != null || this.tailleChaine != 0){
@@ -42,13 +44,17 @@ public class ChaineImp implements Chaine {
 		}
 		
 		this.fichier = chemin;
-		this.operateur = operateur;
-		nbCalcul = this.tailleChaine + tailleListe;
-		
+		this.operateur = operateur;		
+		/**
+		 * Ajout des deux premières valeurs dans la suite
+		 */
 		this.add(new NoeudImp(val1));
 		this.add(new NoeudImp(val2));
 		
-		int newVal = 0;
+		/**
+		 * Complète la liste si les deux valeurs ne suffisent pas à compléter la taille. Les éléments qui complètent la suite sont
+		 * calculé à partir des deux derniers éléments de la liste
+		 */
 		while(this.tailleChaine < nbCalcul){
 			this.getAt(this.tailleChaine-2);
 			newVal = Operateur.getOperateur().calcul(this.operateur, 
@@ -58,7 +64,7 @@ public class ChaineImp implements Chaine {
 			this.add(new NoeudImp(newVal));
 		}
 		
-		return null;
+		return this;
 	}
 	
 	public Noeud getInit() {
@@ -94,11 +100,12 @@ public class ChaineImp implements Chaine {
 	}
 
 	
-
 	@Override
 	public void add(Noeud elememt) {
 		try {
-			//vérifier si la chaine est vide avant de cherche un élément de la chaine 
+			/**
+			 * Vérifier si la chaine est vide avant de cherche un élément de la chaine 
+			 */
 			if(tailleChaine != 0)
 				curseur = getAt(BEGININDEX + getSize()-1);
 		} catch (Exception e) {
@@ -109,7 +116,9 @@ public class ChaineImp implements Chaine {
 		((NoeudImp)elememt).setIndex(BEGININDEX + getSize());
 		((NoeudImp)elememt).setNext(null);
 		
-		// vérification si la chaine est vide
+		/**
+		 * Vérification si la chaine est vide
+		 */
 		if(tailleChaine == 0){
 			init = ((NoeudImp)elememt);
 		} else {
@@ -144,7 +153,7 @@ public class ChaineImp implements Chaine {
 		}
 		
 		/**
-		 * Mise a jour des index
+		 * Mise a jour des index en partant du noeud modifié
 		 */
 		while(curseur!=null){
 			((NoeudImp)curseur).setIndex(((NoeudImp)curseur).getIndex()-1);
@@ -182,9 +191,6 @@ public class ChaineImp implements Chaine {
 		while(position != ((NoeudImp)this.curseur).getIndex()){
 			this.curseur = ((NoeudImp)this.curseur).getNext();
 		}
-		/*for(int pos = position + BEGININDEX ; pos > BEGININDEX ; pos--){
-			
-		}*/
 				
 		return curseur;
 	}
@@ -201,6 +207,11 @@ public class ChaineImp implements Chaine {
 		tailleChaine = 0;
 	}
 
+	/**
+	 * On vérifie le calcul de chaque élément à partir du troisième et cela, en utilisant les deux éléments précédents et
+	 * l'opérateur indiqué par l'attribut de la chaine.
+	 * Rappel:l'opérateur est un singleton, on peut y accéder de n'importe où dans le programme.  
+	 */
 	@Override
 	public boolean isValide() {
 		int val1, val2, res, index;
@@ -211,6 +222,7 @@ public class ChaineImp implements Chaine {
 		}
 		try {
 			index = 2;
+			
 			do{
 				this.curseur = this.getAt(index-2);
 				val1 = ((NoeudImp)curseur).getValue();
@@ -221,7 +233,6 @@ public class ChaineImp implements Chaine {
 					flag = false;
 				}
 				index++;
-				//System.out.println(""+res);
 			} while( flag && index < this.tailleChaine);
 			
 		} catch (Exception e) {

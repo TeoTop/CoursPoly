@@ -1,6 +1,10 @@
 import java.io.Console;
 
-
+/**
+ * Classe de test et de démarrage du projet.
+ * verion 0.5
+ *
+ */
 public class Test {
 
 	public static void main(String[] args) {
