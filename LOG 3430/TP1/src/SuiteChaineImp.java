@@ -14,6 +14,7 @@ import java.io.IOException;
 public class SuiteChaineImp implements SuiteChaine {
 	
 	private static final int BEGININDEX = 0; 
+	private static final int SIZELIMIT = 10;
 
 	private Noeud init;
 	private Noeud curseur;
@@ -75,7 +76,7 @@ public class SuiteChaineImp implements SuiteChaine {
 			}
 		}
 		
-		if(nbCalcul > 10){
+		if(nbCalcul > SIZELIMIT){
 			throw new Exception("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
 		"int val2, int tailleListe, boolean vide) : La taille indiqué n'est pas valide. La taille actuelle de liste ajouté à " +
 			"tailleListe : "+tailleListe+" sera supérieur à 10 \n");
@@ -164,10 +165,17 @@ public class SuiteChaineImp implements SuiteChaine {
 		 */
 		if(tailleChaine == 0){
 			init = ((NoeudImp)elememt);
+			tailleChaine++;
 		} else {
-			((NoeudImp)curseur).setNext(elememt);
+			if(this.getSize()<SIZELIMIT){
+				((NoeudImp)curseur).setNext(elememt);
+				tailleChaine++;
+			}
+			else{
+				System.out.println("Erreur add(): Taille maximale de la liste atteinte. Element : "+((NoeudImp)elememt).getValue()+" Non ajouté");
+			}
 		}
-		tailleChaine++;
+		
 	}
 
 	@Override
