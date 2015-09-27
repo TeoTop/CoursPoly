@@ -1,47 +1,27 @@
 /**
- * Singleton operateur pour effectuer des calcules (+, -, * et /).
- * Permet de n'avoir qu'une instance d'Operateur pour toute l'application et qui sera utilisée par
- * toute les chaines pour effectuer les calculs. Evite le duplication inutile d'une instance
- * fonctionnelle. 
- * @version 0.5
+ * 
+ * @author teoto_000
+ * Singleton opérateur
  */
 public class Operateur {
 	
-	/**
-	 * Instance unique et privée de la classe opérateur (pattern singleton).
-	 * Accessible depuis la méthode {@link #getOperateur()}
-	 * @see #getOperateur() 
-	 */
-	private static Operateur OPERATEUR = null;
-	
-	/**
-	 * Constructeur privé pour appliquer le pattern singleton
-	 * @see #getOperateur()
-	 */
 	private Operateur(){}
 	
-	/**
-	 * Permet d'accéder à l'instance @see {@link Operateur}. Si l'instance n'existe pas encore,
-	 * on appel alors le construcuteur @see {@link #Operateur()}.
-	 * @return {@link #Operateur()}, instance de Operateur (existante ou nouvellement créée)
-	 */
+	private static Operateur OPERATEUR = null;
+	
 	public static Operateur getOperateur(){
 		if(OPERATEUR == null) OPERATEUR = new Operateur();
 		return OPERATEUR;
 	}
-	
-	
-	/**
-	 * Opération sur les termes a et b. Evalué de gauche à droite : a op b.
-	 * @param op Opérateur de calcul (add -> +, sub -> -, mul -> * et div -> /)
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de l'opération
-	 * @see #add(int, int)
-	 * @see #substract(int, int)
-	 * @see #multiply(int, int)
-	 * @see #divide(int, int)
-	 */
+	public boolean isValide(String op)
+	{
+		if(op.equals("add") || op.equals("sub") || op.equals("mul") ||op.equals("div")){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public int calcul(String op, int a, int b){
 		int res = 0;
 		
@@ -69,13 +49,6 @@ public class Operateur {
 		return res;
 	}
 	
-	/**
-	 * Addition entre a et b (O(b))
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de l'addition
-	 * @see #add(int, int)
-	 */
 	private int add(int a, int b){
 		int res=a;
 		
@@ -92,24 +65,13 @@ public class Operateur {
 		return res;
 	}
 
-	/**
-	 * Soustraction de a par b (O(b)).
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de la soustraction
-	 * @see #add(int, int)
-	 */
 	private int substract(int a, int b){
 		return add(a,-b);
 		
 	}
 
 	/**
-	 * Multiplication entre a et b (O(a*b)).
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de la multiplication
-	 * @see #add(int, int)
+	 * Methode pour multiplier deux entiers (Par Théo)
 	 */
 	private int multiply(int a, int b){
 		int res=0;
@@ -121,18 +83,14 @@ public class Operateur {
 		}
 		else if(b<0){
 			while(b++ != 0){
-				res=add(res,-a);
+				res=substract(res,a);
 			}
 		}
 		return res;
 	}
 
 	/**
-	 * Division de a par b (O(b)).
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de la division
-	 * @see #add(int, int)
+	 * On doit retourner le résultat d'une division entière. On ne gère pas le reste. (Par Théo)
 	 */
 	private int divide(int a, int b) throws Exception
 	{
@@ -150,7 +108,7 @@ public class Operateur {
 			if(b<0){
 				while(a<=b){
 					res++;
-					a=add(a, -b);
+					a=substract(a, b);
 				}
 			}
 			if(b>0){
@@ -163,7 +121,7 @@ public class Operateur {
 			if(b>0){
 				while(a>=b){
 					res++;
-					a=add(a, -b);
+					a=substract(a, b);
 				}
 			}
 			if(b<0){
@@ -176,4 +134,98 @@ public class Operateur {
 		
 		return res;
 	}
+	
+
+	/* Méthode multiply et divided by Timothée
+	 */ 
+	/*private int multiply(int a, int b){//NOT WORKING
+		int res=a;
+		if(b>0){
+			while(b-- >1){
+				res=add(res,a);
+			}
+		}
+		else if(b<0){
+			while(b++ <=0){
+				res=substract(res,a);
+			}
+		}
+		else{
+			res=0;
+		}
+		return res;
+		
+	}*/
+	
+	/*private int divide(int a, int b) throws Exception
+	{//NOT WORKING
+		int res=0,test=0,a0=1,b0=1,N=0,n=1,next=1,sign=1;
+		if(b==0){
+			throw new Exception("Erreur divide() : a="+a+" b="+b+" -- division nulle impossible\n");
+		}
+		if((a<0)&&(b<0)){
+			a=-a;
+			b=-b;
+		}
+		else if((a>0)&&(b<0)){
+			b=-b;
+			sign=-1;
+		}
+		else if((a<0)&&(b>0)){
+			a=-a;
+			sign=-1;
+		}
+		if(b>a){
+			return 0;
+		}
+		if(multiply(b,2)>a)
+		{
+			return 1;
+		}
+		if(b==1){
+			return multiply(a,sign);
+		}
+		if(a==0){
+			return 0;
+		}
+		//voir https://fr.wikipedia.org/wiki/Division_euclidienne#M.C3.A9thode_d.C3.A9cimale
+		
+		//recherche plus petite puissqnce de  2
+		res=a;
+		test=b;
+		do{
+			test=multiply(test,2);
+			if(N>=1)
+			{
+				a0=multiply(a0,2);
+			}
+			b0=multiply(b0,2);
+			N++;
+			
+		}while(test<=a);
+		
+		//System.out.println("N 1 :"+N);
+		//System.out.println("a0 1 :"+a0);
+		//System.out.println("b0 1 :"+b0);
+		//System.out.println("test :"+test);
+		while((b0-a0!=1)){
+			next=1;
+			while(multiply(2,next)!=(a0+b0)){
+				next++;
+			}
+			if(multiply(add(a0,b0),b)<=multiply(a,2)){
+				a0=next;	
+			}
+			else{
+				b0=next;
+			}
+			n++;
+			//System.out.println("a0 "+n+" :"+a0);
+			//System.out.println("b0 "+n+" :"+b0);
+		}
+		
+		
+		return multiply(a0,sign);
+	}*/
+
 }
