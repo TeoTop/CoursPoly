@@ -1,47 +1,35 @@
 /**
- * Singleton operateur pour effectuer des calcules (+, -, * et /).
- * Permet de n'avoir qu'une instance d'Operateur pour toute l'application et qui sera utilisée par
- * toute les chaines pour effectuer les calculs. Evite le duplication inutile d'une instance
- * fonctionnelle. 
+ * Singleton operateur pour effectuer des calcules (+, -, * et /). Permet de n'avoir qu'une instance d'Operateur 
+ * pour toute l'application et qui sera utilisée par toute les chaines pour effectuer les calculs. Evite le duplication 
+ * inutile d'une instance fonctionnelle.
+ * Singleton opérateur
  * @version 0.5
  */
 public class Operateur {
 	
 	/**
-	 * Instance unique et privée de la classe opérateur (pattern singleton).
-	 * Accessible depuis la méthode {@link #getOperateur()}
-	 * @see #getOperateur() 
-	 */
-	private static Operateur OPERATEUR = null;
-	
-	/**
 	 * Constructeur privé pour appliquer le pattern singleton
-	 * @see #getOperateur()
 	 */
 	private Operateur(){}
 	
 	/**
-	 * Permet d'accéder à l'instance @see {@link Operateur}. Si l'instance n'existe pas encore,
-	 * on appel alors le construcuteur @see {@link #Operateur()}.
-	 * @return {@link #Operateur()}, instance de Operateur (existante ou nouvellement créée)
+	 * Instance unique et privée de la classe opérateur (pattern singleton).
 	 */
+	private static Operateur OPERATEUR = null;
+	
 	public static Operateur getOperateur(){
 		if(OPERATEUR == null) OPERATEUR = new Operateur();
 		return OPERATEUR;
 	}
-	
-	
-	/**
-	 * Opération sur les termes a et b. Evalué de gauche à droite : a op b.
-	 * @param op Opérateur de calcul (add -> +, sub -> -, mul -> * et div -> /)
-	 * @param a Premier terme de l'opération
-	 * @param b Second terme de l'opération
-	 * @return Résultat de l'opération
-	 * @see #add(int, int)
-	 * @see #substract(int, int)
-	 * @see #multiply(int, int)
-	 * @see #divide(int, int)
-	 */
+	public boolean isValide(String op)
+	{
+		if(op.equals("add") || op.equals("sub") || op.equals("mul") ||op.equals("div")){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	public int calcul(String op, int a, int b){
 		int res = 0;
 		
@@ -74,7 +62,6 @@ public class Operateur {
 	 * @param a Premier terme de l'opération
 	 * @param b Second terme de l'opération
 	 * @return Résultat de l'addition
-	 * @see #add(int, int)
 	 */
 	private int add(int a, int b){
 		int res=a;
@@ -93,11 +80,10 @@ public class Operateur {
 	}
 
 	/**
-	 * Soustraction de a par b (O(b)).
+	 * Soustraction de a par b (O(b))
 	 * @param a Premier terme de l'opération
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la soustraction
-	 * @see #add(int, int)
 	 */
 	private int substract(int a, int b){
 		return add(a,-b);
@@ -105,11 +91,10 @@ public class Operateur {
 	}
 
 	/**
-	 * Multiplication entre a et b (O(a*b)).
+	 * Multiplication entre a et b (O(a*b))
 	 * @param a Premier terme de l'opération
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la multiplication
-	 * @see #add(int, int)
 	 */
 	private int multiply(int a, int b){
 		int res=0;
@@ -132,7 +117,6 @@ public class Operateur {
 	 * @param a Premier terme de l'opération
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la division
-	 * @see #add(int, int)
 	 */
 	private int divide(int a, int b) throws Exception
 	{

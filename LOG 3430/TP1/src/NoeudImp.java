@@ -1,12 +1,12 @@
 /**
- * Implémentation de l'interface Noeud. Représente un noeud (élément de la {@link ChaineImp}).
+ * Implémentation de l'interface Noeud. Représente un noeud (élément de la {@link SuiteChaineImp}).
  * @see Noeud
- * @see ChaineImp
+ * @see SuiteChaineImp
  * @version 0.5
  */
 public class NoeudImp implements Noeud {
 	/**
-	 * Position dans la chaine. Dépend dela constante {@link ChaineImp#BEGININDEX}
+	 * Position dans la chaine. Dépend dela constante {@link SuiteChaineImp#BEGININDEX}
 	 */
 	private int index;
 	
@@ -55,9 +55,9 @@ public class NoeudImp implements Noeud {
 	 *    - {@link #value} = value<br>
 	 *    - {@link #next} = next<br>
 	 *    
-	 * @param index
-	 * @param value
-	 * @param next
+	 * @param index Position du noeud dans la suite
+	 * @param value Valeur attribuée au noeud.
+	 * @param next Pointeur vers le prochain noeud de la liste
 	 */
 	public NoeudImp(int index, int value, Noeud next) {
 		super();

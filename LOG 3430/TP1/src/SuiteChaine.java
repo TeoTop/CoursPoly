@@ -1,10 +1,9 @@
 /**
  * Implémentation de l'interface Chaine. Représente une chaine simple chainée.
- * @see Chaine
  * version 0.5
  *
  */
-public interface Chaine {
+public interface SuiteChaine {
 	
 	/**
 	 * Permet de construire une chaine à partir des deux premiers éléments (val1, val2) et d'éléments générés.
@@ -20,11 +19,10 @@ public interface Chaine {
 	 * @return La chaine complété par les valeurs
 	 * @throws Exception La chaine n'est pas vide alors que vide = true.
 	 */
-	Chaine suiteChaine(String chemin, String operateur, int val1, int val2, int tailleListe, boolean vide) throws Exception;
+	SuiteChaine suiteChaine(String chemin, String operateur, int val1, int val2, int tailleListe, boolean vide) throws Exception;
 	
 	/**
-	 * Ajoute un noeud à la chaine. L'attribut {@link Noeud#index} et {@link Noeud#next} du noeud
-	 * peuvent être modfiés pour appartenir à la chaine.
+	 * Ajoute un noeud à la chaine.
 	 * @param elememt Noeud à ajouter. 
 	 */
 	void add(Noeud elememt);
@@ -65,12 +63,24 @@ public interface Chaine {
 	
 	/**
 	 * Vide la chaine
+	 * @throws Exception
 	 */
-	void reset();
+	void reset() throws Exception;
 	
 	/**
 	 * Vérifie si la suite contenue dans la chaine est respectée.
 	 * @return true si la suite est respectée, sinon faux
 	 */
 	boolean isValide(); 
+	
+	/**
+	 * Sauvegarde la chaine actuelle et la remplace par la chaine contenue dans le fichier
+	 * @param fichier Chemin du fichier contenant la chaine à charger
+	 */
+	void chargerChaine(String fichier); 
+	
+	/**
+	 * Sauvegarde la chaine actuelle dans le fichier indiqué par l'attribut fichier
+	 */
+	void sauvgarderChaine();
 }

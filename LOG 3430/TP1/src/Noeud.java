@@ -1,5 +1,5 @@
 /**
- * Interface d'un noeud (Element de {@link Chaine})
+ * Interface d'un noeud (Element de {@link SuiteChaine})
  * @version 0.5
  * 
  */
