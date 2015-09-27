@@ -8,6 +8,7 @@ import java.io.IOException;
 public class SuiteChaineImp implements SuiteChaine {
 	
 	private static final int BEGININDEX = 0; 
+	private static final int SIZELIMIT = 10;
 
 	private Noeud init;
 	private Noeud curseur;
@@ -60,24 +61,35 @@ public class SuiteChaineImp implements SuiteChaine {
 			"int val2, int tailleListe, boolean vide) : vide = "+ vide +" -- La chaine utilisée n'est pas vide\n");
 			}
 		}
-		//updating chaine
-		this.fichier = chemin;
-		this.operateur = operateur;
-		nbCalcul = this.tailleChaine + tailleListe;
 		
-		this.add(new NoeudImp(val1));
-		this.add(new NoeudImp(val2));
 		
-		int newVal = 0;
-		while(this.tailleChaine < nbCalcul){
-			this.getAt(this.tailleChaine-2);
-			newVal = Operateur.getOperateur().calcul(this.operateur, 
-					((NoeudImp)curseur).getValue(), 
-					((NoeudImp)curseur).getNext().getValue()
-					);
-			this.add(new NoeudImp(newVal));
+		if(this.getSize()+tailleListe<SIZELIMIT)
+		{
+			//updating chaine
+			this.fichier = chemin;
+			this.operateur = operateur;
+			nbCalcul = this.tailleChaine + tailleListe;
+			
+			this.add(new NoeudImp(val1));
+			this.add(new NoeudImp(val2));
+			
+			int newVal = 0;
+			while(this.tailleChaine < nbCalcul){
+				this.getAt(this.tailleChaine-2);
+				newVal = Operateur.getOperateur().calcul(this.operateur, 
+						((NoeudImp)curseur).getValue(), 
+						((NoeudImp)curseur).getNext().getValue()
+						);
+				this.add(new NoeudImp(newVal));
+			}
+			
+			writeSuiteChaineToFile(val1,val2,startIndex);
+			return "MaListe :"+this.toString();
 		}
-		writeSuiteChaineToFile(val1,val2,startIndex);
+		else{
+			System.out.println("Erreur suiteChaine(...): La taille maximale ("+SIZELIMIT+") de la liste va être atteinte. Opérations non effectuées.Taille actuelle: "+this.getSize());
+		}
+		
 		return null;
 	}
 	
@@ -132,10 +144,17 @@ public class SuiteChaineImp implements SuiteChaine {
 		// vérification si la chaine est vide
 		if(tailleChaine == 0){
 			init = ((NoeudImp)elememt);
+			tailleChaine++;
 		} else {
-			((NoeudImp)curseur).setNext(elememt);
+			if(this.getSize()<SIZELIMIT){
+				((NoeudImp)curseur).setNext(elememt);
+				tailleChaine++;
+			}
+			else{
+				System.out.println("Erreur add(): Taille maximale de la liste atteinte. Element : "+((NoeudImp)elememt).getValue()+" Non ajouté");
+			}
 		}
-		tailleChaine++;
+		
 	}
 
 	@Override
@@ -216,8 +235,6 @@ public class SuiteChaineImp implements SuiteChaine {
 		curseur = null;
 		tailleChaine = 0;
 		//deleting file
-		BufferedWriter w = new BufferedWriter(new FileWriter(this.fichier,false));
-		w.close();
 	}
 
 	@Override
