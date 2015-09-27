@@ -44,7 +44,10 @@ public class SuiteChaineImp implements SuiteChaine {
 		boolean isEmpty=false;
 		try{
 			isEmpty=isFileEmpty(chemin);
-			System.out.println("Test read:"+readSuiteChaineFromFile(chemin));
+			if(!readSuiteChaineFromFile(chemin)){
+				System.out.println("Erreur Lors de la lecture du fichier. Aucune donnée chargée");
+			}
+			
 		}
 		catch(Exception e){
 			throw new Exception("Erreur SuiteChaine(...) : \n\t"+e.getMessage());
@@ -199,10 +202,6 @@ public class SuiteChaineImp implements SuiteChaine {
 		while(position != ((NoeudImp)this.curseur).getIndex()){
 			this.curseur = ((NoeudImp)this.curseur).getNext();
 		}
-		/*for(int pos = position + BEGININDEX ; pos > BEGININDEX ; pos--){
-			
-		}*/
-				
 		return curseur;
 	}
 
@@ -359,7 +358,7 @@ public class SuiteChaineImp implements SuiteChaine {
         		return false;
         	}
             bufferedReader.close();    
-            System.out.println("Test val1: " + val1+" val2: "+val2+" op: "+operateur+" index: "+index+" taille: "+taille);
+            //System.out.println("Test val1: " + val1+" val2: "+val2+" op: "+operateur+" index: "+index+" taille: "+taille);
             setList(contenu);
             this.fichier=chemin;
                 
