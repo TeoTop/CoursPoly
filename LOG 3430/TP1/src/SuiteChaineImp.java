@@ -21,6 +21,9 @@ public class SuiteChaineImp implements SuiteChaine {
 	private String fichier;
 	private int tailleChaine;
 	private String operateur;
+	private int val1;
+	private int val2;
+	private int startCurseur;
 	
 	/**
 	 * Constructeur vide. Initialise attribut de la façon suiavnte : <br>
@@ -84,6 +87,9 @@ public class SuiteChaineImp implements SuiteChaine {
 		
 		this.fichier = chemin;
 		this.operateur = operateur;	
+		this.val1=val1;
+		this.val2=val2;
+		this.startCurseur=this.getSize()+BEGININDEX;
 		
 		/**
 		 * Ajout des deux premières valeurs dans la suite
@@ -338,10 +344,14 @@ public class SuiteChaineImp implements SuiteChaine {
 	private void writeSuiteChaineToFile()throws Exception{
 		try {
 			BufferedWriter w = new BufferedWriter(new FileWriter(this.fichier,false));
+			w.write(this.val1+"\n");
+			w.write(this.val2+"\n");
 			w.write(this.operateur+"\n");
+			w.write(this.startCurseur+"\n");
+			w.write(this.getSize()+"\n");
 			w.write(this.toString());
-			
 			w.close();
+			
 		}
         catch(FileNotFoundException ex) {
         	throw new Exception("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");            
