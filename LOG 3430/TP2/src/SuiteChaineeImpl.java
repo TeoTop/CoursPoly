@@ -28,7 +28,12 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		this.list = new MyListImpl();
 		this.fichier = chemin;
 		this.vide = vide;
-		
+	
+		/**
+		 * Comportement à définir
+		 */
+		if(tailleListe < 0 || tailleListe > 10) throw new Exception("La taille de la liste doit être compris entre 0 et 10. "+
+		"La taille actuelle de la liste est de :" + this.tailleChaine);
 		
 		if(this.vide){
 			if(((MyListImpl)this.list).getInit() != null || this.tailleChaine != 0){
