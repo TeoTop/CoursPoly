@@ -1,8 +1,184 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* 
+  Reset css code by Eric Mayer
+  http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-a {
-  color: #00B7FF;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
 }
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*
+  CSS code par Chapon Theo et Julien Bergeron
+*/
+
+/* Importation de style */
+@font-face {
+    font-family: "Old-Standard-TT";
+    src: url('OldStandardTT/OldStandard-Regular.ttf');
+}
+@font-face {
+    font-family: "Old-Standard-TT";
+    font-style: italic;
+    src: url('OldStandardTT/OldStandard-Italic.ttf');
+}
+@font-face {
+    font-family: "Old-Standard-TT";
+    font-weight: bold;
+    src: url('OldStandardTT/OldStandard-Bold.ttf');
+}
+
+html body {
+  font-family: "Old-Standard-TT", Serif;
+}
+
+/*Style header */
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 40px 20px;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 20px 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 20px 20px;
+}
+
+.site_title{
+  text-align: center;
+}
+
+
+/* Style pour menu */
+.style_menu ul {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  margin: 20px;
+  padding: 10px;
+  border: 5px groove grey;
+}
+
+/* Element de base */
+.style_menu ul li {
+  display: inherit;
+  text-align: center;
+  margin: 0px 20px;
+  padding: 10px;
+  width: 150px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.style_menu ul li a {
+    text-decoration: none;
+    color:blue;
+    font-size: 20px;
+    font-weight:bold;
+}
+
+/* Element selectionne */
+.style_menu ul .selected {
+    background-color: blue;
+}
+
+.style_menu ul .selected a {
+    color: white;
+}
+
+
+/* Style pour formulaire */
+.forms-controller{
+  display: relative;
+  margin: 10px 70px;
+  font-size: 18px;
+}
+
+.forms-controller .field-controller{
+  margin: 30px 0px;
+}
+
+.forms-controller .field-controller label{
+  padding-right: 30px;
+  font-weight: bold;
+}
+
+.forms-controller .field-controller input {
+  height: 30px;
+  width: 200px;
+  padding: 5px 20px;
+}
+
+.forms-controller .field-controller input[type=checkbox] {
+    /*visibility:hidden;*/
+    background: url('../images/sword1.png') no-repeat;
+}
+
+.forms-controller .field-controller input[type="submit"] {
+  height: 80px;
+  width: auto;
+  color: #14396A;
+  padding: 10px 25px;
+  border: none;
+  background-color: inherit;
+  font-size: 30px;
+}
+
+.forms-controller .field-controller input[type="submit"]:hover {
+  color: #000;
+  font-size: 40px;
+  cursor:pointer;
+}
+

@@ -1,7 +1,7 @@
 extends layout
 
 block link
-  -var selected = 'new game';
+  -var selected = 'Nouvelle partie';
 
 block content
   h2 Création d'une nouvelle partie
@@ -9,11 +9,11 @@ block content
   div(class='forms-controller')
     form(name="new-game", method="post", action="/new_game_post")
       div(class='field-controller')
-        label(for='name') Name :
+        label(for='name') Name
         input(id='name',type='text',placeholder='Name',name='name')
 
       div(class='field-controller')
-        label(for='kai') Discipline de Kai :
+        label(for='kai') Discipline de Kai
         div(class='checkbox-controller')
           input(type="checkbox", name="kai", value="camouflage")
           | Camouflage
@@ -46,7 +46,7 @@ block content
           | Maîtrise psychique de la matière  
 
       div(class='field-controller')
-        label(for='equipment') Equipement :
+        label(for='equipment') Equipement
         div(class='checkbox-controller')
           input(type="checkbox", name="equipment", value="sword")
           | Epee
