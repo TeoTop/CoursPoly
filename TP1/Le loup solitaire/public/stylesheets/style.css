@@ -170,19 +170,20 @@ h3 {
 
 
 /* Style pour formulaire */
+h2 {
+  text-align: center;
+}
+
 .forms-controller{
   display: relative;
-  margin: 10px 70px;
   font-size: 18px;
+  margin: auto;
+  width: 400px;
 }
 
-.forms-controller .field-controller{
-  margin: 30px 0px;
-}
-
-.forms-controller .field-controller label{
+.forms-controller .field-controller h3 {
+  display: inline-block;
   padding-right: 30px;
-  font-weight: bold;
 }
 
 .forms-controller .field-controller input {
@@ -191,10 +192,29 @@ h3 {
   padding: 5px 20px;
 }
 
-.forms-controller .field-controller input[type=checkbox] {
-    /*visibility:hidden;*/
-    background: url('../images/sword1.png') no-repeat;
+.forms-controller .field-controller .checkbox-controller {
+  margin: 0 0 40px;  
 }
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] {
+  display: none;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] + label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"]:checked + label {
+  background: url("/images/tick_ok.png") center no-repeat;
+}
+
+.forms-controller .field-controller .checkbox-controller label img {
+  margin: 0 100px 0 20px;
+  vertical-align:middle;
+}
+
 
 .forms-controller .field-controller input[type="submit"] {
   height: 80px;

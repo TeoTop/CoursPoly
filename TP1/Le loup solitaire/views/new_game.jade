@@ -2,84 +2,36 @@ extends layout
 
 block link
   -var selected = 'Nouvelle partie';
+  -var kai = {"camouflage" : "Camouflage", "hunting" : "Chasse", "sense" : "Sixème sens", "traking" : "Orientation", "healing" : "Guérison", "weaponskill" : "Maîtrise d'arme  ", "mindshield" : "Bouclier psychique", "mindblast" : "Puissance psychique", "animalkinship" : "Communication animale", "mindovermatter" : "Maîtrise psychique de la matière"};  
+  -var equipement = {"sword" : "Epée", "shortsword" : "Sabre", "spear" : "Lance", "mace" : "Masse d'armes", "warhammer" : "Marteau de guerre", "axe" : "Hâche", "broadsword" : "Glaive", "quaterstaff" : "Bâton", "wastcost" : "Gilet de cuir matelassé", "potion" : "Potion de Lampur", "ration" : "Rations spéciales"};  
+
+
 
 block content
-  h2 Création d'une nouvelle partie
+  h2 Creation d'une nouvelle partie
 
   div(class='forms-controller')
     form(name="new-game", method="post", action="/new_game_post")
       div(class='field-controller')
-        label(for='name') Name
+        h3 Name
         input(id='name',type='text',placeholder='Name',name='name')
+      div(class='field-controller')
+        h3 Discipline de Kai
+        each val, key in kai
+          div(class='checkbox-controller')
+            input(type="checkbox", id=key, name="equipment", value=key)
+            label(for=key)
+              img(src="/images/"+key+".png") 
+              | #{val}
 
       div(class='field-controller')
-        label(for='kai') Discipline de Kai
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="camouflage")
-          | Camouflage
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="hunting")
-          | Chasse
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="sense")
-          | Sixème sens
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="traking")
-          | Orientation
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="healing")
-          | Guérison
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="weaponskill")
-          | Maîtrise d'arme      
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="mindshield")
-          | Bouclier psychique         
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="mindblast")
-          | Puissance psychique   
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="animalkinship")
-          | Communication animale
-        div(class='checkbox-controller')
-          input(type="checkbox", name="kai", value="mindovermatter")
-          | Maîtrise psychique de la matière  
-
-      div(class='field-controller')
-        label(for='equipment') Equipement
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="sword")
-          | Epee
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="shortsword")
-          | Sabre
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="spear")
-          | Lance
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="mace")
-          | Masse d'armes
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="warhammer")
-          | Marteau de guerre    
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="axe")
-          | Hâche         
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="broadsword")
-          | Glaive 
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="quaterstaff")
-          | Bâton
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="wastcost")
-          | Gilet de cuir matelassé
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="potion")
-          | Potion de Lampur
-        div(class='checkbox-controller')
-          input(type="checkbox", name="equipment", value="ration")
-          | Rations spéciales
+        h3 Equipement
+        each val, key in equipement
+          div(class='checkbox-controller')
+            input(type="checkbox", id=key, name="equipment", value=key)
+            label(for=key)
+              img(src="/images/"+key+".png") 
+              | #{val}
 
       div(class='field-controller')
         input(type='submit',name='submit',value='Commencer le jeu')
