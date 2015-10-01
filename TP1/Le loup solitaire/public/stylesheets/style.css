@@ -57,18 +57,23 @@ table {
 
 /* Importation de style */
 @font-face {
+    font-family: "Godofwar";
+    src: url('../fonts/GODOFWAR.ttf');
+}
+
+@font-face {
     font-family: "Old-Standard-TT";
-    src: url('OldStandardTT/OldStandard-Regular.ttf');
+    src: url('../fonts/OldStandardTT/OldStandard-Regular.ttf');
 }
 @font-face {
     font-family: "Old-Standard-TT";
     font-style: italic;
-    src: url('OldStandardTT/OldStandard-Italic.ttf');
+    src: url('../fonts/OldStandardTT/OldStandard-Italic.ttf');
 }
 @font-face {
     font-family: "Old-Standard-TT";
     font-weight: bold;
-    src: url('OldStandardTT/OldStandard-Bold.ttf');
+    src: url('../fonts/OldStandardTT/OldStandard-Bold.ttf');
 }
 
 html body {
@@ -77,6 +82,7 @@ html body {
 
 /*Style header */
 h1, h2, h3, h4 {
+  font-family: "GODOFWAR", "Old-Standard-TT", Serif;
   font-weight: bold;
 }
 
@@ -95,19 +101,20 @@ h3 {
   margin: 20px 20px;
 }
 
-.site_title{
-  text-align: center;
-}
-
 
 /* Style pour menu */
+.style_menu {
+  text-align: center;
+  background-color: #302E2A;
+}
+
 .style_menu ul {
   position: relative;
   display: inline-block;
   list-style-type: none;
-  margin: 20px;
+  margin: 20px 0px;
   padding: 10px;
-  border: 5px groove grey;
+  line-height:60px;
 }
 
 /* Element de base */
@@ -115,27 +122,50 @@ h3 {
   display: inherit;
   text-align: center;
   margin: 0px 20px;
-  padding: 10px;
-  width: 150px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
+  padding: auto;
+  width: 200px;
+  line-height:50px;
 }
 
 .style_menu ul li a {
     text-decoration: none;
-    color:blue;
+    color:white;
     font-size: 20px;
     font-weight:bold;
 }
 
-/* Element selectionne */
-.style_menu ul .selected {
-    background-color: blue;
+.style_menu ul li a:hover {
+    font-size: 25px;
+    background: -webkit-radial-gradient(white 5%, #302E2A 90%); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(white 5%, #302E2A 90%); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(white 5%, #302E2A 90%); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(white 5%, #302E2A 30%); /* Standard syntax */
 }
 
-.style_menu ul .selected a {
-    color: white;
+/* Element selectionne */
+.style_menu ul li.selected {
+    background: url("/images/border_menu.png") no-repeat;
+}
+
+
+
+.style_menu ul li.selected a {
+    font-size: 20px;
+    background: none;
+    pointer-events: none;
+    cursor: default;
+}
+
+/*titre*/
+.site_title{
+  position: relative;
+  top:-20px;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.site_title img {
+  width: 40%;
 }
 
 
