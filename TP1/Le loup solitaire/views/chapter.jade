@@ -2,77 +2,96 @@ extends layout
 
 block link
   -var selected = 'Chapitre';
-  
-block content
- h2 Sommaire du joueur
 
- div 
-  span Habiletés
-  span 13
-
- div 
-  span Endurance
-  span 18
-
- div 
-  span Pièces d'or
-  span 48
-
- div 
-  span Disciplines
-  span Camouflage
-  span Chasseur
-  span Sixième sens
-  span Orientation
-  span Guérison
-  
- h2 Équipements
-  
- div 
-  span Armes
-  span Marteau de guerre
-  span Glaive
-
- div 
-  span Sac à dos
-  span Rations spéciales
-  span Potion de Lampsur
-  span Vide
-  span Vide
-  span Vide
-  span Vide
-  span Vide
-
- div
-  span Objets spéciaux
-  span Gilet de cuir matelassé
-  span Objet 2
-
- h2 Page #{chap}
- div(id="story")
-  block story
  
- div(id="fight")
-  block fight
+block content
+  h2 Sommaire du joueur
 
- div(id="turn")
-  block turn
+  div(class="context_menu")
+    div(class="adventure")
+     a(href="#adventure_box") Aventure
+    div(class="backpack")
+     a(href="#backpack_box") Sac à dos
+    div(class="special_object")
+     a(href="#special_object") Objets spéciaux
 
- div(id="picture")
-  block picture
+  div(id="adventure_box" class="box")
+    a(href="#")
+    | Moi c'est adv
+  div(id="backpack_box" class="box") 
+    a(href="#")
+    | Moi c'est sac à dos
+  div(id="special_object" class="box")
+    a(href="#") 
+    | Moi c'est jean luc
 
- h2 Historique des combats
- div
-  span Chapitre
-  span Ennemi
-  span Résultat
- div
-  span 78
-  span Bakana
-  span Victoire
-  button Voir Combat
- div
-  span 345
-  span Bob
-  span Défaite
-  button Voir Combat
+  div 
+    span Habiletés
+    span 13
+
+  div 
+    span Endurance
+    span 18
+
+  div 
+    span Pièces d'or
+    span 48
+
+  div 
+    span Disciplines
+    span Camouflage
+    span Chasseur
+    span Sixième sens
+    span Orientation
+    span Guérison
+    
+  h2 Équipements
+    
+  div 
+    span Armes
+    span Marteau de guerre
+    span Glaive
+
+  div 
+    span Sac à dos
+    span Rations spéciales
+    span Potion de Lampsur
+    span Vide
+    span Vide
+    span Vide
+    span Vide
+    span Vide
+
+  div
+    span Objets spéciaux
+    span Gilet de cuir matelassé
+    span Objet 2
+
+  h2 Page #{chap}
+  div(id="story")
+    block story
+   
+  div(id="fight")
+    block fight
+
+  div(id="turn")
+    block turn
+
+  div(id="picture")
+    block picture
+
+  h2 Historique des combats
+  div
+    span Chapitre
+    span Ennemi
+    span Résultat
+  div
+    span 78
+    span Bakana
+    span Victoire
+    button Voir Combat
+  div
+    span 345
+    span Bob
+    span Défaite
+    button Voir Combat

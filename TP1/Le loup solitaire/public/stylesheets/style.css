@@ -78,9 +78,17 @@ table {
 
 html body {
   font-family: "Old-Standard-TT", Serif;
+  font-size: 18px;
 }
 
 /*Style header */
+.content {
+  position: relative;
+  margin: auto;
+  width: 600px;
+  z-index: 10;
+}
+
 h1, h2, h3, h4 {
   font-family: "GODOFWAR", "Old-Standard-TT", Serif;
   font-weight: bold;
@@ -174,13 +182,6 @@ h2 {
   text-align: center;
 }
 
-.forms-controller{
-  display: relative;
-  font-size: 18px;
-  margin: auto;
-  width: 400px;
-}
-
 .forms-controller .field-controller h3 {
   display: inline-block;
   padding-right: 30px;
@@ -232,3 +233,79 @@ h2 {
   cursor:pointer;
 }
 
+
+/*Menu contextuel*/
+.context_menu{
+  position: relative;
+  margin: auto;
+}
+
+.context_menu > div {
+  display: inline-block;
+  width: 150px;
+  margin: 0 25px;
+  text-align: center;
+}
+
+/*.context_menu .box {
+  display: none;
+  position: absolute;
+  top:-50px;
+  left: 0px;
+  width: 600px;
+  height: 800px;
+  background-color: white;
+  z-index: 20;
+}
+
+.background_box {
+  background-color:#302E2A;
+  width:100%;
+  height:100%;
+  position:fixed;
+  opacity: 0.5;
+  z-index:15;  
+}
+
+
+.context_menu a:focus + .box,
+.context_menu .box:focus {
+
+}*/
+
+/*.box {
+  position: fixed;
+  display: none;
+  top:0px;
+  left:0px;
+  z-index: 20;
+  background-color: #302E2A;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}*/
+
+.box a {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -20;
+  background-color: #302E2A;
+  opacity:0.5;
+}
+
+.box:target {
+  display: block;
+}
+
+.box {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+}
