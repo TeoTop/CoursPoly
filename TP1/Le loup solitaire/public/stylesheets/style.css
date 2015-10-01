@@ -211,6 +211,10 @@ h2 {
   background: url("/images/tick_ok.png") center no-repeat;
 }
 
+.forms-controller .field-controller .checkbox-controller label {
+  width:400px;
+}
+
 .forms-controller .field-controller .checkbox-controller label img {
   margin: 0 100px 0 20px;
   vertical-align:middle;
@@ -219,16 +223,16 @@ h2 {
 
 .forms-controller .field-controller input[type="submit"] {
   height: 80px;
-  width: auto;
-  color: #14396A;
+  width: 400px;
+  margin: auto;
+  color: white;
   padding: 10px 25px;
   border: none;
-  background-color: inherit;
+  background-color: #302E2A;
   font-size: 30px;
 }
 
 .forms-controller .field-controller input[type="submit"]:hover {
-  color: #000;
   font-size: 40px;
   cursor:pointer;
 }
@@ -285,6 +289,20 @@ h2 {
   opacity: 0.5;
 }*/
 
+.box:target, .choice_box:target {
+  display: block;
+}
+
+.box, .choice_box {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+}
+
 .box a {
   position: fixed;
   top: 0px;
@@ -296,16 +314,24 @@ h2 {
   opacity:0.5;
 }
 
-.box:target {
-  display: block;
-}
-
-.box {
-  position: absolute;
+.choice_box span {
+  position: fixed;
   top: 0px;
   left: 0px;
-  display: none;
-  height: 600px;
-  width: 600px;
-  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: -20;
+  background-color: #302E2A;
+  opacity:0.5;
+  pointer-events: none;
+  cursor: default;
+}
+
+.choice_box a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: initial;
 }
