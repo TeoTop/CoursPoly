@@ -89,9 +89,14 @@ html body {
   z-index: 10;
 }
 
+.content div {
+  margin: 50px 0;
+}
+
 h1, h2, h3, h4 {
   font-family: "GODOFWAR", "Old-Standard-TT", Serif;
   font-weight: bold;
+  text-align: center;
 }
 
 h1 {
@@ -108,6 +113,31 @@ h3 {
   font-size: 20px;
   margin: 20px 20px;
 }
+
+p {
+  margin: 10px 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+b {
+  font-weight: bold;
+}
+
+/*Style footer*/
+footer{
+  background-color:#302E2A;
+  color: white;
+  padding: 20px 50px;
+  text-align: center;
+}
+
+footer a {
+  color: inherit;
+}
+
 
 
 /* Style pour menu */
@@ -136,7 +166,6 @@ h3 {
 }
 
 .style_menu ul li a {
-    text-decoration: none;
     color:white;
     font-size: 20px;
     font-weight:bold;
@@ -178,9 +207,6 @@ h3 {
 
 
 /* Style pour formulaire */
-h2 {
-  text-align: center;
-}
 
 .forms-controller .field-controller h3 {
   display: inline-block;
@@ -212,7 +238,7 @@ h2 {
 }
 
 .forms-controller .field-controller .checkbox-controller label {
-  width:400px;
+  width:450px;
 }
 
 .forms-controller .field-controller .checkbox-controller label img {
@@ -251,44 +277,7 @@ h2 {
   text-align: center;
 }
 
-/*.context_menu .box {
-  display: none;
-  position: absolute;
-  top:-50px;
-  left: 0px;
-  width: 600px;
-  height: 800px;
-  background-color: white;
-  z-index: 20;
-}
-
-.background_box {
-  background-color:#302E2A;
-  width:100%;
-  height:100%;
-  position:fixed;
-  opacity: 0.5;
-  z-index:15;  
-}
-
-
-.context_menu a:focus + .box,
-.context_menu .box:focus {
-
-}*/
-
-/*.box {
-  position: fixed;
-  display: none;
-  top:0px;
-  left:0px;
-  z-index: 20;
-  background-color: #302E2A;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-}*/
-
+/*Boite d'interraction avec le joueur*/
 .box:target, .choice_box:target {
   display: block;
 }
@@ -298,12 +287,14 @@ h2 {
   top: 0px;
   left: 0px;
   display: none;
-  height: 600px;
-  width: 600px;
+  min-width: 600px;
+  min-height: 200px;
+  padding: 10px 20px;
   background-color: white;
+  text-align: center;
 }
 
-.box a {
+.box a, .choice_box span {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -315,16 +306,57 @@ h2 {
 }
 
 .choice_box span {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: -20;
-  background-color: #302E2A;
-  opacity:0.5;
   pointer-events: none;
   cursor: default;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 120px 120px 120px 120px;
+  grid-template-rows: 120px 120px;
+  margin: 50px auto 20px !important;
+  width: 480px;
+}
+
+.grid span {
+  padding: 10px;
+}
+
+.grid span:hover {
+  border: solid;
+  background-color: rgba(48, 46, 42, 0.2);
+}
+
+.grid .row-1{
+  -ms-grid-row:1;
+}
+
+.grid .row-2{
+  grid-row:2;
+}
+
+.grid .col-1{
+  grid-column:1;
+}
+
+.grid .col-2{
+  grid-column:2;
+}
+
+.grid .col-3{
+  grid-column:3;
+}
+
+.grid .col-4{
+  grid-column:4;
+}
+
+#backpack_box .grid span{
+  border: dashed 1px #302E2A;
+}
+
+.choice_box p {
+    margin: 50px auto;
 }
 
 .choice_box a.button {
@@ -332,6 +364,24 @@ h2 {
     -moz-appearance: button;
     appearance: button;
     padding: 5px 10px;
-    text-decoration: none;
     color: initial;
+    margin: 20px;
+}
+
+/*Image en background*/
+#backpack_box {
+  background: url("/images/backpack_background.png") no-repeat; 
+  background-size: 100%;
+}
+
+.potion{
+  background: url("/images/potion.png") center no-repeat;
+}
+
+.ration{
+  background: url("/images/ration.png") center no-repeat;
+}
+
+.wastcost{
+  background: url("/images/wastcost.png") center no-repeat;
 }

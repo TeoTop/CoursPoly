@@ -1,12 +1,15 @@
 extends ../chapter
 
 block story
-  div(id="backpack_choice_box1" class="box")
-    a(href="/chap/62")
-    | Tu dois faire un choix fils
-  div(id="backpack_choice_box2" class="box")
-    a(href="/chap/288")
-    | Tu dois faire un choix fils
+  div(id="backpack_choice_box1" class="choice_box")
+    span
+    p Attention vous venez de perdre #[b 4 points d#{"'"}endurance].
+    a(href="/chap/62" class="button") Continuer
+
+  div(id="backpack_choice_box2" class="choice_box")
+    span
+    p Attention vous venez de perdre #[b 4 points d#{"'"}endurance].
+    a(href="/chap/288" class="button") Continuer
 
   p.
     Le lendemain, la température descend et un froid rigoureux s'installe. Des vents du nord amènent une grêle de glace qui vous cingle le visage et vos lèvres gercées se mettent à saigner. Vers midi, vous êtes pris dans un blizzard qui rend votre progression difficile et épuisante. Le vent violent vous force à descendre du traîneau pour le pousser. Vous êtes exténué, vos mains et vos orteils sont engourdis par le froid et la transpiration provoquée par vos efforts harassants a gelé sur votre peau, déposant à l'intérieur de vos moufles et de vos bottes une couche de glace.
@@ -18,7 +21,7 @@ block story
 
 block turn
   p Si vous tirez un chiffre entre 0 et 4, rendez-vous au  
-    a(href="#backpack_choice_box1") 62.
+    a(href="#backpack_choice_box1") 68.
   p Entre 5 et 9, rendez-vous au  
     a(href="#backpack_choice_box2") 288.
 

@@ -8,6 +8,7 @@ html
     -var selected = 'Accueil'; //default
 
   -var menu = { 'Accueil': '/', 'Nouvelle partie': '/new_game', 'Chapitre': '/chap', 'Guide de jeu': '/help' };
+  -var next_chap = 0;
 
   body
     nav(id="general_menu", class="style_menu")
@@ -29,5 +30,6 @@ html
       block content
 
     footer
-      p Site créé avec Express, Jade et utilise NodeJS dans le cadre du cours LOG4420.
-      p Équipe composé de Julien Bergeron(1611134) et de Théo Chapon(1810145)
+      p #[a(href="/", title="Acceuil") Acceuil] | #[a(href="/new_game", title="Nouvelle partie") Nouvelle partie] | #[a(href="/chap", title="Chapitre") Chapitre] | #[a(href="/help", title="Guide de jeu") Guide de jeu] 
+      p Site créé avec Express, Jade et NodeJS dans le cadre du cours LOG4420.
+      p Équipe composée de Julien Bergeron(1611134) et de Théo Chapon(1810145)

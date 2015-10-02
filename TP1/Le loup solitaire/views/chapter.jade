@@ -9,21 +9,39 @@ block content
 
   div(class="context_menu")
     div(class="adventure")
-     a(href="#adventure_box") Aventure
+     a(href="#adventure_box") Feuille de route
     div(class="backpack")
-     a(href="#backpack_box") Sac à dos
+     a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
     div(class="special_object")
-     a(href="#special_object") Objets spéciaux
+     a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]
 
   div(id="adventure_box" class="box")
     a(href="#")
     | Moi c'est adv
   div(id="backpack_box" class="box") 
+    h3 Sac à dos
+    div(class="grid")
+      span(class="row-1 col-1 ration")
+      span(class="row-1 col-2 potion")
+      span(class="row-1 col-3")
+      span(class="row-1 col-4")
+      span(class="row-2 col-1 potion")
+      span(class="row-2 col-2")
+      span(class="row-2 col-3")
+      span(class="row-2 col-4")
     a(href="#")
-    | Moi c'est sac à dos
   div(id="special_object" class="box")
+    h3 Objets spéciaux
+    div(class="grid")
+      span(class="row-1 col-1 wastcost")
+      span(class="row-1 col-2")
+      span(class="row-1 col-3")
+      span(class="row-1 col-4")
+      span(class="row-2 col-1")
+      span(class="row-2 col-2")
+      span(class="row-2 col-3")
+      span(class="row-2 col-4")
     a(href="#") 
-    | Moi c'est jean luc
 
   div 
     span Habiletés
@@ -51,21 +69,6 @@ block content
     span Armes
     span Marteau de guerre
     span Glaive
-
-  div 
-    span Sac à dos
-    span Rations spéciales
-    span Potion de Lampsur
-    span Vide
-    span Vide
-    span Vide
-    span Vide
-    span Vide
-
-  div
-    span Objets spéciaux
-    span Gilet de cuir matelassé
-    span Objet 2
 
   h2 Page #{chap}
   div(id="story")
