@@ -255,7 +255,6 @@ footer a {
   position: relative;
   height: 80px;
   width: 400px;
-  margin: auto;
   color: white;
   padding: 10px 25px;
   border: none;
@@ -383,13 +382,31 @@ footer a {
     margin: 50px auto;
 }
 
-.choice_box a.button {
+.button {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-    padding: 5px 10px;
-    color: initial;
-    margin: 20px;
+	text-align:center;
+	margin:20px;
+    padding: 10px 10px;
+    border: none;
+    background-color: #302E2A;
+    font-size: 20px;
+}
+
+.button a {
+	color: white;
+}
+
+.button a:hover {
+  font-size: 30px;
+  cursor:pointer;
+}
+
+#nextPageButton {
+	width: 370px;
+	height: 20px;
+	border-radius:20px;
 }
 
 /*Image en background*/
