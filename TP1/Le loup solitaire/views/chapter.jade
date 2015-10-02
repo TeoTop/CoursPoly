@@ -7,55 +7,27 @@ block link
 block content
   h2 Sommaire du joueur
 
-  div(class="context_menu")
+  section(class="context_menu")
     div(class="adventure")
      a(href="#adventure_box") Feuille de route
     div(class="backpack")
      a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
     div(class="special_object")
-     a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]
+     a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]  
 
-  div(id="adventure_box" class="box")
-    a(href="#")
-    | Moi c'est adv
-  div(id="backpack_box" class="box") 
-    h3 Sac à dos
-    div(class="grid")
-      span(class="row-1 col-1 ration")
-      span(class="row-1 col-2 potion")
-      span(class="row-1 col-3")
-      span(class="row-1 col-4")
-      span(class="row-2 col-1 potion")
-      span(class="row-2 col-2")
-      span(class="row-2 col-3")
-      span(class="row-2 col-4")
-    a(href="#")
-  div(id="special_object" class="box")
-    h3 Objets spéciaux
-    div(class="grid")
-      span(class="row-1 col-1 wastcost")
-      span(class="row-1 col-2")
-      span(class="row-1 col-3")
-      span(class="row-1 col-4")
-      span(class="row-2 col-1")
-      span(class="row-2 col-2")
-      span(class="row-2 col-3")
-      span(class="row-2 col-4")
-    a(href="#") 
-
-  div 
+  section 
     span Habiletés
     span 13
 
-  div 
+  section 
     span Endurance
     span 18
 
-  div 
+  section 
     span Pièces d'or
     span 48
 
-  div 
+  section 
     span Disciplines
     span Camouflage
     span Chasseur
@@ -65,22 +37,22 @@ block content
     
   h2 Équipements
     
-  div 
+  section 
     span Armes
     span Marteau de guerre
     span Glaive
 
   h2 Page #{chap}
-  div(id="story")
+  section(id="story")
     block story
    
-  div(id="fight")
+  section(id="fight")
     block fight
 
-  div(id="turn")
+  section(id="turn")
     block turn
 
-  div(id="picture")
+  section(id="picture")
     block picture
 
   h2 Historique des combats

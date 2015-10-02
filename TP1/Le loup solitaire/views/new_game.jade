@@ -10,7 +10,7 @@ block link
 block content
   h2 Creation d'une nouvelle partie
 
-  div(class='forms-controller')
+  section(class='forms-controller')
     form(name="new-game", method="post", action="/new_game_post")
       div(class='field-controller')
         h3 Name
@@ -33,5 +33,5 @@ block content
               img(src="/images/"+key+".png") 
               | #{val}
 
-      div(class='field-controller')
+      div(class='field-controller center')
         input(type='submit',name='submit',value='Commencer le jeu')
