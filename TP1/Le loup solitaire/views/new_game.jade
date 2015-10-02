@@ -8,30 +8,30 @@ block link
 
 
 block content
-  h2 Creation d'une nouvelle partie
+  div(class="chapter-content")
+    h2 Creation d'une nouvelle partie
+    div(class='forms-controller')
+      form(name="new-game", method="post", action="/new_game_post")
+        div(class='field-controller')
+          h3 Name
+          input(id='name',type='text',placeholder='Name',name='name')
+        div(class='field-controller')
+          h3 Discipline de Kai
+          each val, key in kai
+            div(class='checkbox-controller')
+              input(type="checkbox", id=key, name="equipment", value=key)
+              label(for=key)
+                img(src="/images/"+key+".png") 
+                | #{val}
 
-  section(class='forms-controller')
-    form(name="new-game", method="post", action="/new_game_post")
-      div(class='field-controller')
-        h3 Name
-        input(id='name',type='text',placeholder='Name',name='name')
-      div(class='field-controller')
-        h3 Discipline de Kai
-        each val, key in kai
-          div(class='checkbox-controller')
-            input(type="checkbox", id=key, name="equipment", value=key)
-            label(for=key)
-              img(src="/images/"+key+".png") 
-              | #{val}
+        div(class='field-controller')
+          h3 Equipement
+          each val, key in equipement
+            div(class='checkbox-controller')
+              input(type="checkbox", id=key, name="equipment", value=key)
+              label(for=key)
+                img(src="/images/"+key+".png") 
+                | #{val}
 
-      div(class='field-controller')
-        h3 Equipement
-        each val, key in equipement
-          div(class='checkbox-controller')
-            input(type="checkbox", id=key, name="equipment", value=key)
-            label(for=key)
-              img(src="/images/"+key+".png") 
-              | #{val}
-
-      div(class='field-controller center')
-        input(type='submit',name='submit',value='Commencer le jeu')
+        div(class='field-controller')
+          input(type='submit',name='submit',value='Commencer le jeu')

@@ -5,68 +5,97 @@ block link
 
  
 block content
-  h2 Sommaire du joueur
+  div(id="adventure_box" class="float-left center") 
+    div(class="adv_box_stats line") 
+      div#[img(src="/images/endurance.png")] #[br] 18
+      div #[img(src="/images/hability.png")] #[br] 18
+      div #[img(src="/images/bourse.png")] #[br] 18
 
-  section(class="context_menu")
-    div(class="adventure")
-     a(href="#adventure_box") Feuille de route
-    div(class="backpack")
-     a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
-    div(class="special_object")
-     a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]  
+    h3 Disciplines Kai
+    table
+      tr
+        td #[img(src="/images/camouflage.png")]
+        td #[img(src="/images/hunting.png")]
+        td #[img(src="/images/sense.png")]
+        td #[img(src="/images/traking.png")]
+      tr
+        td #[img(src="/images/healing.png")]
+        td
+        td
+        td
+      tr
+        td
+      
+    h3 Équipements
+    div #[img(src="/images/sword.png")]
+    div #[img(src="/images/axe.png")]
 
-  section 
-    span Habiletés
-    span 13
+  div(class="chapter-content")
+    h2 Menu
+    div(class="context_menu line")
+      //-div(class="adventure")
+       a(href="#adventure_box") Feuille de route
+      div(class="backpack")
+       a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
+      div(class="special_object")
+       a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]  
 
-  section 
-    span Endurance
-    span 18
+    div(id="backpack_box" class="box context_content")
+      div(class="box-content")
+        h3 Sac à dos
+        table(class="grid grid-border")
+          tr 
+            td(class="ration")
+            td(class="potion")
+            td
+            td
+          tr
+            td(class="potion")
+            td
+            td
+            td 
+      a(href="#")
+    div(id="special_object" class="box context_content")
+      div(class="box-content")
+        h3 Objets spéciaux
+        table(class="grid")
+          tr 
+            td(class="wastcost")
+            td
+            td
+            td
+          tr
+            td
+            td
+            td
+            td 
+      a(href="#")      
 
-  section 
-    span Pièces d'or
-    span 48
+    h2 Page #{chap}
+    section(id="story")
+      block story
+     
+    section(id="fight")
+      block fight
 
-  section 
-    span Disciplines
-    span Camouflage
-    span Chasseur
-    span Sixième sens
-    span Orientation
-    span Guérison
-    
-  h2 Équipements
-    
-  section 
-    span Armes
-    span Marteau de guerre
-    span Glaive
+    section(id="turn")
+      block turn
 
-  h2 Page #{chap}
-  section(id="story")
-    block story
-   
-  section(id="fight")
-    block fight
+    section(id="picture")
+      block picture
 
-  section(id="turn")
-    block turn
-
-  section(id="picture")
-    block picture
-
-  h2 Historique des combats
-  div
-    span Chapitre
-    span Ennemi
-    span Résultat
-  div
-    span 78
-    span Bakana
-    span Victoire
-    button Voir Combat
-  div
-    span 345
-    span Bob
-    span Défaite
-    button Voir Combat
+    h2 Historique des combats
+    div
+      span Chapitre
+      span Ennemi
+      span Résultat
+    div
+      span 78
+      span Bakana
+      span Victoire
+      button Voir Combat
+    div
+      span 345
+      span Bob
+      span Défaite
+      button Voir Combat
