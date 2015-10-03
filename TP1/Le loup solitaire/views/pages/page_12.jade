@@ -1,16 +1,56 @@
 extends ../chapter
 
 block story
-  div(id="backpack_choice_box1" class="choice_box")
+  div(id="backpack_choice_box1" class="choice_box context_content")
     span
-    | Tu dois faire un choix fils
-    a(href="/chap/180" class="button") Continuer
-    
-  div(id="backpack_choice_box2" class="choice_box")
+    div(class="box-content")
+      h3 Choisissez les objets à supprimer ou à ajouter
+      table(class="grid grid-border")
+        tr 
+          td(class="ration")
+          td(class="potion")
+          td
+          td
+        tr
+          td(class="potion")
+          td
+          td
+          td 
+
+      table(class="grid grid-border")
+        tr 
+          td(class="ration")
+          td(class="potion")
+          td
+          td
+      div(class="button")
+        a(href="/chap/180") Continuer
+
+  div(id="backpack_choice_box2" class="choice_box context_content")
     span
-    | Tu dois faire un choix fils
-    a(href="/chap/259" class="button") Continuer
-  
+    div(class="box-content")
+      h3 Choisissez les objets à supprimer ou à ajouter
+      table(class="grid grid-border")
+        tr 
+          td(class="ration")
+          td(class="potion")
+          td
+          td
+        tr
+          td(class="potion")
+          td
+          td
+          td 
+
+      table(class="grid grid-border")
+        tr 
+          td(class="ration")
+          td(class="potion")
+          td
+          td
+      div(class="button")
+        a(href="/chap/259") Continuer
+
   p.
      Le matériel et les vivres sont rapidement déballés et répartisentre vous. Vous recevez des provisions qui représentent l'équivalent de 3 Repas, des Couvertures en Fourrure et une Corde. Inscrivez tous ces éléments sur votre Feuille d'Aventure en sachant que les Couvertures en Fourrure prennent dans votre Sac à Dos la place de deux objets normaux.
 

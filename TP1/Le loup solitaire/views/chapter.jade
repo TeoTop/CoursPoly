@@ -27,8 +27,9 @@ block content
         td
       
     h3 Équipements
-    div #[img(src="/images/sword.png")]
-    div #[img(src="/images/axe.png")]
+    div(class="line")
+      div #[img(src="/images/sword.png")]
+      div #[img(src="/images/axe.png")]
 
   div(class="chapter-content")
     h2 Menu
@@ -72,30 +73,38 @@ block content
       a(href="#")      
 
     h2 Page #{chap}
-    section(id="story")
+    div(id="story")
       block story
      
-    section(id="fight")
+    div(id="fight")
       block fight
 
-    section(id="turn")
+    div(id="turn")
       block turn
 
-    section(id="picture")
+    div(id="picture" class="content-center")
       block picture
 
     h2 Historique des combats
-    div
-      span Chapitre
-      span Ennemi
-      span Résultat
-    div
-      span 78
-      span Bakana
-      span Victoire
-      button Voir Combat
-    div
-      span 345
-      span Bob
-      span Défaite
-      button Voir Combat
+    table
+     thead
+      tr
+        th Chapitre
+        th Ennemi
+        th Résultat
+     tbody
+      tr
+        td 78
+        td Bakana
+        td Victoire
+      
+      tr
+        td 345
+        td Gremlin
+        td Défaite
+      
+      tr
+        td 999
+        td Infinity
+        td Défaite
+    button Voir Combat
