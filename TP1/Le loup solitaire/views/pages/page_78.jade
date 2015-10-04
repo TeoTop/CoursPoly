@@ -7,59 +7,54 @@ block story
 
 block fight
   h3 Combat entre Loup Solitaire et Bakanal
-  table
+  table(class="battleHistory")
     thead
       tr
-       th Loup Solitaire
+       th Tour
        th Endurance
        th Damage
        th Ratio
        th Number
        th Damage
        th Endurance
-       th Bakanal
     tbody
       tr
-       td J1
-       td 14
+       td 1
+       td(id="BattlePlayerEnduranceColumn") 14
        td 6
        td 0
        td 5
        td 13
-       td 17
-       td J2
+       td(id="BattleEnnemyEnduranceColumn") 17
       tr
-       td J1
-       td 12
+       td 2
+       td(id="BattlePlayerEnduranceColumn") 12
        td 2
        td 0
        td 7
        td 2
-       td 15
-       td J2
+       td(id="BattleEnnemyEnduranceColumn") 15
       tr
-       td J1
-       td 4
+       td 3
+       td(id="BattlePlayerEnduranceColumn") 4
        td 8
        td 0
        td 2
        td 10
-       td 5
-       td J2
+       td(id="BattleEnnemyEnduranceColumn") 5
       tr
-       td J1
-       td 2
+       td 4
+       td(id="BattlePlayerEnduranceColumn") 2
        td 2
        td 0
        td 7
        td 5
-       td 0
-       td J2
+       td(id="BattleEnnemyEnduranceColumn") 0
 
   div
-    button Poursuivre le combat
-    button Voir le combat complet
-    button Fuir
+    button(class="button") Poursuivre le combat
+    button(class="button") Voir le combat complet
+    button(class="button") Fuir
 
 
   p Vous avez gagné!
