@@ -7,47 +7,61 @@ block story
 
 block fight
   h3 Combat entre Loup Solitaire et Bakanal
+    table(class="battleHistory")
+      tr
+       th
+       th Endurance
+       th Habileté
+      tr
+       td Loup Solitaire
+       td(id="BattlePlayerEnduranceColumn") 14
+       td 9
+      tr
+       td Bakanal
+       td(id="BattleEnnemyEnduranceColumn") 17
+       td 6
+
   table(class="battleHistory")
     thead
       tr
        th Tour
        th Endurance
-       th Damage
-       th Ratio
-       th Number
-       th Damage
+       th Dmg
+       th(id="battleInvariantLeftHeader") Ratio
+       th(id="battleInvariantRightHeader") Number
+       th Dmg
        th Endurance
     tbody
       tr
        td 1
        td(id="BattlePlayerEnduranceColumn") 14
        td 6
-       td 0
-       td 5
+       td(id="battleInvariantLeftHeader") 0
+       td(id="battleInvariantRightHeader") 5
        td 13
        td(id="BattleEnnemyEnduranceColumn") 17
       tr
        td 2
        td(id="BattlePlayerEnduranceColumn") 12
        td 2
-       td 0
-       td 7
+       td(id="battleInvariantLeftHeader") 0
+       td(id="battleInvariantRightHeader") 7
        td 2
        td(id="BattleEnnemyEnduranceColumn") 15
       tr
        td 3
        td(id="BattlePlayerEnduranceColumn") 4
        td 8
-       td 0
-       td 2
+       td(id="battleInvariantLeftHeader") 0
+       td(id="battleInvariantRightHeader") 2
        td 10
        td(id="BattleEnnemyEnduranceColumn") 5
       tr
        td 4
        td(id="BattlePlayerEnduranceColumn") 2
        td 2
-       td 0
-       td 7
+       td(id="battleInvariantLeftHeader") 0
+       td(id="battleInvariantRightHeader") 7
        td 5
        td(id="BattleEnnemyEnduranceColumn") 0
 
