@@ -37,7 +37,7 @@ public class CalculatorImpl implements Calculator {
 	}
 	
 	
-	public int calcul(int a, int b){
+	public int calcul(int a, int b) throws Exception{
 		int res = 0;
 		
 		switch(this.op){
@@ -51,11 +51,7 @@ public class CalculatorImpl implements Calculator {
 			res = multiply(a, b);
 			break;
 		case div:
-			try {
-				res = divide(a, b);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			res = divide(a, b);
 			break;
 		default:
 			break;
@@ -125,12 +121,12 @@ public class CalculatorImpl implements Calculator {
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la division
 	 */
-	private int divide(int a, int b) throws Exception
+	private int divide(int a, int b) throws Exception 
 	{
 		int res=0;
 		
 		if(b==0){
-			throw new Exception("Erreur divide() : a="+a+" b="+b+" -- division nulle impossible\n");
+			throw new ArithmeticException("Erreur divide() : a="+a+" b="+b+" -- division par zero impossible\n");
 		}
 		
 		if(a==b){

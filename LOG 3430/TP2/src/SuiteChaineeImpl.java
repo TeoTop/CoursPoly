@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javax.naming.SizeLimitExceededException;
+import javax.swing.SizeRequirements;
 
 public class SuiteChaineeImpl implements SuiteChainee {
 
@@ -21,50 +25,64 @@ public class SuiteChaineeImpl implements SuiteChainee {
 	
 
 	public SuiteChaineeImpl(String chemin, int val1, int val2, String operateur, int tailleListe, boolean vide) throws Exception {
-		int nbCalcul = this.tailleChaine + tailleListe;
 		int newVal = 0;
 		Elem curser = null;
 		
 		this.list = new MyListImpl();
+		this.tailleChaine = 0;
+		this.calculator = new CalculatorImpl();
+		
+		if(!this.calculator.isValide(operateur)) {
+			throw new IllegalArgumentException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
+			"int val2, int tailleListe, boolean vide) : Operateur doit être 'add', 'sub', 'mul' ou 'div'.");
+			
+		}		
+		
+		try{
+			readSuiteChaineFromFile(chemin);
+		} catch (Exception e) {
+			if(e.getClass().equals(IOException.class) || 
+					e.getClass().equals(NumberFormatException.class) || 
+					e.getClass().equals(NullPointerException.class)) 
+				throw new Exception("Erreur lors de la lecture du fichier");
+		}
+	
+		
+		
+		/**
+		 * Test longueur de chaine
+		 */
+		if(tailleListe < 0 || tailleListe > SIZELIMIT) throw new IllegalArgumentException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
+			"int val2, int tailleListe, boolean vide) : La taille de la liste doit être compris entre 0 et 10.");
+
+		if(this.vide && tailleListe != 0){
+			throw new SizeLimitExceededException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
+					"int val2, int tailleListe, boolean vide) : vide = "+ vide +" -- La chaine utilisée n'est pas vide\n");	
+		}
+		
+				
 		this.fichier = chemin;
 		this.vide = vide;
-	
-		/**
-		 * Comportement à définir
-		 */
-		if(tailleListe < 0 || tailleListe > 10) throw new Exception("La taille de la liste doit être compris entre 0 et 10. "+
-		"La taille actuelle de la liste est de :" + this.tailleChaine);
-		
-		if(this.vide){
-			if(((MyListImpl)this.list).getInit() != null || this.tailleChaine != 0){
-				throw new Exception("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
-			"int val2, int tailleListe, boolean vide) : vide = "+ vide +" -- La chaine utilisée n'est pas vide\n");
-			}
-		}
-		
-		if(nbCalcul > SIZELIMIT){
-			throw new Exception("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
-		"int val2, int tailleListe, boolean vide) : La taille indiqué n'est pas valide. La taille actuelle de liste ajouté à " +
-			"tailleListe : "+tailleListe+" sera supérieur à 10 \n");
-		}
-				
-		if(calculator == null) this.calculator = new CalculatorImpl();
 		this.calculator.setOp(operateur);	
-		this.val1=val1;
-		this.val2=val2;
-		this.startCurseur=this.getSize()+BEGININDEX;
+		this.startCurseur= BEGININDEX + this.tailleChaine;
 		
 		/**
 		 * Ajout des deux premières valeurs dans la suite
 		 */
-		add(new Elem(val1));
-		add(new Elem(val2));
-		
+		if(tailleListe >= 1 && tailleListe > this.tailleChaine) {
+			this.val1=val1;
+			add(new Elem(val1));
+		}
+		if(tailleListe >= 2 && tailleListe > this.tailleChaine){
+			this.val2=val2;
+			add(new Elem(val2));
+		}		
+				
 		/**
 		 * Complète la liste si les deux valeurs ne suffisent pas à compléter la taille. Les éléments qui complètent la suite sont
 		 * calculé à partir des deux derniers éléments de la liste
 		 */
-		while(this.tailleChaine < nbCalcul){
+		while(this.tailleChaine < tailleListe){
 			curser = getAt(this.tailleChaine-2);
 			newVal = calculator.calcul(curser.getValue(), curser.getNext().getValue());
 			add(new Elem(newVal));
@@ -219,16 +237,15 @@ public class SuiteChaineeImpl implements SuiteChainee {
 			w.write(this.getSize()+"\n");
 			w.write(this.toString());
 			w.close();
-			
 		}
         catch(FileNotFoundException ex) {
-        	throw new Exception("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");            
+        	throw new FileNotFoundException("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");            
         }
         catch(IOException ex) {
-        	throw new Exception("Erreur writeSuiteChaineToFile : Erreur d'écriture dans " + this.fichier + "\n");                 
+        	throw new IOException("Erreur writeSuiteChaineToFile : Erreur d'écriture dans " + this.fichier + "\n");                 
         }
 		catch(NullPointerException ex) {
-			throw new Exception("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");           
+			throw new NullPointerException("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");           
         }
 	}
 	
@@ -241,41 +258,29 @@ public class SuiteChaineeImpl implements SuiteChainee {
 	 */
 	private boolean readSuiteChaineFromFile(String chemin) throws Exception {
 		String contenu;
-		String operateur;
 		String line = null;
 		
 		try {
-            FileReader fileReader = new FileReader(chemin);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            RandomAccessFile fileReader = new RandomAccessFile(chemin, "r");
             
             /**
-             * Trouver si le fichier est vide ou pas.
+             * On passe toutes les lignes de sauvegarde inutile
              */
-            if((line=bufferedReader.readLine())!=null){
-            	operateur=line;
-            	if(calculator.isValide(operateur)!=true){
-            		bufferedReader.close();
-            		return false;
-            	}
-        	}
-        	else{
-        		bufferedReader.close();
-        		return false;
-        	}
+            for(int i = 0 ; i < 5 ; i++){
+	            line=fileReader.readLine();
+            }
             
-            if((line=bufferedReader.readLine())!=null){
+            if((line=fileReader.readLine())!=null){
         		contenu=line;        
         	}
         	else{
-        		bufferedReader.close();
+        		fileReader.close();
         		return false;
         	}
             
-            bufferedReader.close();
+            fileReader.close();
             
             setList(contenu); 
-            this.fichier=chemin;
-            this.calculator.setOp(operateur);;
         }
         catch(FileNotFoundException ex) {
         	throw new Exception("Erreur readSuiteChaineFromFile : Impossible d'ouvrir le fichier " + chemin + "\n");            
