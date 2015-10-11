@@ -1,3 +1,4 @@
+package programme;
 /**
  * Implémentation de l'interface Chaine. Représente une chaine simple chainée.
  * version 0.5

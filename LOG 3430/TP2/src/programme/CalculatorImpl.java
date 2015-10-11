@@ -1,3 +1,4 @@
+package programme;
 
 public class CalculatorImpl implements Calculator {
 
@@ -66,17 +67,27 @@ public class CalculatorImpl implements Calculator {
 	 * @param b Second terme de l'opération
 	 * @return Résultat de l'addition
 	 */
-	private int add(int a, int b){
+	private int add(int a, int b) throws Exception{
 		int res=a;
 		
 		if(b>0){
 			while(b-- !=0){
-				res++;
+				if(res < Integer.MAX_VALUE && res > Integer.MIN_VALUE){
+					res++;
+			    } else {
+			    	throw new ArithmeticException("add(int a, int b) : a ou b est trop grand" +
+			    			" pour effectuer le calcule");
+			    }
 			}
 		}
 		else if(b<0){
 			while(b++ !=0){
-				res--;
+				if(res < Integer.MAX_VALUE && res > Integer.MIN_VALUE){
+					res--;
+			    } else {
+			    	throw new ArithmeticException("add(int a, int b) : a ou b est trop grand" +
+			    			" pour effectuer le calcule. Diminuer a ou b ou la taille de chaine.");
+			    }
 			}
 		}
 		return res;
@@ -88,7 +99,7 @@ public class CalculatorImpl implements Calculator {
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la soustraction
 	 */
-	private int substract(int a, int b){
+	private int substract(int a, int b) throws Exception{
 		return add(a,-b);
 		
 	}
@@ -99,7 +110,7 @@ public class CalculatorImpl implements Calculator {
 	 * @param b Second terme de l'opération
 	 * @return Résultat de la multiplication
 	 */
-	private int multiply(int a, int b){
+	private int multiply(int a, int b) throws Exception{
 		int res=0;
 		
 		if(b>0){

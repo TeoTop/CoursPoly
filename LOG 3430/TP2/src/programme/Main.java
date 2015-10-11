@@ -1,3 +1,4 @@
+package programme;
 import java.io.Console;
 
 /**
@@ -5,7 +6,7 @@ import java.io.Console;
  * verion 0.5
  *
  */
-public class Test {
+public class Main {
 
 	public static void main(String[] args) {
 		String filePath="src/Files/chaine.properties";

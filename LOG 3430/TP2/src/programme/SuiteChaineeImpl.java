@@ -1,3 +1,4 @@
+package programme;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -52,11 +53,12 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		/**
 		 * Test longueur de chaine
 		 */
-		if(tailleListe < 0 || tailleListe > SIZELIMIT) throw new IllegalArgumentException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
+		int taille_final = this.tailleChaine + tailleListe;
+		if(tailleListe < 0 || taille_final > SIZELIMIT) throw new SizeLimitExceededException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
 			"int val2, int tailleListe, boolean vide) : La taille de la liste doit être compris entre 0 et 10.");
 
-		if(this.vide && tailleListe != 0){
-			throw new SizeLimitExceededException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
+		if(vide && this.tailleChaine != 0){
+			throw new IllegalArgumentException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
 					"int val2, int tailleListe, boolean vide) : vide = "+ vide +" -- La chaine utilisée n'est pas vide\n");	
 		}
 		
@@ -69,11 +71,11 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		/**
 		 * Ajout des deux premières valeurs dans la suite
 		 */
-		if(tailleListe >= 1 && tailleListe > this.tailleChaine) {
+		if(tailleListe >= 1) {
 			this.val1=val1;
 			add(new Elem(val1));
 		}
-		if(tailleListe >= 2 && tailleListe > this.tailleChaine){
+		if(tailleListe >= 2){
 			this.val2=val2;
 			add(new Elem(val2));
 		}		
@@ -82,7 +84,7 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		 * Complète la liste si les deux valeurs ne suffisent pas à compléter la taille. Les éléments qui complètent la suite sont
 		 * calculé à partir des deux derniers éléments de la liste
 		 */
-		while(this.tailleChaine < tailleListe){
+		while(this.tailleChaine < taille_final){
 			curser = getAt(this.tailleChaine-2);
 			newVal = calculator.calcul(curser.getValue(), curser.getNext().getValue());
 			add(new Elem(newVal));

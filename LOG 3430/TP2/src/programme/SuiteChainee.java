@@ -1,3 +1,4 @@
+package programme;
 
 public interface SuiteChainee {
 	/**

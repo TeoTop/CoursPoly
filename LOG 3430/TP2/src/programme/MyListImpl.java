@@ -1,3 +1,4 @@
+package programme;
 /**
  * Implémentation de l'interface SuiteChaine.
  * @see MyList
