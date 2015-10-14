@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  block link
+    -var selected = 'Accueil'; //default
+
+  -var menu = { 'Accueil': '/', 'Nouvelle partie': '/new_game', 'Chapitre': '/chap', 'Guide de jeu': '/help' };
+  -var next_chap = 0;
+
+  body
+    nav(id="general_menu", class="style_menu")
+      ul
+        each val, key in menu
+          if selected === key
+            li.selected
+              a(href=val, title=key)=key
+          else
+            li
+              a(href=val, title=key)=key
+
+    h1.site_title
+      a(href="/" title="Le Loup Solitaire : Les Grottes de Katle")
+        img(src="/images/title.png")
+    
+    
+    div(id="content" class="content")
+      block content
+
+    footer(class="content-center")
+      p #[a(href="/", title="Accueil") Accueil] | #[a(href="/new_game", title="Nouvelle partie") Nouvelle partie] | #[a(href="/chap", title="Chapitre") Chapitre] | #[a(href="/help", title="Guide de jeu") Guide de jeu] 
+      p Site créé avec Express, Jade et NodeJS dans le cadre du cours LOG4420.
+      p Équipe composée de Julien Bergeron(1611134) et de Théo Chapon(1810945)

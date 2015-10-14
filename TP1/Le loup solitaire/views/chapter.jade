@@ -1,0 +1,110 @@
+extends layout
+
+block link
+  -var selected = 'Chapitre';
+
+ 
+block content
+  div(id="adventure_box" class="float-left center") 
+    div(class="adv_box_stats line") 
+      div#[img(src="/images/endurance.png")] #[br] 18
+      div #[img(src="/images/hability.png")] #[br] 18
+      div #[img(src="/images/bourse.png")] #[br] 18
+
+    h3 Disciplines Kai
+    table
+      tr
+        td #[img(src="/images/camouflage.png")]
+        td #[img(src="/images/hunting.png")]
+        td #[img(src="/images/sense.png")]
+        td #[img(src="/images/traking.png")]
+      tr
+        td #[img(src="/images/healing.png")]
+        td
+        td
+        td
+      tr
+        td
+      
+    h3 Équipements
+    div(class="line")
+      div #[img(src="/images/sword.png")]
+      div #[img(src="/images/axe.png")]
+
+  div(class="chapter-content")
+    h2 Menu
+    div(class="context_menu line")
+      //-div(class="adventure")
+       a(href="#adventure_box") Feuille de route
+      div(class="backpack")
+       a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
+      div(class="special_object")
+       a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]  
+
+    div(id="backpack_box" class="box context_content")
+      div(class="box-content")
+        h3 Sac à dos
+        table(class="grid grid-border")
+          tr 
+            td(class="ration")
+            td(class="potion")
+            td
+            td
+          tr
+            td(class="potion")
+            td
+            td
+            td 
+      a(href="#")
+    div(id="special_object" class="box context_content")
+      div(class="box-content")
+        h3 Objets spéciaux
+        table(class="grid")
+          tr 
+            td(class="wastcost")
+            td
+            td
+            td
+          tr
+            td
+            td
+            td
+            td 
+      a(href="#")      
+
+    h2 Page #{chap}
+    div(id="story")
+      block story
+     
+    div(id="fight")
+      block fight
+
+    div(id="turn")
+      block turn
+
+    div(id="picture" class="content-center")
+      block picture
+
+    h2 Historique des combats
+    table(class="battleHistory")
+     thead
+      tr
+        th Chapitre
+        th Ennemi
+        th Résultat
+     tbody
+      tr
+        td 78
+        td Bakana
+        td Victoire
+      
+      tr
+        td 345
+        td Gremlin
+        td Défaite
+      
+      tr
+        td 999
+        td Infinity
+        td Défaite
+    button(class="button") Voir Combat

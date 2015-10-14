@@ -1,20 +1,64 @@
-
+/**
+ * Implémentation de l'interface Noeud. Représente un noeud (élément de la {@link SuiteChaineImp}).
+ * @see Noeud
+ * @see SuiteChaineImp
+ * @version 0.5
+ */
 public class NoeudImp implements Noeud {
-
+	/**
+	 * Position dans la chaine. Dépend dela constante {@link SuiteChaineImp#BEGININDEX}
+	 */
 	private int index;
+	
+	/**
+	 * Valeur contenu par le noeud
+	 */
 	private int value;
+	
+	/**
+	 * Pointeur vers le noeud suivant de la chaine (Chaine à simple chainage)
+	 */
 	private Noeud next;
 	
-	
+	/**
+	 * Constructeur vide. Initialise attribut de la façon suiavnte : <br>
+	 *    - {@link #index} = 0<br>
+	 *    - {@link #value} = 0<br>
+	 *    - {@link #next} = null<br>
+	 */
 	public NoeudImp() {
 		super();
+		this.index = 0;
+		this.value = 0;
+		this.next = null;
+		
 	}
 	
+	/**
+	 * Constructeur à un paramètre. Initialise attribut de la façon suiavnte : <br>
+	 *    - {@link #index} = 0<br>
+	 *    - {@link #value} = value<br>
+	 *    - {@link #next} = null<br>
+	 *    
+	 * @param value Valeur attribuée au noeud.
+	 */
 	public NoeudImp(int value) {
 		super();
+		this.index = 0;
 		this.value = value;
+		this.next = null;
 	}
 
+	/**
+	 * Constructeur complet. Initialise attribut de la façon suiavnte : <br>
+	 *    - {@link #index} = index<br>
+	 *    - {@link #value} = value<br>
+	 *    - {@link #next} = next<br>
+	 *    
+	 * @param index Position du noeud dans la suite
+	 * @param value Valeur attribuée au noeud.
+	 * @param next Pointeur vers le prochain noeud de la liste
+	 */
 	public NoeudImp(int index, int value, Noeud next) {
 		super();
 		this.index = index;
@@ -22,6 +66,7 @@ public class NoeudImp implements Noeud {
 		this.next = next;
 	}
 
+	
 	public int getIndex() {
 		return index;
 	}

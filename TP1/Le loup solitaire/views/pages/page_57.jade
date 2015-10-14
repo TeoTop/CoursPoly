@@ -1,0 +1,25 @@
+extends ../chapter
+
+block story
+  div(id="backpack_choice_box" class="choice_box context_content")
+    span
+    div(class="box-content")
+      h3 Choisissez un des objets
+      table(class="grid grid-border")
+        tr 
+          td(class="warhammer")
+          td(class="spear")
+          td(class="wastcost")
+          td
+      div(class="button")
+        a(href="/chap/331") Continuer
+ 
+  p.
+   Vous cachez le cadavre sous l'escalier et vous vous hâtez de le fouiller. Vous y découvrez une Épée d'Os et un Disque de Pierre Bleue. Si vous souhaitez conserver 
+   l'un ou l'autre de ces objets (ou les deux), inscrivez-les sur votre Feuille d'Aventure dans la case Objets Spéciaux. Vous abandonnez ensuite le cadavre et vous montez 
+   l'escalier quatre à quatre.
+
+block turn
+  p Rendez-vous au #[a(href="#backpack_choice_box") 331].
+
+block picture

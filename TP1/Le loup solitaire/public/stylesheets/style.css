@@ -1,0 +1,502 @@
+/* 
+  Reset css code by Eric Mayer
+  http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*
+  CSS code par Chapon Theo et Julien Bergeron
+*/
+
+/* Importation de style */
+@font-face {
+    font-family: "Godofwar";
+    src: url('../fonts/GODOFWAR.ttf');
+}
+
+@font-face {
+    font-family: "Old-Standard-TT";
+    src: url('../fonts/OldStandardTT/OldStandard-Regular.ttf');
+}
+@font-face {
+    font-family: "Old-Standard-TT";
+    font-style: italic;
+    src: url('../fonts/OldStandardTT/OldStandard-Italic.ttf');
+}
+@font-face {
+    font-family: "Old-Standard-TT";
+    font-weight: bold;
+    src: url('../fonts/OldStandardTT/OldStandard-Bold.ttf');
+}
+
+html body {
+  font-family: "Old-Standard-TT", Serif;
+  font-size: 18px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "GODOFWAR", "Old-Standard-TT", Serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 40px 20px;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 20px 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 20px 20px;
+}
+
+p {
+  margin: 20px 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+b {
+  font-weight: bold;
+}
+
+/*Style partagé*/
+.line > div {
+  display: inline-block;
+  margin: auto;
+}
+
+.context_content {
+  display: none;
+}
+
+.context_content:target {
+  display: block;
+}
+
+.content-center {
+  text-align: center;
+}
+
+.center {
+  width: inherit;
+  text-align: center;
+}
+
+
+/*Style header */
+.content {
+  position: relative;
+  width: 75%; 
+  z-index: 10;
+  text-align: justify;
+  text-justify: inter-word;
+  overflow: hidden;
+}
+
+.float-left {
+  float:left;
+  width: 40%; 
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.chapter-content {
+  display:relative;
+  width: 50%;
+  margin:20px 40% 50px;
+}
+
+.adv_box_stats div {
+  margin: 20px;
+}
+
+#adventure_box table {
+  margin: auto;
+}
+
+#adventure_box td {
+  width: 25%;
+  height: 25%;
+  padding: 20px;
+}
+
+
+
+/*Style footer*/
+footer{
+  background-color:#302E2A;
+  color: white;
+  padding: 20px 50px;
+}
+
+footer a {
+  color: inherit;
+}
+
+
+
+/* Style pour menu */
+.style_menu {
+  background-color: #302E2A;
+  text-align: center;
+}
+
+.style_menu ul {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  margin: 20px 0px;
+  padding: 10px;
+  line-height:60px;
+}
+
+/* Element de base */
+.style_menu ul li {
+  display: inherit;
+  text-align: center;
+  margin: 0px 20px;
+  padding: auto;
+  width: 200px;
+  line-height:50px;
+}
+
+.style_menu ul li a {
+    color:white;
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.style_menu ul li a:hover {
+    font-size: 25px;
+    background: -webkit-radial-gradient(white 5%, #302E2A 90%); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(white 5%, #302E2A 90%); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(white 5%, #302E2A 90%); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(white 5%, #302E2A 30%); /* Standard syntax */
+}
+
+/* Element selectionne */
+.style_menu ul li.selected {
+    background: url("/images/border_menu.png") no-repeat;
+}
+
+
+
+.style_menu ul li.selected a {
+    font-size: 20px;
+    background: none;
+    pointer-events: none;
+    cursor: default;
+}
+
+/*titre*/
+.site_title{
+  position: relative;
+  top:-20px;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.site_title img {
+  width: 40%;
+}
+
+
+/* Style pour formulaire */
+
+.forms-controller .field-controller {
+  margin-left:20%;
+}
+
+.forms-controller .field-controller h3 {
+  display: inline-block;
+  padding-right: 30px;
+}
+
+.forms-controller .field-controller input {
+  height: 30px;
+  width: 200px;
+  padding: 5px 20px;
+}
+
+.forms-controller .field-controller .checkbox-controller {
+  margin: 0 0 30px;  
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] {
+  display: none;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] + label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"]:checked + label {
+  background: url("/images/tick_ok.png") center no-repeat;
+}
+
+.forms-controller .field-controller .checkbox-controller label {
+  width:450px;
+}
+
+.forms-controller .field-controller .checkbox-controller label img {
+  margin: 0 60px 0 60px;
+  vertical-align:middle;
+}
+
+
+.forms-controller .field-controller input[type="submit"] {
+  position: relative;
+  height: 80px;
+  width: 400px;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  background-color: #302E2A;
+  font-size: 30px;
+}
+
+.forms-controller .field-controller input[type="submit"]:hover {
+  font-size: 40px;
+  cursor:pointer;
+}
+
+
+/*Menu contextuel*/
+.context_menu{
+  position: relative;
+  width: 100%;
+}
+
+.context_menu div {
+  width: 50%;
+  text-align: center;
+}
+
+
+
+
+/*Boite d'interraction avec le joueur*/
+.box, .choice_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center; 
+}
+
+.box .box-content, .choice_box .box-content {
+  position: absolute;
+  z-index:20;
+  top:25%;
+  right: 0;
+  min-width: 600px;
+  min-height: 200px;
+  padding: 20px 20px;
+  background-color: white;
+  text-align: center;  
+}
+
+.box a, .choice_box span {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #302E2A;
+  opacity:0.5;
+}
+
+.choice_box p {
+    margin: 50px auto;
+}
+
+.choice_box span {
+  pointer-events: none;
+  cursor: default;
+}
+
+.grid {
+  margin: 50px auto 20px !important;
+}
+
+.grid td {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+}
+
+.grid-border td{
+  border: dashed 1px #302E2A;
+}
+
+.grid td:hover {
+  border: solid 2px #302E2A;
+  background-color: rgba(48, 46, 42, 0.2);
+}
+
+.button {
+	text-align:center;
+	margin:20px auto;
+  padding: 10px 10px;
+  /*border-radius:20px;*/
+  background-color: #302E2A;
+  width:170px;
+  line-height: 30px;
+  color: white;
+}
+
+.button a {
+	color: white;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.button a:hover {
+  font-size: 30px;
+  cursor:pointer;
+}
+
+#start_button {
+	width: 300px;
+	line-height:30px;
+}
+
+/*Image en background*/
+#backpack_box .box-content {
+  background: url("/images/backpack_background.png") no-repeat; 
+  background-size: 100%;
+}
+
+.potion{
+  background: url("/images/potion.png") center no-repeat;
+}
+
+.ration{
+  background: url("/images/ration.png") center no-repeat;
+}
+
+.wastcost{
+  background: url("/images/wastcost.png") center no-repeat;
+}
+
+.warhammer{
+  background: url("/images/warhammer.png") center no-repeat;
+}
+
+.spear{
+  background: url("/images/spear.png") center no-repeat;
+}
+
+.battleHistory table {
+	background: #f5f5f5;
+	border-collapse: separate;
+	box-shadow: inset 0 1px 0 #fff;
+	font-size: 12px;
+	line-height: 24px;
+	margin: 30px auto;
+	text-align: left;
+}
+
+.battleHistory th {
+	background:linear-gradient(#777, #444);
+	border-left: 1px solid #555;
+	border-right: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #333;
+	box-shadow: inset 0 1px 0 #999;
+	color: #fff;
+    font-weight: bold;
+	padding: 10px 15px;
+	position: relative;
+	text-shadow: 0 1px 0 #000;
+}
+
+#battleInvariantLeftHeader {
+    padding: 10px 5px 10px 30px;
+}
+
+#battleInvariantRightHeader {
+    padding: 10px 30px 10px 5px;
+}
+
+.battleHistory td {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #e8e8e8;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 10px 15px;
+	position: relative;
+	transition: all 300ms;
+    text-align: center;
+}
+
+.battleHistory tr:hover {
+	background: #eeeeee;
+}
+
+#BattlePlayerEnduranceColumn {
+    color: green;
+}
+
+#BattleEnnemyEnduranceColumn {
+    color: red;
+}
