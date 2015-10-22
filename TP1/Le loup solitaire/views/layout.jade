@@ -3,12 +3,10 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    link(rel='javascript', href='/js/vars_global.css')
+    
   block link
     -var selected = 'Accueil'; //default
-
-  -var menu = { 'Accueil': '/', 'Nouvelle partie': '/new_game', 'Chapitre': '/chap', 'Guide de jeu': '/help' };
-  -var next_chap = 0;
 
   body
     nav(id="general_menu", class="style_menu")

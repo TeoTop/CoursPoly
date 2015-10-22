@@ -2,33 +2,30 @@ extends layout
 
 block link
   -var selected = 'Nouvelle partie';
-  -var kai = {"camouflage" : "Camouflage", "hunting" : "Chasse", "sense" : "Sixème sens", "traking" : "Orientation", "healing" : "Guérison", "weaponskill" : "Maîtrise d'arme  ", "mindshield" : "Bouclier psychique", "mindblast" : "Puissance psychique", "animalkinship" : "Communication animale", "mindovermatter" : "Maîtrise psychique de la matière"};  
-  -var equipement = {"sword" : "Epée", "shortsword" : "Sabre", "spear" : "Lance", "mace" : "Masse d'armes", "warhammer" : "Marteau de guerre", "axe" : "Hâche", "broadsword" : "Glaive", "quaterstaff" : "Bâton", "wastcost" : "Gilet de cuir matelassé", "potion" : "Potion de Lampur", "ration" : "Rations spéciales"};  
-
 
 
 block content
   div(class="chapter-content")
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
-      form(name="new-game", method="post", action="/new_game_post")
+      form(name="new-game", method="post", action="/new_game")
         div(class='field-controller')
           h3 Name
           input(id='name',type='text',placeholder='Name',name='name')
         div(class='field-controller')
           h3 Discipline de Kai
-          each val, key in kai
+          each val, key in kais
             div(class='checkbox-controller')
-              input(type="checkbox", id=key, name="equipment", value=key)
+              input(type="checkbox", id=key, name="kais", value=key)
               label(for=key)
                 img(src="/images/"+key+".png") 
                 | #{val}
 
         div(class='field-controller')
           h3 Equipement
-          each val, key in equipement
+          each val, key in equipments
             div(class='checkbox-controller')
-              input(type="checkbox", id=key, name="equipment", value=key)
+              input(type="checkbox", id=key, name="equipments", value=key)
               label(for=key)
                 img(src="/images/"+key+".png") 
                 | #{val}

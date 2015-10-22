@@ -26,6 +26,9 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use('/', routes);
 app.use('/chap', chapter);
 
+//global variables
+app.locals = require('./vars_global');
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
