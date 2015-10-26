@@ -1,0 +1,41 @@
+div(id="stats" class="stats-menu content-center") 
+    div(class="adv_box_stats line") 
+      div #[img(src="/images/endurance.png")] #[br] #{session.player.life} / #{session.player.lifeMax}
+      div #[img(src="/images/hability.png")] #[br] #{session.player.dexter}
+      div #[img(src="/images/bourse.png")] #[br] #{session.player.gold} / #{session.player.goldMax}
+
+    h3 Disciplines Kai
+    table
+      each kai, key in session.player.kais
+        if key%4 == 0
+          tr
+        td #[img(src="/images/"+kai+".png")]
+      
+    h3 Équipements
+    div(class="line")
+      each weapon in session.player.weapons
+        div #[img(src="/images/"+weapon+".png")]
+
+    h3 Historique des combats
+    table(class="battleHistory")
+     thead
+      tr
+        th Chapitre
+        th Ennemi
+        th Résultat
+     tbody
+      tr
+        td 78
+        td Bakana
+        td Victoire
+      
+      tr
+        td 345
+        td Gremlin
+        td Défaite
+      
+      tr
+        td 999
+        td Infinity
+        td Défaite
+    button(class="button history-button") Voir Combat

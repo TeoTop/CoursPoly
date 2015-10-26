@@ -1,5 +1,5 @@
 var express = require('express');
-var methodes = require('../methodes');
+var Joueur = require('../Joueur.js');
 var router = express.Router();
 
 /* GET home page. */
@@ -19,7 +19,9 @@ router.post('/new_game', function(req, res, next) {
   var name = req.body.name;
   var kais = req.body.kais;
   var equipments = req.body.equipments;
+  var master = req.body.master;
   var regex = /^\w+$/;
+  var player;
 
   if(!name || !regex.test(name)){
   	res.render('new_game', { title: 'Nouvelle partie' });
@@ -51,12 +53,10 @@ router.post('/new_game', function(req, res, next) {
   	return;
   }
 
-  req.app.locals.life = methodes.getRandom(10,19);
-  req.app.locals.dexter = methodes.getRandom(20,29);
-  req.app.locals.gold = methodes.getRandom(10,19);
-
-  if()
-
+  player = new Joueur();
+  player.setUp(kais, equipments, master);
+  req.session.player = player;
+  
   res.redirect('/chap/1');
 
 });
