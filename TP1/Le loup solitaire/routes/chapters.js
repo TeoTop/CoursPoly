@@ -37,7 +37,7 @@ router.get('/:chap/:section', function(req, res, next) {
   }
 
   res.locals.session = req.session;
-  res.render(, option);
+  res.render(page, option);
   
 });
 

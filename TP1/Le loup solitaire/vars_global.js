@@ -7,4 +7,8 @@ module.exports = {
 	backpack : {"POTION" : "Potion de Lampur", "RATION" : "Rations spéciales"}
 }
 
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 

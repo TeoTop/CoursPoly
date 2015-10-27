@@ -1,9 +1,5 @@
 var var_globals = require('./vars_global');
 
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function Joueur() {
 	this.lifeMax = getRandom(19,19);
 	this.life = this.lifeMax;
