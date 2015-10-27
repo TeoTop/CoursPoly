@@ -6,5 +6,3 @@ module.exports = {
 	spe_object : {"WASTCOST" : "Gilet de cuir matelassé"},
 	backpack : {"POTION" : "Potion de Lampur", "RATION" : "Rations spéciales"}
 }
-
-

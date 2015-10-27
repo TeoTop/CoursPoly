@@ -1,5 +1,6 @@
 var express = require('express');
 var Joueur = require('../Joueur.js');
+var Battle = require('../Battle.js');
 var router = express.Router();
 
 /* GET home page. */
@@ -13,6 +14,16 @@ router.get('/new_game', function(req, res, next) {
 
 router.get('/help', function(req, res, next) {
   res.render('help', { title: 'Guide aide' });
+});
+
+router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
+    var battle = new Battle();
+    battle.playerHabilities = req.params.playerHab;
+    battle.ennemyHabilities = req.params.ennemyHab;
+
+    var result = battle.fight();
+    
+    res.json({ result })
 });
 
 router.post('/new_game', function(req, res, next) {
