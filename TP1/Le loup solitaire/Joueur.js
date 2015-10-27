@@ -1,7 +1,8 @@
 var var_globals = require('./vars_global');
+var common_functions = require('./CommonFunctions');
 
 function Joueur() {
-	this.lifeMax = getRandom(19,19);
+	this.lifeMax = common_functions.getRandom(19,19);
 	this.life = this.lifeMax;
 		
 	this.dexter = getRandom(10,19);
@@ -51,7 +52,5 @@ Joueur.prototype.backPackFull = function() {
 Joueur.prototype.objectFull = function() {
 	return (this.spe_object.length >= 8) ? true : false;
 }
-
-
 
 module.exports = Joueur;

@@ -6,9 +6,3 @@ module.exports = {
 	spe_object : {"WASTCOST" : "Gilet de cuir matelassé"},
 	backpack : {"POTION" : "Potion de Lampur", "RATION" : "Rations spéciales"}
 }
-
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-
