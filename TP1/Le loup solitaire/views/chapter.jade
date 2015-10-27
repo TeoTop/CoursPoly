@@ -44,8 +44,9 @@ block content
     div(id="fight")
       block fight
 
-    div(id="turn" class=displayTurn)
-      block turn
+    if next_page
+      div(id="turn")
+        block turn
 
   include ./stats.jade 
     

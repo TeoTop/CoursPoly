@@ -1,0 +1,17 @@
+extends ../chapter
+
+block story
+  div(id="backpack_choice_box" class="choice_box context_content")
+    span
+    div(class="box-content")
+      p Attention vous venez de perdre #[b 2 points d#{"'"}endurance].
+      div(class="button")
+        a(href="/chap/155") Continuer
+
+  p Vous vous cramponnez à la paroi rocheuse pendant toute la nuit. Le vent glacial vous cingle le visage et vous êtes saisi de tremblements incontrôlables, luttant de toutes vos forces pour ne pas vous évanouir. Vous perdez 2 points d'ENDURANCE. L'huile de Bakanal vous permet cependant de conserver suffisamment de chaleur dans votre corps pour arriver à survivre : sans elle, le froid aurait eu raison de vous.
+
+block turn
+  p Rendez-vous au 
+    a(href="#backpack_choice_box") 155.
+
+block picture
