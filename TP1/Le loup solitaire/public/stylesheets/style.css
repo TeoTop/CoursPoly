@@ -128,6 +128,19 @@ b {
   display: block;
 }
 
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+.error {
+  color:red;
+  display: block;
+}
+
 .content {
   position: relative;
   width: 75%; 
@@ -151,15 +164,6 @@ b {
   width: 50%;
   text-align: center;
 }
-
-.showTurn{
-  display: block;
-}
-
-.hideTurn{
-  display: none;
-}
-
 
 /* Style pour les éléments a possédant la class button (transformation d'un lien en bouton*/
 

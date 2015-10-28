@@ -9,11 +9,15 @@ block content
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
       form(name="new-game", method="post", action="/new_game")
+        if msgName
+          span(class="error") #{msgName}
         div(class='field-controller')
           h3 Name
           input(id='name',type='text',placeholder='Name',name='name')
         div(class='field-controller')
           h3 Discipline de Kai
+          if msgKai
+            span(class="error") #{msgKai}
           each val, key in kais
             div(class='checkbox-controller')
               input(type="checkbox", id=key, name="kais", value=key)
@@ -23,6 +27,8 @@ block content
 
         div(class='field-controller')
           h3 Equipement
+          if msgWeapon
+            span(class="error") #{msgWeapon}
           each val, key in equipments
             div(class='checkbox-controller')
               input(type="checkbox", id=key, name="equipments", value=key)

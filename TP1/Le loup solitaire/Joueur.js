@@ -5,11 +5,11 @@ function Joueur() {
 	this.lifeMax = common_functions.getRandom(19,19);
 	this.life = this.lifeMax;
 		
-	this.dexter = getRandom(10,19);
+	this.dexter = common_functions.getRandom(10,19);
 	this.dexterMaster = this.dexter + 2;
 	this.master = -1;
 
-	this.gold = getRandom(10,19);
+	this.gold = common_functions.getRandom(10,19);
 	this.goldMax = 50;
 	
 	this.kais = [];

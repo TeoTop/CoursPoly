@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var chapter = require('./routes/chapters');
-var player = require('./routes/player');
 
 var app = express();
 
@@ -28,7 +27,6 @@ app.use(session({ secret: 'loup solitaire', resave: false, saveUninitialized: tr
 
 app.use('/', routes);
 app.use('/chap', chapter);
-app.use('/player', player);
 
 //global variables
 app.locals = require('./vars_global');
