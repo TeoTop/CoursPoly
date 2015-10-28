@@ -1,6 +1,7 @@
 var express = require('express');
 var Joueur = require('../Joueur.js');
 var Battle = require('../Battle.js');
+var aleaChoice = require("../aleaChoice.js");
 var router = express.Router();
 
 /* GET home page. */
@@ -8,12 +9,15 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/new_game', function(req, res, next) {
-  res.render('new_game', { title: 'Nouvelle partie' });
-});
-
-router.get('/help', function(req, res, next) {
-  res.render('help', { title: 'Guide aide' });
+router.get('/choixAleatoire/:page', function(req, res, next) {
+  var retour = {choix: "Cette page ne contient pas de choix aléatoire", intervales: []};
+  for(var i = 0; i < aleaChoice.length; i++){
+    if(aleaChoice[i].id == req.params.page){
+      retour.choix = aleaChoice[i].fun();
+      retour.intervales = aleaChoice[i].intervals;
+    }
+  }
+  res.json(retour);
 });
 
 router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
@@ -24,6 +28,14 @@ router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
     var result = battle.fight();
     
     res.json(result);
+});
+
+router.get('/help', function(req, res, next) {
+  res.render('help', { title: 'Guide aide' });
+});
+
+router.get('/new_game', function(req, res, next) {
+  res.render('new_game', { title: 'Nouvelle partie' });
 });
 
 router.post('/new_game', function(req, res, next) {
