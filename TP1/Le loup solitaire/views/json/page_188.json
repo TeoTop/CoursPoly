@@ -1,4 +1,14 @@
-extends ../chapter
+{
+  "id":188,
+  "text":
+  [
 
-block turn
-      a(href="/chap/331") rendez-vous au 331.
+  ],
+  "battle": {},
+  "info": "",
+  "choice":[],
+  "next_page":
+  [
+    {"id": 331, "text": "Rendez-vous au ."},
+  ]
+}

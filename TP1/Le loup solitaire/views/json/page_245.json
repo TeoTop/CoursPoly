@@ -1,4 +1,13 @@
-extends ../chapter
-
-block story
-  p Cette page n'est pas encore implémentée.
+{
+  "id":245,
+  "text":
+  [
+  	"Cette page n'est pas encore implémentée."
+  ],
+  "battle": {},
+  "info": "",
+  "choice":[],
+  "next_page":
+  [
+  ]
+}

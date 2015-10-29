@@ -1,88 +1,18 @@
-extends ../chapter
-
-block story
- p.
-    Dans l'obscurité balayée de neige, vous distinguez deux petits points rouges et brillants qui grandissent peu à peu. Puis soudain, une forme se dessine dans l'ombre : vous voyez alors apparaître une grande et hideuse créature quadrupède qui bondit sur vous. Elle a les yeux étincelants et ouvre une gueule hérissée de dents, exhibant en même temps une énorme langue couverte de poils rêches qu'elle pointe en direction de votre visage.
-
- p.
-    « Argh ! Un Languabarb ! » s'écrie Fenor. Il se précipite aussitôt à votre côté en brandissant une épée dont il essaie de frapper la langue de la créature. L'animal, cependant, est déjà sur vous et il vous faut le combattre.
-
- p.
-    Indifférente à l'attaque de Fenor, la bête monstrueuse ne semble s'intéresser qu'à vous. Fenor lui porte ses coups par-derrière et ne sera donc pas blessé.
-
- p.
-    En revanche, il fera perdre 3 points supplémentaires d'ENDURANCE à votre adversaire, et cela à chaque Assaut, enraison des blessures qu'il lui inflige.
-
-block fight
-  h3 Combat entre Loup Solitaire et LANGUABARB
-    table(class="battleHistory")
-      tr
-       th
-       th Endurance
-       th Habileté
-      tr
-       td Loup Solitaire
-       td(id="BattlePlayerEnduranceColumn") 14
-       td 9
-      tr
-       td LANGUABARB
-       td(id="BattleEnnemyEnduranceColumn") 35
-       td 11
-
-  table(class="battleHistory")
-    thead
-      tr
-       th Tour
-       th Endurance
-       th Dmg
-       th(id="battleInvariantLeftHeader") Ratio
-       th(id="battleInvariantRightHeader") Number
-       th Dmg
-       th Endurance
-    tbody
-      tr
-       td 1
-       td(id="BattlePlayerEnduranceColumn") 14
-       td 6
-       td(id="battleInvariantLeftHeader") 0
-       td(id="battleInvariantRightHeader") 5
-       td 13
-       td(id="BattleEnnemyEnduranceColumn") 17
-      tr
-       td 2
-       td(id="BattlePlayerEnduranceColumn") 12
-       td 2
-       td(id="battleInvariantLeftHeader") 0
-       td(id="battleInvariantRightHeader") 7
-       td 2
-       td(id="BattleEnnemyEnduranceColumn") 15
-      tr
-       td 3
-       td(id="BattlePlayerEnduranceColumn") 4
-       td 8
-       td(id="battleInvariantLeftHeader") 0
-       td(id="battleInvariantRightHeader") 2
-       td 10
-       td(id="BattleEnnemyEnduranceColumn") 5
-      tr
-       td 4
-       td(id="BattlePlayerEnduranceColumn") 2
-       td 2
-       td(id="battleInvariantLeftHeader") 0
-       td(id="battleInvariantRightHeader") 7
-       td 5
-       td(id="BattleEnnemyEnduranceColumn") 0
-
-  div
-    button(class="button") Poursuivre le combat
-    button(class="button") Voir le combat complet
-    button(class="button") Fuir
-
-
-  p Vous avez gagné!
-
-block turn
-    p Si vous tuez la créature sans perdre aucun point d'ENDURANCE, 
-     a(href="/chap/70") rendez-vous au 70.
-    p Si vous perdez des points d'ENDURANCE aucours du combat, 
-     a(href="/chap/129") rendez-vous au 129.
+{
+  "id":180,
+  "text":
+  [
+  	"Dans l'obscurité balayée de neige, vous distinguez deux petits points rouges et brillants qui grandissent peu à peu. Puis soudain, une forme se dessine dans l'ombre : vous voyez alors apparaître une grande et hideuse créature quadrupède qui bondit sur vous. Elle a les yeux étincelants et ouvre une gueule hérissée de dents, exhibant en même temps une énorme langue couverte de poils rêches qu'elle pointe en direction de votre visage.",
+  	"« Argh ! Un Languabarb ! » s'écrie Fenor. Il se précipite aussitôt à votre côté en brandissant une épée dont il essaie de frapper la langue de la créature. L'animal, cependant, est déjà sur vous et il vous faut le combattre.",
+	"Indifférente à l'attaque de Fenor, la bête monstrueuse ne semble s'intéresser qu'à vous. Fenor lui porte ses coups par-derrière et ne sera donc pas blessé.",
+	"En revanche, il fera perdre 3 points supplémentaires d'ENDURANCE à votre adversaire, et cela à chaque Assaut, enraison des blessures qu'il lui inflige."
+  ],
+  "battle": {"name": "Languabarb", "hability": 11, "endurance": 35, "escape": false},
+  "info": "",
+  "choice":[],
+  "next_page":
+  [
+    {"id": 70, "text": "Si vous tuez la créature sans perdre aucun point d'ENDURANCE, rendez-vous au "},
+	{"id": 129, "text": "Si vous perdez des points d'ENDURANCE aucours du combat, rendez-vous au "}
+  ]
+}
