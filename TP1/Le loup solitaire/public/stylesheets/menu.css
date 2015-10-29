@@ -1,0 +1,61 @@
+.style_menu {
+  background-color: #302E2A;
+  text-align: center;
+}
+
+.style_menu ul {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  margin: 20px 0px;
+  padding: 10px;
+  line-height:60px;
+}
+
+/***** Element de base *****/
+.style_menu ul li {
+  display: inherit;
+  text-align: center;
+  margin: 0px 20px;
+  padding: auto;
+  width: 200px;
+  line-height:50px;
+}
+
+.style_menu ul li a {
+    color:white;
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.style_menu ul li a:hover {
+    font-size: 25px;
+    background: -webkit-radial-gradient(white 5%, #302E2A 90%); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(white 5%, #302E2A 90%); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(white 5%, #302E2A 90%); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(white 5%, #302E2A 30%); /* Standard syntax */
+}
+
+/***** Element selectionné *****/
+.style_menu ul li.selected {
+    background: url("/images/border_menu.png") no-repeat;
+}
+
+.style_menu ul li.selected a {
+    font-size: 20px;
+    background: none;
+    pointer-events: none;
+    cursor: default;
+}
+
+/***** Titre *****/
+.site_title{
+  position: relative;
+  top:-20px;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.site_title img {
+  width: 40%;
+}

@@ -1,14 +1,16 @@
 doctype html
+
+block link
+    -var selected = 'Accueil'; //default
+    -var css;
+
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-
-  block link
-    -var selected = 'Accueil'; //default
-
-  -var menu = { 'Accueil': '/', 'Nouvelle partie': '/new_game', 'Chapitre': '/chap', 'Guide de jeu': '/help' };
-  -var next_chap = 0;
+    link(rel='stylesheet', href='/stylesheets/menu.css')
+    link(rel='stylesheet', href='/stylesheets/footer.css')
+    link(rel='stylesheet', href='/stylesheets/'+css+'.css')
 
   body
     nav(id="general_menu", class="style_menu")
@@ -22,11 +24,11 @@ html
               a(href=val, title=key)=key
 
     h1.site_title
-      a(href="/" title="Le Loup Solitaire : Les Grottes de Katle")
+      a(href="/" title="Le Loup Solitaire : Les Grottes de Kalte")
         img(src="/images/title.png")
     
     
-    div(id="content" class="content")
+    div(id="content" class="content center")
       block content
 
     footer(class="content-center")

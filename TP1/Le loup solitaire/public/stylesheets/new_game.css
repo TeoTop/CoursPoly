@@ -1,0 +1,64 @@
+.forms-controller{
+  width: 800px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.forms-controller .field-controller {
+  margin-left:20%;
+}
+
+.forms-controller .field-controller h3 {
+  display: inline-block;
+  padding-right: 30px;
+}
+
+.forms-controller .field-controller input {
+  height: 30px;
+  width: 200px;
+  padding: 5px 20px;
+}
+
+.forms-controller .field-controller .checkbox-controller {
+  margin: 0 0 30px;  
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] {
+  display: none;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"] + label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.forms-controller .field-controller .checkbox-controller input[type="checkbox"]:checked + label {
+  background: url("/images/tick_ok.png") center no-repeat;
+}
+
+.forms-controller .field-controller .checkbox-controller label {
+  width:450px;
+}
+
+.forms-controller .field-controller .checkbox-controller label img {
+  margin: 0 60px 0 60px;
+  vertical-align:middle;
+}
+
+
+.forms-controller .field-controller input[type="submit"] {
+  position: relative;
+  height: 80px;
+  width: 400px;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  background-color: #302E2A;
+  font-size: 30px;
+}
+
+.forms-controller .field-controller input[type="submit"]:hover {
+  font-size: 40px;
+  cursor:pointer;
+}

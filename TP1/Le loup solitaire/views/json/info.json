@@ -1,0 +1,16 @@
+{
+  "id":"Numéro de la page (int)",
+  "text":"Contenue textuelle de la page",
+  "battle": {},   //a completer
+  "info": "Message d'information à afficher au joueur",
+  "choice":
+  [
+    "Choix que le joueur peut faire pour garder ou retirer des objets",
+    {"intitule":"Indication de la sélection", "type":"Référence à la variable globale", "quantite":"Nombre d'objet inclut en une fois (int)"},
+  ],
+  "next_page":
+  [
+    "Indique les pages suivantes à cette page"
+    {"id": "Numéro de la page qui suit (int)", "text": "Text associé au numéro de page"},
+  ]
+}

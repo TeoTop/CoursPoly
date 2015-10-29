@@ -1,0 +1,5 @@
+/* Modifie l'apparence de base du bouton */
+#start_button {
+  width: 300px;
+  line-height:30px;
+}
