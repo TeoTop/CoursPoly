@@ -28,19 +28,13 @@ public class MyListImpl implements MyList {
 	 * peuvent être modfiés pour appartenir à la chaine.
 	 */
 	@Override
-	public void add(Elem element)throws Exception {
+	public void add(Elem element) throws Exception {
 		
 		Elem curser = null;
 		
-		try {
-			/**
-			 * Vérifier si la chaine est vide avant de cherche un élément de la chaine 
-			 */
-			if(getSize() != 0)
-				curser = getAt(BEGININDEX + getSize()-1);
-		} catch (Exception e) {
-			throw e;
-		}
+		if(getSize() != 0)
+			curser = getAt(BEGININDEX + getSize()-1);
+		
 		
 		element.setIndex(BEGININDEX + getSize());
 		element.setNext(null);
@@ -92,7 +86,8 @@ public class MyListImpl implements MyList {
 			curser = curser.getNext();
 		}
 		
-		if(curser != null) removeAt(curser.getIndex());
+		if(curser != null) {removeAt(curser.getIndex());}
+		else {throw new Exception();}
 	}
 
 	
@@ -100,11 +95,7 @@ public class MyListImpl implements MyList {
 	public void setAt(int element, int position) throws Exception {
 		Elem curser = null;
 		
-		try {
-			curser = getAt(position);
-		} catch (Exception e) {
-			throw new Exception("Erreur setAt() : Appel getAt\n" + e.getMessage());
-		}
+		curser = getAt(position);
 		
 		curser.setValue(element);
 	}
