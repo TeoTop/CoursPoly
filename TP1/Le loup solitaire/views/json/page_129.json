@@ -1,26 +1,17 @@
-extends ../chapter
-
-block story
-  div(id="backpack_choice_box" class="choice_box context_content")
-    span
-    div(class="box-content")
-      p Attention vous venez de perdre #[b 3 points d#{"'"}endurance].
-      div(class="button")
-        a(href="/chap/155") Continuer
-  p.
-    Les poils rêches qui couvrent la langue du Languabarb sont imprégnés d'un puissant venin grâce auquel la créature paralyseses victimes avant de les dévorer. En moins de cinq secondes, le poison fait son effet, et vous perdez connaissance avant mêmeque votre tête n'ait heurté la neige.
-
-  p.
-    Lorsque vous reprenezconscience, vous sentez un poids vous peser lourdement sur lapoitrine. C'est le cadavre d'Irian. Et tandis que vous essayez tant bien que mal de vous relever, une vision désolante s'offre à vousdans la brume du petit matin. Tous vos guides, en effet, sontmorts et ce qui reste de votre équipement est dispersé alentour.
- 
-  p.
-    Les cadavres des deux Languabarbs sont étendus dans la neige tachée de sang : tous deux ont été tués à coups d'épée. Engourdi par le froid et le choc que vous venez de recevoir, vous cherchez pendant une heure votre Sac à Dos, parcourant d'un pas chancelant l'étendue glacée, lorsque vous vous apercevez enfin qu'il est toujours accroché à vos épaules.
-
-  p.
-    Bien que vous soyez toujours dans un état second, vous parvenez malgré tout à découvrir un chemin escarpé qui vous permet de poursuivre votre route. Un vent glacial souffle sur ces montagnes hostiles et si vous ne vous êtes pas enduit le corps d'huile de Bakanal, vous perdez 3 points d'ENDURANCE.
-
-block turn
-  p Rendez-vous au 
-    a(href="#backpack_choice_box") 155.
-
-block picture
+{
+  "id":129,
+  "text":
+  [
+    "Les poils rêches qui couvrent la langue du Languabarb sont imprégnés d'un puissant venin grâce auquel la créature paralyseses victimes avant de les dévorer. En moins de cinq secondes, le poison fait son effet, et vous perdez connaissance avant mêmeque votre tête n'ait heurté la neige.",
+    "Lorsque vous reprenezconscience, vous sentez un poids vous peser lourdement sur lapoitrine. C'est le cadavre d'Irian. Et tandis que vous essayez tant bien que mal de vous relever, une vision désolante s'offre à vousdans la brume du petit matin. Tous vos guides, en effet, sontmorts et ce qui reste de votre équipement est dispersé alentour.",
+    "Les cadavres des deux Languabarbs sont étendus dans la neige tachée de sang : tous deux ont été tués à coups d'épée. Engourdi par le froid et le choc que vous venez de recevoir, vous cherchez pendant une heure votre Sac à Dos, parcourant d'un pas chancelant l'étendue glacée, lorsque vous vous apercevez enfin qu'il est toujours accroché à vos épaules.",
+    "Bien que vous soyez toujours dans un état second, vous parvenez malgré tout à découvrir un chemin escarpé qui vous permet de poursuivre votre route."
+  ],
+  "battle": {},
+  "info": "Un vent glacial souffle sur ces montagnes hostiles et si vous ne vous êtes pas enduit le corps d'huile de Bakanal, vous perdez 3 points d'ENDURANCE.",
+  "choice": [],
+  "next_page":
+  [
+    {"id": 155, "text": "Rendez-vous au "}
+  ]
+}

@@ -19,7 +19,7 @@ router.get('/:chap', function(req, res, next) {
 
 router.get('/:chap/:section', function(req, res, next) {
   var page = 'pages/page_'+req.params.chap; 
-  var option = { chap: req.params.chap };
+  var option = { chap: req.params.chap, next_page: false };
 
   if(!req.session.player) {
     player = new Joueur();
@@ -29,7 +29,7 @@ router.get('/:chap/:section', function(req, res, next) {
   if(req.params.section == 2) {
     option.next_page = true;
   } else if(req.params.section != 1){
-  	var wrongPath = new Error('This path canno\'t be use');
+  	var wrongPath = new Error('This path cannot be use');
     res.status(404);
     next(wrongPath);
   	return;

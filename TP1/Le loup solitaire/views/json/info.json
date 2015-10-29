@@ -8,7 +8,6 @@
     "Choix que le joueur peut faire pour garder ou retirer des objets",
     {"intitule":"Indication de la sélection", "type":"Référence à la variable globale", "quantite":"Nombre d'objet inclut en une fois (int)"},
   ],
-  "interval": ["Tableau de 2 valeur [min, max] qui donne l'intervale pour le chiffre aléatoire pour le passage à la prochaine page, min"],
   "next_page":
   [
     "Indique les pages suivantes à cette page"
