@@ -15,19 +15,19 @@ block story
 
 block fight
   h3 Combat entre Loup Solitaire et LANGUABARB
-    table(class="battleHistory")
-      tr
-       th
-       th Endurance
-       th Habileté
-      tr
-       td Loup Solitaire
-       td(id="BattlePlayerEnduranceColumn") 14
-       td 9
-      tr
-       td LANGUABARB
-       td(id="BattleEnnemyEnduranceColumn") 35
-       td 11
+  table(class="battleHistory")
+    tr
+     th
+     th Endurance
+     th Habileté
+    tr
+     td Loup Solitaire
+     td(id="BattlePlayerEnduranceColumn") 14
+     td 9
+    tr
+     td LANGUABARB
+     td(id="BattleEnnemyEnduranceColumn") 35
+     td 11
 
   table(class="battleHistory")
     thead
@@ -73,16 +73,16 @@ block fight
        td 5
        td(id="BattleEnnemyEnduranceColumn") 0
 
-  div
-    button(class="button") Poursuivre le combat
-    button(class="button") Voir le combat complet
-    button(class="button") Fuir
+  div(class="line-button")
+    div(class="button") Poursuivre
+    div(class="button") Voir le combat
+    div(class="button") Fuir
 
 
   p Vous avez gagné!
 
 block turn
     p Si vous tuez la créature sans perdre aucun point d'ENDURANCE, 
-     a(href="/chap/70") rendez-vous au 70.
+     a(href="/chap/70/1") rendez-vous au 70.
     p Si vous perdez des points d'ENDURANCE aucours du combat, 
-     a(href="/chap/129") rendez-vous au 129.
+     a(href="/chap/129/1") rendez-vous au 129.

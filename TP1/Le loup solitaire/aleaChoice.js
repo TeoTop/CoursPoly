@@ -1,6 +1,12 @@
 var fs = require('fs');
 var common_functions = require('./CommonFunctions');
 
+/**
+	Objet js qui stock la liste des pages qui doivent appliquer une méthode élatoire pour déterminer la suite de l'histoire
+	id : numero de la page
+	fun : fonction à appliquer -> retourne le numéro de la page suivante en fonction d'un nombre aléatoire
+	intervals : liste des intervales et de la page associée
+**/
 module.exports = [
 	{ 
 		id: 134, 

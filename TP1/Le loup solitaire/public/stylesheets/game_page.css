@@ -1,3 +1,4 @@
+/*** Style pour l'ensemble globale de la page chapter ***/
 .chapter-content {
   display: inline-block;
   position: relative;
@@ -83,16 +84,28 @@
   background-color: rgba(48, 46, 42, 0.2);
 }
 
+#add-objets div {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 40px 10px 40px;
+}
+
 /*Image en background*/
 #backpack_box .box-content {
   background: url("/images/backpack_background.png") no-repeat; 
   background-size: 100%;
 }
-/**/
 
+
+/* Style pour l'affichage des stats */
+.kais-stat{
+  width: 100%;
+}
 
 .battleHistory {
   width: 100%;
+  text-align: center;
+
 }
 
 .battleHistory th {
@@ -131,7 +144,6 @@
   padding: 10px 15px;
   position: relative;
   transition: all 300ms;
-  text-align: center;
 }
 
 .battleHistory tr:hover {

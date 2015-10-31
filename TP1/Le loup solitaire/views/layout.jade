@@ -1,18 +1,24 @@
 doctype html
 
+//- Définition du block link qui permet de modifier les variables -- qui setup des éléments du site -- dans les jades fils 
 block link
-    -var selected = 'Accueil'; //default
-    -var css;
+  -var selected = 'Accueil'; //default
+  -var css;
 
 html
   head
     title= title
+
+    //- Styles globaux
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/menu.css')
     link(rel='stylesheet', href='/stylesheets/footer.css')
+
+    //- Style spécifique à la page affcihée
     link(rel='stylesheet', href='/stylesheets/'+css+'.css')
 
   body
+    //- Affiche le menu
     nav(id="general_menu", class="style_menu")
       ul
         each val, key in menu
@@ -23,14 +29,17 @@ html
             li
               a(href=val, title=key)=key
 
+    //- Affiche le titre du jeu
     h1.site_title
       a(href="/" title="Le Loup Solitaire : Les Grottes de Kalte")
         img(src="/images/title.png")
     
     
+    //- Affiche le contenue
     div(id="content" class="content center")
       block content
 
+    //- Affiche le bas de page
     footer(class="content-center")
       p #[a(href="/", title="Accueil") Accueil] | #[a(href="/new_game", title="Nouvelle partie") Nouvelle partie] | #[a(href="/chap", title="Chapitre") Chapitre] | #[a(href="/help", title="Guide de jeu") Guide de jeu] 
       p Site créé avec Express, Jade et NodeJS dans le cadre du cours LOG4420.

@@ -1,21 +1,30 @@
+//-Affichage des stats, compétence et armes du joueur. On affiche aussi la liste des combats du joueur.
 div(id="stats" class="stats-menu content-center") 
     div(class="adv_box_stats line") 
-      div #[img(src="/images/endurance.png")] #[br] #{session.player.life} / #{session.player.lifeMax}
-      div #[img(src="/images/hability.png")] #[br] #{session.player.dexter}
-      div #[img(src="/images/bourse.png")] #[br] #{session.player.gold} / #{session.player.goldMax}
+      div #[img(src="/images/endurance.png" title="Endurance")] #[br] #{session.player.life} / #{session.player.lifeMax}
+      div #[img(src="/images/hability.png" title="Habilité")] #[br] #{session.player.dexter}
+      div #[img(src="/images/bourse.png" title="Or")] #[br] #{session.player.gold} / #{session.player.goldMax}
 
+    //-On affiche les compétences de Kai du joueur
     h3 Disciplines Kai
-    table
+    table(class="kais-stat")
       each kai, key in session.player.kais
-        if key%4 == 0
-          tr
-        td #[img(src="/images/"+kai+".png")]
-      
+        //-Jade n'implément l'utilisation conditionnelle d'élément. On doit passer les balises HTML en utilisant le text plain de Jade
+        if (key%4) == 0
+          | <tr>
+        if key == 4
+          | <td colspan="4">
+        else
+          | <td> 
+        img(src="/images/"+kai+".png" title=kais[kai])
+
+    //-On affiche les armes du joueur
     h3 Équipements
     div(class="line")
       each weapon in session.player.weapons
-        div #[img(src="/images/"+weapon+".png")]
+        div #[img(src="/images/"+weapon+".png" title=weapons[weapon])]
 
+    //-On affiche les combats du joueur tout au long de l'histoire (n'est pas encore dynamique). 
     h3 Historique des combats
     table(class="battleHistory")
      thead
@@ -34,7 +43,7 @@ div(id="stats" class="stats-menu content-center")
       tr
         td 345
         td Gremlin
-        td Défaite
+        td Victoire
         td
           button(class="button history-button") Voir Combat
       tr

@@ -8,12 +8,20 @@ block content
   div(class="chapter-content")
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
+
+      //-Formulaire de création du nouveau joueur
       form(name="new-game", method="post", action="/new_game")
+
+        //- Affichage du message après retour d'un post
         if msgName
           span(class="error") #{msgName}
+
+        //- Nom du joueur
         div(class='field-controller')
           h3 Name
           input(id='name',type='text',placeholder='Name',name='name')
+        
+        //- Sélection des compétences de Kai
         div(class='field-controller')
           h3 Discipline de Kai
           if msgKai
@@ -25,6 +33,7 @@ block content
                 img(src="/images/"+key+".png") 
                 | #{val}
 
+        //- Sélection des équipements de départ
         div(class='field-controller')
           h3 Equipement
           if msgWeapon

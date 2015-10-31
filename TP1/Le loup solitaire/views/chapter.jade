@@ -5,6 +5,7 @@ block link
   -var css = "game_page";
  
 block content
+  //- Affichage du menu contextuel pour le sac à dos
   div(id="backpack_box" class="box context_content")
     div(class="box-content")
       h3 Sac à dos
@@ -15,6 +16,7 @@ block content
           td #[img(src="/images/"+pack+".png")]
     a(href="#")
 
+  //- Affichage du menu contextuel pour les objets spéciales
   div(id="special_object" class="box context_content")
     div(class="box-content")
       h3 Objets spéciaux
@@ -25,6 +27,7 @@ block content
           td #[img(src="/images/"+spe+".png")]
     a(href="#") 
   
+  //- Affichage principale pour l'histoire
   div(id="story_flow" class="chapter-content")
     h2 Menu
     div(class="context_menu line")
@@ -47,5 +50,6 @@ block content
       div(id="turn")
         block turn
 
+  //- Affichage des stats du joueurs
   include ./stats.jade 
     

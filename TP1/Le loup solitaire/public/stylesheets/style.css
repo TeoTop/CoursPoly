@@ -76,6 +76,8 @@ table {
     src: url('../fonts/OldStandardTT/OldStandard-Bold.ttf');
 }
 
+
+/***** Style globale des balises ******/
 html body {
   font-family: "Old-Standard-TT", Serif;
   font-size: 18px;
@@ -114,10 +116,28 @@ b {
   font-weight: bold;
 }
 
-/*Style partagé*/
+fieldset {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border: 2px solid black;
+  border-color: gray;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/**** Style de class partagé *****/
 .line > div {
   display: inline-block;
   margin: auto;
+}
+
+.line-button {
+  text-align: center;
+}
+
+.line-button div {
+  display: inline-block;
 }
 
 .context_content {
@@ -141,6 +161,15 @@ b {
   display: block;
 }
 
+.infobulle {
+  position: absolute;
+  display: hidden;
+}
+
+div:hover .infobulle {
+  display:inline;
+}
+
 .content {
   position: relative;
   width: 75%; 
@@ -154,7 +183,7 @@ b {
   text-align: center;
 }
 
-/*Menu contextuel*/
+/*** Menu contextuel ****/
 .context_menu{
   position: relative;
   width: 100%;
@@ -165,11 +194,11 @@ b {
   text-align: center;
 }
 
-/* Style pour les éléments a possédant la class button (transformation d'un lien en bouton*/
+/*** Style pour les éléments a possédant la class button (transformation d'un lien en bouton)  ***/
 
 .button {
   text-align:center;
-  margin:20px auto;
+  margin:20px 20px;
   padding: 10px 10px;
   /*border-radius:20px;*/
   background-color: #302E2A;

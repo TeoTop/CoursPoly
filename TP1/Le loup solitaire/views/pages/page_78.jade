@@ -7,19 +7,19 @@ block story
 
 block fight
   h3 Combat entre Loup Solitaire et Bakanal
-    table(class="battleHistory")
-      tr
-       th
-       th Endurance
-       th Habileté
-      tr
-       td Loup Solitaire
-       td(id="BattlePlayerEnduranceColumn") 14
-       td 9
-      tr
-       td Bakanal
-       td(id="BattleEnnemyEnduranceColumn") 17
-       td 6
+  table(class="battleHistory")
+    tr
+     th
+     th Endurance
+     th Habileté
+    tr
+     td Loup Solitaire
+     td(id="BattlePlayerEnduranceColumn") 14
+     td 9
+    tr
+     td Bakanal
+     td(id="BattleEnnemyEnduranceColumn") 17
+     td 6
 
   table(class="battleHistory")
     thead
@@ -65,17 +65,17 @@ block fight
        td 5
        td(id="BattleEnnemyEnduranceColumn") 0
 
-  div
-    button(class="button") Poursuivre le combat
-    button(class="button") Voir le combat complet
-    button(class="button") Fuir
+  div(class="line-button")
+    div(class="button") Poursuivre
+    div(class="button") Voir le combat
+    div(class="button") Fuir
 
 
   p Vous avez gagné!
 
 block turn
   p Si vous êtes vainqueur, rendez-vous au 
-    a(href="/chap/245") 245.
+    a(href="/chap/245/1") 245.
 
 block picture
   img(src="/images/picture_page_78.png")

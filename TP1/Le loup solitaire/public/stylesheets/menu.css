@@ -1,3 +1,4 @@
+/****** Style globale du menu ******/
 .style_menu {
   background-color: #302E2A;
   text-align: center;
@@ -12,7 +13,8 @@
   line-height:60px;
 }
 
-/***** Element de base *****/
+
+/***** Element de base du menu *****/
 .style_menu ul li {
   display: inherit;
   text-align: center;

@@ -1,14 +1,11 @@
 {
   "id":188,
-  "text":
-  [
-
-  ],
+  "text": [],
   "battle": {},
   "info": "",
   "choice":[],
   "next_page":
   [
-    {"id": 331, "text": "Rendez-vous au ."},
+    {"id": 331, "text": "Rendez-vous au ."}
   ]
 }

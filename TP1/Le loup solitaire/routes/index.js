@@ -6,8 +6,9 @@ var router = express.Router();
 
 /* Affiche la page d'accueil */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { title: 'Accueil' });
 });
+
 
 /* Retourne un json contenant le resultat de la fontion associé à la page éxécuté et les intervales de la page. Le numéro de la page est récupéré depuis l'URL */
 router.get('/choixAleatoire/:page', function(req, res, next) {
@@ -29,6 +30,7 @@ router.get('/choixAleatoire/:page', function(req, res, next) {
   res.json(retour);
 });
 
+
 /* Retourne un json contenant le résultat d'un round de combat. L'habilité du joueur et de l'ennemi sont récupéré depuis l'URL. */
 router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
     //création de l'objet Battle
@@ -39,21 +41,24 @@ router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
     battle.ennemyHabilities = req.params.ennemyHab;
 
     //on fait tourner les combats (ici juste 1 round; à modifer au prochain TP) et on récupère l'objet BattleResult
-    var result = battle.fight();
+    var result = battle.round();
     
     // on retourne le resultat au format json
     res.json(result);
 });
+
 
 /* Affiche la page d'aide */
 router.get('/help', function(req, res, next) {
   res.render('help', { title: 'Guide aide' });
 });
 
+
 /* Affiche la page de nouvelle partie */
 router.get('/new_game', function(req, res, next) {
   res.render('new_game', { title: 'Nouvelle partie' });
 });
+
 
 /* Récupère le formulaire de la page nouvelle partie, vérifie les valeurs fournis par le joueur, retourne vers la page nouvelle avec des erreurs si il y a des données
  invalides, ou redirige vers la page /chap/1/1 si les données sont valides. Créer un session pour le joueur.*/
@@ -123,9 +128,11 @@ router.post('/new_game', function(req, res, next) {
 
 });
 
+
 /* Retourne le json correspondant à l'objet joueur stocker en session*/
 router.get('/player', function(req, res, next) {
   res.json(req.session.player);
 });
+
 
 module.exports = router;
