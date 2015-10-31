@@ -11,13 +11,15 @@ public interface SuiteChainee {
 	/**
 	 * Sauvegarde la chaine actuelle et la remplace par la chaine contenue dans le fichier
 	 * @param fichier Chemin du fichier contenant la chaine à charger
+	 * @throws Exception 
 	 */
-	void chargerChaine(String fichier); 
+	void chargerChaine(String fichier) throws Exception; 
 	
 	/**
 	 * Sauvegarde la chaine actuelle dans le fichier indiqué par l'attribut fichier
+	 * @throws Exception 
 	 */
-	void sauvgarderChaine();
+	void sauvgarderChaine() throws Exception;
 	
 	/**
 	 * Ajoute un élement à la liste

@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ACEmptyFileTest.class, ACFileTest.class, ACBoiteBlanche.class})
+@SuiteClasses({ ACEmptyFileTest.class, ACFileTest.class, ECBoiteBlanche.class})
 
 public class ACTestsCoverage {
 

@@ -38,16 +38,7 @@ public class SuiteChaineeImpl implements SuiteChainee {
 			"int val2, int tailleListe, boolean vide) : Operateur doit être 'add', 'sub', 'mul' ou 'div'.");		
 		}		
 		
-		try{
-			readSuiteChaineFromFile(chemin);
-		} catch (Exception e) {
-			if(e.getClass().equals(IOException.class) || 
-					e.getClass().equals(NumberFormatException.class) || 
-					e.getClass().equals(NullPointerException.class)) 
-				throw new Exception("Erreur lors de la lecture du fichier");
-		}
-	
-		
+		readSuiteChaineFromFile(chemin);
 		
 		/**
 		 * Test longueur de chaine
@@ -174,23 +165,15 @@ public class SuiteChaineeImpl implements SuiteChainee {
 	}
 	
 	@Override
-	public void chargerChaine(String fichier){
-		try {
-			if(this.fichier!=null) writeSuiteChaineToFile();
+	public void chargerChaine(String fichier) throws Exception {
+		writeSuiteChaineToFile();
 			
-			readSuiteChaineFromFile(fichier);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		readSuiteChaineFromFile(fichier);
 	}
 	
 	@Override
-	public void sauvgarderChaine() {
-		try {
-			writeSuiteChaineToFile();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void sauvgarderChaine() throws Exception {
+		writeSuiteChaineToFile();
 	}
 	
 	/**
@@ -209,25 +192,14 @@ public class SuiteChaineeImpl implements SuiteChainee {
 	 * @throws Exception
 	 */
 	private void writeSuiteChaineToFile()throws Exception{
-		try {
-			BufferedWriter w = new BufferedWriter(new FileWriter(this.fichier,false));
-			w.write(this.val1+"\n");
-			w.write(this.val2+"\n");
-			w.write(this.calculator.getOp().name()+"\n");
-			w.write(this.startCurseur+"\n");
-			w.write(this.getSize()+"\n");
-			w.write(this.toString());
-			w.close();
-		}
-        catch(FileNotFoundException ex) {
-        	throw new FileNotFoundException("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");            
-        }
-        catch(IOException ex) {
-        	throw new IOException("Erreur writeSuiteChaineToFile : Erreur d'écriture dans " + this.fichier + "\n");                 
-        }
-		catch(NullPointerException ex) {
-			throw new NullPointerException("Erreur writeSuiteChaineToFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");           
-        }
+		BufferedWriter w = new BufferedWriter(new FileWriter(this.fichier,false));
+		w.write(this.val1+"\n");
+		w.write(this.val2+"\n");
+		w.write(this.calculator.getOp().name()+"\n");
+		w.write(this.startCurseur+"\n");
+		w.write(this.getSize()+"\n");
+		w.write(this.toString());
+		w.close();
 	}
 	
 	/**
@@ -241,42 +213,29 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		String contenu;
 		String line = null;
 		
-		try {
-            RandomAccessFile fileReader = new RandomAccessFile(chemin, "r");
-            
-            /**
-             * On passe toutes les lignes de sauvegarde inutile
-             */
-            for(int i = 0 ; i < 5 ; i++){
-	            line=fileReader.readLine();
-            }
-            
-            if((line=fileReader.readLine())!=null){
-        		contenu=line;        
-        	}
-        	else{
-        		fileReader.close();
-        		return false;
-        	}
-            
-            fileReader.close();
-            
-            setList(contenu);
-            this.fichier= chemin;
-            
+		
+        RandomAccessFile fileReader = new RandomAccessFile(chemin, "r");
+        
+        /**
+         * On passe toutes les lignes de sauvegarde inutile
+         */
+        for(int i = 0 ; i < 5 ; i++){
+            line=fileReader.readLine();
         }
-        catch(FileNotFoundException ex) {
-        	throw new Exception("Erreur readSuiteChaineFromFile : Impossible d'ouvrir le fichier " + chemin + "\n");            
-        }
-        catch(IOException ex) {
-        	throw new Exception("Erreur readSuiteChaineFromFile : Erreur de lecture " + chemin + "\n");                 
-        }
-		catch(NumberFormatException e){
-			throw new Exception("Erreur readSuiteChaineFromFile : Fichier corrompu, ligne : "+line);
-		}
-		catch(NullPointerException ex) {
-			throw new Exception("Erreur readSuiteChaineFromFile : Impossible d'ouvrir le fichier " + this.fichier + "\n");           
-        }
+        
+        if((line=fileReader.readLine())!=null){
+    		contenu=line;        
+    	}
+    	else{
+    		fileReader.close();
+    		return false;
+    	}
+        
+        fileReader.close();
+        
+        setList(contenu);
+        this.fichier= chemin;
+            
 		
 		return true;
 	}

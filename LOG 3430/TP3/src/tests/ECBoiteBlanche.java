@@ -47,11 +47,14 @@ public class ECBoiteBlanche {
 		new RandomAccessFile(filePath, "rw").setLength(0);
 	}
 	
+	/*********************************************************/
+	/*                Test SuiteChaineeImp                   */
+	/*********************************************************/	
 	/**
-	 * Tests isValide for size equal to 3 or more
+	 * Tests isValide : size equal to 3 or more
 	 */
 	@Test
-	public void isValideCoverageTSup3() {
+	public void isValideSize3Coverage() {
 		try{
 			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",4,true);
 			assertTrue(s.isValide());
@@ -63,10 +66,10 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests isValide for size equal to 2 or less
+	 * Tests isValide : size equal to 2 or less
 	 */
 	@Test
-	public void isValideCoverageTinf3() {
+	public void isValideSize2Coverage() {
 		try{
 			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",2,true);
 			assertTrue(s.isValide());
@@ -78,10 +81,10 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests isValide false
+	 * Tests isValide : suite chaine false
 	 */
 	@Test
-	public void isValideCoverageFalse() {
+	public void isValideFalseCoverage() {
 		try{
 			SuiteChainee s1 = new SuiteChaineeImpl(filePath,-5,-5,"add",2,true);
 			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"mul",2,false);
@@ -127,27 +130,28 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests removeAt
+	 * Tests getAt : position < BEGININDEX
 	 */
-	@Test
-	public void removeAtCoverage() {
-		try{
-			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",5,true);
-			s.removeAt(3);
-			assertEquals(s.toString(), filePath + " : -5, -5, -10, -25");
-			assertEquals(s.getSize(), 4);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
+	@Test(expected = Exception.class)
+	public void getAtUnderSizeCoverage() throws Exception {
+		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",5,true);
+		s.getAt(-1);
 	}
 	
 	/**
-	 * Tests removeAt
+	 * Tests getAt : position > BEGININDEX + sizeList
+	 */
+	@Test(expected = Exception.class)
+	public void getAtOverSizeCoverage() throws Exception {
+		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",5,true);
+		s.getAt(10);
+	}
+	
+	/**
+	 * Tests removeAt : position = BEGININDEX (0)
 	 */
 	@Test
-	public void removeAtCoverageZ() {
+	public void removeAtZeroCoverage() {
 		try{
 			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",5,true);
 			s.removeAt(0);
@@ -179,7 +183,7 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests removeItem empty list
+	 * Tests removeItem : empty list
 	 */
 	@Test(expected = Exception.class)
 	public void removeItemEmptyListCoverage() throws Exception {
@@ -204,114 +208,35 @@ public class ECBoiteBlanche {
 		}
 	}
 	
-	/**
-	 * Tests setOp isValide false
-	 */
-	@Test
-	public void setOpCoverageValide() {
-		try{
-			Calculator o= new CalculatorImpl();
-			assertFalse(o.isValide("lol"));
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
-	}
+	/*********************************************************/
+	/*                  Test Calculator                      */
+	/*********************************************************/
 	
 	/**
-	 * Tests setOp False
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void setOpCoverageF() throws Exception {
-		CalculatorImpl o= new CalculatorImpl();
-		o.setOp("lol");
-		assertEquals(o.calcul(4, 5), 0);
-	}
-	
-	/**
-	 * Tests add  b < 0 et Min Value
+	 * Tests add : b < 0 et a = Max Value
 	 */
 	@Test(expected = ArithmeticException.class)
-	public void addCoveragebMinVal() throws Exception {
-		CalculatorImpl o= new CalculatorImpl();
-		o.setOp("add");
-		o.calcul(Integer.MIN_VALUE-1,-5);
-	}
-	
-	/**
-	 * Tests add  b < 0 et Max Value
-	 */
-	@Test(expected = ArithmeticException.class)
-	public void addCoveragebMaxVal() throws Exception {
+	public void addBNegMaxValCoverage() throws Exception {
 		CalculatorImpl o= new CalculatorImpl();
 		o.setOp("add");
 		o.calcul(Integer.MAX_VALUE+1,-5);
 	}
 	
 	/**
-	 * Tests add  b > 0 et Max Value
+	 * Tests add : b < 0 et a = Min Value
 	 */
-	/*@Test(expected = ArithmeticException.class)
-	public void addCoveragebMaxVal() throws Exception {
+	@Test(expected = ArithmeticException.class)
+	public void addBNegMinValCoverage() throws Exception {
 		CalculatorImpl o= new CalculatorImpl();
 		o.setOp("add");
-		assertEquals(o.calcul(Integer.MAX_VALUE,5), 5);
-	}*/
-	
-	/**
-	 * Tests add b=0
-	 */
-	@Test
-	public void addCoverageba0() {
-		try{
-			CalculatorImpl o= new CalculatorImpl();
-			o.setOp("add");
-			assertEquals(o.calcul(3,0),3);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
+		o.calcul(Integer.MIN_VALUE-1,-5);
 	}
 	
 	/**
-	 * Tests substract
+	 * Tests multiply : b > 0
 	 */
 	@Test
-	public void substractCoverage() {
-		try{
-			CalculatorImpl o= new CalculatorImpl();
-			o.setOp("sub");
-			assertEquals(o.calcul(-1,3),-4);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
-	}
-	
-	/**
-	 * Tests mutltiply a=0
-	 */
-	@Test
-	public void multiplyCoveragea0() {
-		try{
-			CalculatorImpl o= new CalculatorImpl();
-			o.setOp("mul");
-			assertEquals(o.calcul(1,0),0);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
-	}
-	
-	/**
-	 * Tests multiply
-	 */
-	@Test
-	public void multiplyCoverage() {
+	public void multiplyBOverZeroCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("mul");
@@ -322,17 +247,16 @@ public class ECBoiteBlanche {
 			fail("Erreur - Exception inattendu");
 		}
 	}
-
 	
 	/**
-	 * Tests divide a=0
+	 * Tests multiply : b = 0
 	 */
 	@Test
-	public void divideCoveragea0() {
+	public void multiplyBEqualZeroCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
-			o.setOp("div");
-			assertEquals(o.calcul(0,1),0);
+			o.setOp("mul");
+			assertEquals(o.calcul(5,0),0);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -341,10 +265,10 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests divide a==b
+	 * Tests divide : a==b
 	 */
 	@Test
-	public void divideCoverageaa() {
+	public void divideAEqualBCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("div");
@@ -360,7 +284,7 @@ public class ECBoiteBlanche {
 	 * Tests divide a==-b
 	 */
 	@Test
-	public void divideCoverageaam() {
+	public void divideAEqualLessBCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("div");
@@ -373,10 +297,26 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
+	 * Tests divide : a = 0
+	 */
+	@Test
+	public void divideAZeroCoverage() {
+		try{
+			CalculatorImpl o= new CalculatorImpl();
+			o.setOp("div");
+			assertEquals(o.calcul(0,-3),0);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			fail("Erreur - Exception inattendu");
+		}
+	}
+	
+	/**
 	 * Tests divide b<0 et a<0 et a<=b
 	 */
 	@Test
-	public void divideCoverageambm() {
+	public void divideANegBNEgAInfBCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("div");
@@ -389,10 +329,10 @@ public class ECBoiteBlanche {
 	}
 	
 	/**
-	 * Tests divide b>0 et a<0 et -a>=b
+	 * Tests divide b>0 et a<0 et -a>b
 	 */
 	@Test
-	public void divideCoverageamb() {
+	public void divideANegBPosASupBCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("div");
@@ -408,27 +348,11 @@ public class ECBoiteBlanche {
 	 * Tests divide b<0 et a>0 et a>=-b
 	 */
 	@Test
-	public void divideCoverageabm() {
+	public void divideAPosBNEgASupBCoverage() {
 		try{
 			CalculatorImpl o= new CalculatorImpl();
 			o.setOp("div");
 			assertEquals(o.calcul(4,-3),-1);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			fail("Erreur - Exception inattendu");
-		}
-	}
-	
-	/**
-	 * Tests divide b>0 et a>0 et a>=b
-	 */
-	@Test
-	public void divideCoverageab() {
-		try{
-			CalculatorImpl o= new CalculatorImpl();
-			o.setOp("div");
-			assertEquals(o.calcul(4,3),1);
 		}
 		catch(Exception e){
 			e.printStackTrace();
