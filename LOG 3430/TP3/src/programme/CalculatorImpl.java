@@ -37,9 +37,6 @@ public class CalculatorImpl implements Calculator {
 		int res = 0;
 		
 		switch(this.op){
-		case add:
-			res = add(a, b);
-			break;
 		case sub:
 			res = substract(a, b);
 			break;
@@ -50,6 +47,7 @@ public class CalculatorImpl implements Calculator {
 			res = divide(a, b);
 			break;
 		default:
+			res = add(a, b);
 			break;
 		}
 		

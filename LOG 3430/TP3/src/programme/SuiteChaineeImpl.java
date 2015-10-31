@@ -35,8 +35,7 @@ public class SuiteChaineeImpl implements SuiteChainee {
 		
 		if(!this.calculator.isValide(operateur)) {
 			throw new IllegalArgumentException("Erreur SuiteChaine(String chemin, String operateur, int val1, " +
-			"int val2, int tailleListe, boolean vide) : Operateur doit être 'add', 'sub', 'mul' ou 'div'.");
-			
+			"int val2, int tailleListe, boolean vide) : Operateur doit être 'add', 'sub', 'mul' ou 'div'.");		
 		}		
 		
 		try{
@@ -106,18 +105,12 @@ public class SuiteChaineeImpl implements SuiteChainee {
 	public void removeAt(int position) throws Exception {
 		this.list.removeAt(position);
 		
-		this.val1 = getAt(BEGININDEX).getValue();
-		this.val2 = getAt(BEGININDEX+1).getValue();
-		
 		this.tailleChaine--;
 	}
 
 	@Override
 	public void removeItem(int element) throws Exception {
 		this.list.removeItem(element);
-		
-		this.val1 = getAt(BEGININDEX).getValue();
-		this.val2 = getAt(BEGININDEX+1).getValue();
 		
 		this.tailleChaine--;
 	}
