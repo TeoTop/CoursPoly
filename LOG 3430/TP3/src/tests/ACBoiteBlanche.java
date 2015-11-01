@@ -79,6 +79,15 @@ public class ACBoiteBlanche {
 	}
 	
 	/**
+	 * Tests getAt : position < BEGININDEX
+	 */
+	@Test(expected = Exception.class)
+	public void getAtUnderSizeCoverage() throws Exception {
+		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,"add",5,true);
+		s.getAt(-1);
+	}
+	
+	/**
 	 * Tests getAt : position > BEGININDEX + sizeList
 	 */
 	@Test(expected = Exception.class)
