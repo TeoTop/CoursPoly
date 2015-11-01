@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ECetERRTest.class, ECBoiteBlanche.class})
+@SuiteClasses({ ERRTests.class, ECTests.class, ECBoiteBlanche.class})
 public final class ECTestsCoverage {
 
 }

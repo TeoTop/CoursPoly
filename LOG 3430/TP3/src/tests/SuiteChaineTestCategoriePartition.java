@@ -4,5 +4,5 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ECetERRTest.class, ACEmptyFileTest.class, ACFileTest.class })
+@SuiteClasses({ ERRTests.class, ACEmptyFileTest.class, ACFileTest.class })
 public final class SuiteChaineTestCategoriePartition {}
