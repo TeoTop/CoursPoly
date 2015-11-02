@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Elem.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">programme</a> &gt; <span class="el_source">Elem.java</span></div><h1>Elem.java</h1><pre class="source lang-java linenums">package programme;
+
+/**
+ * Implémentation d'un élément. Représente un noeud (élément de la {@link MyListImpl}).
+ * @version 0.5
+ * 
+ */
+public class Elem {
+	
+
+	/**
+	 * Position dans la chaine. Dépend dela constante {@link MyListImpl#BEGININDEX}
+	 */
+	private int index;
+	
+	/**
+	 * Valeur contenu par le noeud
+	 */
+	private int value;
+	
+	/**
+	 * Pointeur vers le noeud suivant de la chaine (Chaine à simple chainage)
+	 */
+	private Elem next;
+	
+	/**
+	 * Constructeur à un paramètre. Initialise attribut de la façon suiavnte : &lt;br&gt;
+	 *    - {@link #index} = 0&lt;br&gt;
+	 *    - {@link #value} = value&lt;br&gt;
+	 *    - {@link #next} = null&lt;br&gt;
+	 *    
+	 * @param value Valeur attribuée au noeud.
+	 */
+	public Elem(int value) {
+<span class="fc" id="L35">		super();</span>
+<span class="fc" id="L36">		this.index = 0;</span>
+<span class="fc" id="L37">		this.value = value;</span>
+<span class="fc" id="L38">		this.next = null;</span>
+<span class="fc" id="L39">	}</span>
+	
+	public int getIndex() {
+<span class="fc" id="L42">		return index;</span>
+	}
+	
+	public void setIndex(int index) {
+<span class="fc" id="L46">		this.index = index;</span>
+<span class="fc" id="L47">	}</span>
+	
+	public int getValue() {
+<span class="fc" id="L50">		return value;</span>
+	}
+	
+	public void setValue(int value) {
+<span class="fc" id="L54">		this.value = value;</span>
+<span class="fc" id="L55">	}</span>
+	
+	public Elem getNext() {
+<span class="fc" id="L58">		return next;</span>
+	}
+	
+	public void setNext(Elem next) {
+<span class="fc" id="L62">		this.next = next;</span>
+<span class="fc" id="L63">	}</span>
+	
+	@Override
+	protected Elem clone() throws CloneNotSupportedException {
+<span class="fc" id="L67">		Elem clone = new Elem(this.value);</span>
+<span class="fc" id="L68">		clone.setIndex(this.index);</span>
+<span class="fc" id="L69">		clone.setNext(this.next);</span>
+<span class="fc" id="L70">		return clone;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>

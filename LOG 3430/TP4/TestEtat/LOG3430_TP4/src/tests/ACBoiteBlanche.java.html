@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ACBoiteBlanche.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">tests</a> &gt; <span class="el_source">ACBoiteBlanche.java</span></div><h1>ACBoiteBlanche.java</h1><pre class="source lang-java linenums">package tests;
+
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javax.naming.SizeLimitExceededException;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import programme.SuiteChainee;
+import programme.SuiteChaineeImpl;
+import programme.Calculator;
+import programme.CalculatorImpl;
+import org.junit.Test;
+
+<span class="nc" id="L22">public class ACBoiteBlanche {</span>
+	private static String wrongFilePath;
+	private static String filePath;
+	private static String filePath2;
+	
+	@BeforeClass
+	public static void init(){
+<span class="nc" id="L29">		wrongFilePath=&quot;src/Timote/chaine.properties&quot;;</span>
+<span class="nc" id="L30">		filePath=&quot;src/Files/chaine.properties&quot;;</span>
+<span class="nc" id="L31">		filePath2=&quot;src/Files/chaine2.properties&quot;;</span>
+<span class="nc" id="L32">	}</span>
+	
+	@AfterClass
+	public static void end() throws FileNotFoundException, IOException{
+<span class="nc" id="L36">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L37">	}</span>
+	
+	@Before
+	public void reset() throws FileNotFoundException, IOException{
+<span class="nc" id="L41">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L42">	}</span>
+	
+	/*********************************************************/
+	/*                Test SuiteChaineeImp                   */
+	/*********************************************************/
+	
+	/**
+	 * Tests chargerChaine
+	 */
+	@Test
+	public void chargerChaineCoverage() {
+		try{
+<span class="nc" id="L54">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L55">			s.chargerChaine(filePath2);</span>
+<span class="nc" id="L56">			assertEquals(s.toString(), filePath2 + &quot; : -52, 0, 0, 0&quot;);</span>
+<span class="nc" id="L57">			assertEquals(s.getSize(), 4);</span>
+<span class="nc" id="L58">		}</span>
+<span class="nc" id="L59">		catch(Exception e){</span>
+<span class="nc" id="L60">			e.printStackTrace();</span>
+<span class="nc" id="L61">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L63">	}</span>
+	
+	/**
+	 * Tests sauvegarderChaine
+	 */
+	@Test
+	public void sauvegarderChaineCoverage() {
+		try{
+<span class="nc" id="L71">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L72">			s.sauvgarderChaine();</span>
+<span class="nc" id="L73">			assertTrue(true);</span>
+<span class="nc" id="L74">		}</span>
+<span class="nc" id="L75">		catch(Exception e){</span>
+<span class="nc" id="L76">			e.printStackTrace();</span>
+<span class="nc" id="L77">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L79">	}</span>
+	
+	/**
+	 * Tests getAt : position &lt; BEGININDEX
+	 */
+	@Test(expected = Exception.class)
+	public void getAtUnderSizeCoverage() throws Exception {
+<span class="nc" id="L86">		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L87">		s.getAt(-1);</span>
+<span class="nc" id="L88">	}</span>
+	
+	/**
+	 * Tests getAt : position &gt; BEGININDEX + sizeList
+	 */
+	@Test(expected = Exception.class)
+	public void getAtOverSizeCoverage() throws Exception {
+<span class="nc" id="L95">		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L96">		s.getAt(10);</span>
+<span class="nc" id="L97">	}</span>
+	
+	/**
+	 * Tests removeItem
+	 */
+	@Test
+	public void removeItemCoverage() {
+		try{
+<span class="nc" id="L105">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L106">			s.removeItem(-10);</span>
+<span class="nc" id="L107">			assertEquals(s.toString(), filePath + &quot; : -5, -5, -15, -25&quot;);</span>
+<span class="nc" id="L108">			assertEquals(s.getSize(), 4);</span>
+<span class="nc" id="L109">		}</span>
+<span class="nc" id="L110">		catch(Exception e){</span>
+<span class="nc" id="L111">			e.printStackTrace();</span>
+<span class="nc" id="L112">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L114">	}</span>
+	
+	/**
+	 * Tests removeItem : empty list
+	 */
+	@Test(expected = Exception.class)
+	public void removeItemEmptyListCoverage() throws Exception {
+<span class="nc" id="L121">		SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,0,true);</span>
+<span class="nc" id="L122">		s.removeItem(-10);</span>
+<span class="nc" id="L123">	}</span>
+	
+	/**
+	 * Tests setAt
+	 */
+	@Test
+	public void setAtCoverage() {
+		try{
+<span class="nc" id="L131">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L132">			s.setAt(10,3);</span>
+<span class="nc" id="L133">			assertEquals(s.toString(), filePath + &quot; : -5, -5, -10, 10, -25&quot;);</span>
+<span class="nc" id="L134">			assertEquals(s.getSize(), 5);</span>
+<span class="nc" id="L135">		}</span>
+<span class="nc" id="L136">		catch(Exception e){</span>
+<span class="nc" id="L137">			e.printStackTrace();</span>
+<span class="nc" id="L138">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L140">	}</span>
+		
+
+	/**
+	 * Tests isValide for size equal to 3 or more
+	 */
+	@Test
+	public void isValideCoverageTSup3() {
+		try{
+<span class="nc" id="L149">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,4,true);</span>
+<span class="nc" id="L150">			assertTrue(s.isValide());</span>
+<span class="nc" id="L151">		}</span>
+<span class="nc" id="L152">		catch(Exception e){</span>
+<span class="nc" id="L153">			e.printStackTrace();</span>
+<span class="nc" id="L154">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L156">	}</span>
+	
+	/**
+	 * Tests isValide for size equal to 2 or less
+	 */
+	@Test
+	public void isValideCoverageTinf3() {
+		try{
+<span class="nc" id="L164">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,2,true);</span>
+<span class="nc" id="L165">			assertTrue(s.isValide());</span>
+<span class="nc" id="L166">		}</span>
+<span class="nc" id="L167">		catch(Exception e){</span>
+<span class="nc" id="L168">			e.printStackTrace();</span>
+<span class="nc" id="L169">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L171">	}</span>
+	
+	/**
+	 * Tests isValide false
+	 */
+	@Test
+	public void isValideCoverageFalse() {
+		try{
+<span class="nc" id="L179">			SuiteChainee s1 = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,2,true);</span>
+<span class="nc" id="L180">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;mul&quot;,2,false);</span>
+<span class="nc" id="L181">			assertFalse(s.isValide());</span>
+<span class="nc" id="L182">		}</span>
+<span class="nc" id="L183">		catch(Exception e){</span>
+<span class="nc" id="L184">			e.printStackTrace();</span>
+<span class="nc" id="L185">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L187">	}	</span>
+	
+	
+	/**
+	 * Tests removeAt
+	 */
+	@Test
+	public void removeAtCoverageZ() {
+		try{
+<span class="nc" id="L196">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L197">			s.removeAt(0);</span>
+<span class="nc" id="L198">			assertEquals(s.toString(), filePath + &quot; : -5, -10, -15, -25&quot;);</span>
+<span class="nc" id="L199">			assertEquals(s.getSize(), 4);</span>
+<span class="nc" id="L200">		}</span>
+<span class="nc" id="L201">		catch(Exception e){</span>
+<span class="nc" id="L202">			e.printStackTrace();</span>
+<span class="nc" id="L203">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L205">	}</span>
+	
+
+	
+	/*********************************************************/
+	/*                  Test Calculator                      */
+	/*********************************************************/
+	/**
+	 * Tests setOp Fals
+	 */
+	@Test
+	public void setOpCoverageF() {
+		try{
+<span class="nc" id="L218">			Calculator o= new CalculatorImpl();</span>
+<span class="nc" id="L219">			assertFalse(o.isValide(&quot;lol&quot;));</span>
+<span class="nc" id="L220">		}</span>
+<span class="nc" id="L221">		catch(Exception e){</span>
+<span class="nc" id="L222">			e.printStackTrace();</span>
+<span class="nc" id="L223">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L225">	}</span>
+	
+	/**
+	 * Tests add : b &gt; 0 et a = Min Value
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void addBPosMinValCoverage() throws Exception {
+<span class="nc" id="L232">		CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L233">		o.setOp(&quot;add&quot;);</span>
+<span class="nc" id="L234">		o.calcul(Integer.MIN_VALUE-1,5);</span>
+<span class="nc" id="L235">	}</span>
+	
+	/**
+	 * Tests add : b &lt; 0 et a = Max Value
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void addBNegMaxValCoverage() throws Exception {
+<span class="nc" id="L242">		CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L243">		o.setOp(&quot;add&quot;);</span>
+<span class="nc" id="L244">		o.calcul(Integer.MAX_VALUE+1,-5);</span>
+<span class="nc" id="L245">	}</span>
+	
+	/**
+	 * Tests add : b &lt; 0 et a = Min Value
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void addBNegMinValCoverage() throws Exception {
+<span class="nc" id="L252">		CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L253">		o.setOp(&quot;add&quot;);</span>
+<span class="nc" id="L254">		o.calcul(Integer.MIN_VALUE-1,-5);</span>
+<span class="nc" id="L255">	}</span>
+	
+	/**
+	 * Tests multiply : b &gt; 0
+	 */
+	@Test
+	public void multiplyBOverZeroCoverage() {
+		try{
+<span class="nc" id="L263">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L264">			o.setOp(&quot;mul&quot;);</span>
+<span class="nc" id="L265">			assertEquals(o.calcul(-1,3),-3);</span>
+<span class="nc" id="L266">		}</span>
+<span class="nc" id="L267">		catch(Exception e){</span>
+<span class="nc" id="L268">			e.printStackTrace();</span>
+<span class="nc" id="L269">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L271">	}</span>
+	
+	/**
+	 * Tests divide : a==b
+	 */
+	@Test
+	public void divideAEqualBCoverage() {
+		try{
+<span class="nc" id="L279">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L280">			o.setOp(&quot;div&quot;);</span>
+<span class="nc" id="L281">			assertEquals(o.calcul(1,1),1);</span>
+<span class="nc" id="L282">		}</span>
+<span class="nc" id="L283">		catch(Exception e){</span>
+<span class="nc" id="L284">			e.printStackTrace();</span>
+<span class="nc" id="L285">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L287">	}</span>
+	
+
+	
+	/**
+	 * Tests divide : a = 0
+	 */
+	@Test
+	public void divideAZeroCoverage() {
+		try{
+<span class="nc" id="L297">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L298">			o.setOp(&quot;div&quot;);</span>
+<span class="nc" id="L299">			assertEquals(o.calcul(0,-3),0);</span>
+<span class="nc" id="L300">		}</span>
+<span class="nc" id="L301">		catch(Exception e){</span>
+<span class="nc" id="L302">			e.printStackTrace();</span>
+<span class="nc" id="L303">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L305">	}</span>
+	
+	/**
+	 * Tests divide b&lt;0 et a&lt;0 et a&lt;=b
+	 */
+	@Test
+	public void divideANegBNEgAInfBCoverage() {
+		try{
+<span class="nc" id="L313">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L314">			o.setOp(&quot;div&quot;);</span>
+<span class="nc" id="L315">			assertEquals(o.calcul(-2,-1),2);</span>
+<span class="nc" id="L316">		}</span>
+<span class="nc" id="L317">		catch(Exception e){</span>
+<span class="nc" id="L318">			e.printStackTrace();</span>
+<span class="nc" id="L319">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L321">	}</span>
+	
+	/**
+	 * Tests divide b&gt;0 et a&lt;0 et -a&gt;b
+	 */
+	@Test
+	public void divideANegBPosASupBCoverage() {
+		try{
+<span class="nc" id="L329">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L330">			o.setOp(&quot;div&quot;);</span>
+<span class="nc" id="L331">			assertEquals(o.calcul(-2,1),-2);</span>
+<span class="nc" id="L332">		}</span>
+<span class="nc" id="L333">		catch(Exception e){</span>
+<span class="nc" id="L334">			e.printStackTrace();</span>
+<span class="nc" id="L335">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L337">	}</span>
+	
+	/**
+	 * Tests divide b&lt;0 et a&gt;0 et a&gt;=-b
+	 */
+	@Test
+	public void divideAPosBNEgASupBCoverage() {
+		try{
+<span class="nc" id="L345">			CalculatorImpl o= new CalculatorImpl();</span>
+<span class="nc" id="L346">			o.setOp(&quot;div&quot;);</span>
+<span class="nc" id="L347">			assertEquals(o.calcul(4,-3),-1);</span>
+<span class="nc" id="L348">		}</span>
+<span class="nc" id="L349">		catch(Exception e){</span>
+<span class="nc" id="L350">			e.printStackTrace();</span>
+<span class="nc" id="L351">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L353">	}</span>
+
+	
+
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>

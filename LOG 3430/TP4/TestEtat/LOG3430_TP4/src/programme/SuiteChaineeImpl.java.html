@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>SuiteChaineeImpl.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">programme</a> &gt; <span class="el_source">SuiteChaineeImpl.java</span></div><h1>SuiteChaineeImpl.java</h1><pre class="source lang-java linenums">package programme;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javax.naming.SizeLimitExceededException;
+import javax.swing.SizeRequirements;
+
+public class SuiteChaineeImpl implements SuiteChainee {
+
+	private static final int BEGININDEX = 0; 
+	private static final int SIZELIMIT = 10;
+
+	private MyList list;
+	private CalculatorImpl calculator;
+	private String fichier;
+	private int tailleChaine;
+	private int val1;
+	private int val2;
+	private boolean vide;
+	private int startCurseur;
+	
+
+<span class="nc" id="L28">	public SuiteChaineeImpl(String chemin, int val1, int val2, String operateur, int tailleListe, boolean vide) throws Exception {</span>
+<span class="nc" id="L29">		int newVal = 0;</span>
+<span class="nc" id="L30">		Elem curser = null;</span>
+		
+<span class="nc" id="L32">		this.list = new MyListImpl();</span>
+<span class="nc" id="L33">		this.tailleChaine = 0;</span>
+<span class="nc" id="L34">		this.calculator = new CalculatorImpl();</span>
+		
+<span class="nc bnc" id="L36" title="All 2 branches missed.">		if(!this.calculator.isValide(operateur)) {</span>
+<span class="nc" id="L37">			throw new IllegalArgumentException(&quot;Erreur SuiteChaine(String chemin, String operateur, int val1, &quot; +</span>
+			&quot;int val2, int tailleListe, boolean vide) : Operateur doit être 'add', 'sub', 'mul' ou 'div'.&quot;);		
+		}		
+		
+<span class="nc" id="L41">		readSuiteChaineFromFile(chemin);</span>
+		
+		/**
+		 * Test longueur de chaine
+		 */
+<span class="nc" id="L46">		int taille_final = this.tailleChaine + tailleListe;</span>
+<span class="nc bnc" id="L47" title="All 4 branches missed.">		if(tailleListe &lt; 0 || taille_final &gt; SIZELIMIT) throw new SizeLimitExceededException(&quot;Erreur SuiteChaine(String chemin, String operateur, int val1, &quot; +</span>
+			&quot;int val2, int tailleListe, boolean vide) : La taille de la liste doit être compris entre 0 et 10.&quot;);
+
+<span class="nc bnc" id="L50" title="All 4 branches missed.">		if(vide &amp;&amp; this.tailleChaine != 0){</span>
+<span class="nc" id="L51">			throw new IllegalArgumentException(&quot;Erreur SuiteChaine(String chemin, String operateur, int val1, &quot; +</span>
+<span class="nc" id="L52">					&quot;int val2, int tailleListe, boolean vide) : vide = &quot;+ vide +&quot; -- La chaine utilisée n'est pas vide\n&quot;);	</span>
+		}
+		
+				
+<span class="nc" id="L56">		this.fichier = chemin;</span>
+<span class="nc" id="L57">		this.vide = vide;</span>
+<span class="nc" id="L58">		this.calculator.setOp(operateur);	</span>
+<span class="nc" id="L59">		this.startCurseur= BEGININDEX + this.tailleChaine;</span>
+		
+		/**
+		 * Ajout des deux premières valeurs dans la suite
+		 */
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if(tailleListe &gt;= 1) {</span>
+<span class="nc" id="L65">			this.val1=val1;</span>
+<span class="nc" id="L66">			add(new Elem(val1));</span>
+		}
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if(tailleListe &gt;= 2){</span>
+<span class="nc" id="L69">			this.val2=val2;</span>
+<span class="nc" id="L70">			add(new Elem(val2));</span>
+		}		
+				
+		/**
+		 * Complète la liste si les deux valeurs ne suffisent pas à compléter la taille. Les éléments qui complètent la suite sont
+		 * calculé à partir des deux derniers éléments de la liste
+		 */
+<span class="nc bnc" id="L77" title="All 2 branches missed.">		while(this.tailleChaine &lt; taille_final){</span>
+<span class="nc" id="L78">			curser = getAt(this.tailleChaine-2);</span>
+<span class="nc" id="L79">			newVal = calculator.calcul(curser.getValue(), curser.getNext().getValue());</span>
+<span class="nc" id="L80">			add(new Elem(newVal));</span>
+		}
+		
+<span class="nc" id="L83">		writeSuiteChaineToFile();</span>
+<span class="nc" id="L84">	}</span>
+	
+	/*****************************************************************************************
+	 * Methode à modifier pour le TP3 (à voir avec les tests et le comportement attendu)
+	 *****************************************************************************************/
+	@Override
+	public void add(Elem elememt) throws Exception{
+<span class="nc" id="L91">		this.list.add(elememt);</span>
+<span class="nc" id="L92">		this.tailleChaine++;</span>
+<span class="nc" id="L93">	}</span>
+
+	@Override
+	public void removeAt(int position) throws Exception {
+<span class="nc" id="L97">		this.list.removeAt(position);</span>
+		
+<span class="nc" id="L99">		this.tailleChaine--;</span>
+<span class="nc" id="L100">	}</span>
+
+	@Override
+	public void removeItem(int element) throws Exception {
+<span class="nc" id="L104">		this.list.removeItem(element);</span>
+		
+<span class="nc" id="L106">		this.tailleChaine--;</span>
+<span class="nc" id="L107">	}</span>
+
+	
+	@Override
+	public void setAt(int element, int position) throws Exception {
+<span class="nc" id="L112">		this.list.setAt(element, position);</span>
+<span class="nc" id="L113">	}</span>
+
+	@Override
+	public Elem getAt(int position) throws Exception {
+<span class="nc" id="L117">		return this.list.getAt(position);</span>
+	}
+
+	@Override
+	public int getSize() {
+<span class="nc" id="L122">		return tailleChaine;</span>
+	}
+
+	@Override
+	public void reset() throws Exception {
+<span class="nc" id="L127">		this.list.reset();</span>
+<span class="nc" id="L128">		this.startCurseur = 0;</span>
+<span class="nc" id="L129">		this.tailleChaine = 0;</span>
+<span class="nc" id="L130">		this.vide = true;</span>
+<span class="nc" id="L131">		this.val1 = 0;</span>
+<span class="nc" id="L132">		this.val2 = 0;</span>
+<span class="nc" id="L133">		this.fichier = null;</span>
+<span class="nc" id="L134">	}</span>
+
+	/**
+	 * On vérifie le calcul de chaque élément à partir du troisième et cela, en utilisant les deux éléments précédents et
+	 * l'opérateur indiqué par l'attribut de la chaine.
+	 * Rappel:l'opérateur est un singleton, on peut y accéder de n'importe où dans le programme.  
+	 */
+	@Override
+	public boolean isValide() throws Exception {
+		int val1, val2, res, index;
+<span class="nc" id="L144">		boolean flag = true;</span>
+<span class="nc" id="L145">		Elem curser = null;</span>
+		
+<span class="nc bnc" id="L147" title="All 2 branches missed.">		if (this.tailleChaine &lt; 3){</span>
+<span class="nc" id="L148">			return true;</span>
+		}
+
+<span class="nc" id="L151">		index = 2;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">		do{</span>
+<span class="nc" id="L153">			curser = getAt(index-2);</span>
+<span class="nc" id="L154">			val1 = curser.getValue();</span>
+<span class="nc" id="L155">			val2 = curser.getNext().getValue();</span>
+<span class="nc" id="L156">			res = curser.getNext().getNext().getValue();</span>
+			
+<span class="nc bnc" id="L158" title="All 2 branches missed.">			if(res != calculator.calcul(val1, val2)){</span>
+<span class="nc" id="L159">				flag = false;</span>
+			}
+<span class="nc" id="L161">			index++;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">		} while( flag &amp;&amp; index &lt; this.tailleChaine);</span>
+		
+<span class="nc" id="L164">		return flag;</span>
+	}
+	
+	@Override
+	public void chargerChaine(String fichier) throws Exception {
+<span class="nc" id="L169">		writeSuiteChaineToFile();</span>
+			
+<span class="nc" id="L171">		readSuiteChaineFromFile(fichier);</span>
+<span class="nc" id="L172">	}</span>
+	
+	@Override
+	public void sauvgarderChaine() throws Exception {
+<span class="nc" id="L176">		writeSuiteChaineToFile();</span>
+<span class="nc" id="L177">	}</span>
+	
+	/**
+	 * String = fichier + &quot; : &quot; + noeuds + (&quot;, &quot;);
+	 */
+	public String toString() {
+<span class="nc" id="L183">		String str=this.fichier + &quot; : &quot;;</span>
+		
+<span class="nc" id="L185">		str+=this.list.toString();</span>
+<span class="nc" id="L186">		return str;	</span>
+	}
+	
+	
+	/**
+	 * Ecrit la liste dans le fichier en mettant à jour les paramêtres
+	 * @throws Exception
+	 */
+	private void writeSuiteChaineToFile()throws Exception{
+<span class="nc" id="L195">		BufferedWriter w = new BufferedWriter(new FileWriter(this.fichier,false));</span>
+<span class="nc" id="L196">		w.write(this.val1+&quot;\n&quot;);</span>
+<span class="nc" id="L197">		w.write(this.val2+&quot;\n&quot;);</span>
+<span class="nc" id="L198">		w.write(this.calculator.getOp().name()+&quot;\n&quot;);</span>
+<span class="nc" id="L199">		w.write(this.startCurseur+&quot;\n&quot;);</span>
+<span class="nc" id="L200">		w.write(this.getSize()+&quot;\n&quot;);</span>
+<span class="nc" id="L201">		w.write(this.toString());</span>
+<span class="nc" id="L202">		w.close();</span>
+<span class="nc" id="L203">	}</span>
+	
+	/**
+	 * Lit une suite chainée contenue dans un fichier et la charge en mémoire
+	 * retourne true si la suite a été correctement chargée
+	 * Si la liste est vide ou corompue ne fait aucun changement et retourne faux
+	 * 
+	 * @param chemin Chemin vers le fichier contenant la chaine
+	 */
+	private boolean readSuiteChaineFromFile(String chemin) throws Exception {
+		String contenu;
+<span class="nc" id="L214">		String line = null;</span>
+		
+		
+<span class="nc" id="L217">        RandomAccessFile fileReader = new RandomAccessFile(chemin, &quot;r&quot;);</span>
+        
+        /**
+         * On passe toutes les lignes de sauvegarde inutile
+         */
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        for(int i = 0 ; i &lt; 5 ; i++){</span>
+<span class="nc" id="L223">            line=fileReader.readLine();</span>
+        }
+        
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        if((line=fileReader.readLine())!=null){</span>
+<span class="nc" id="L227">    		contenu=line;        </span>
+<span class="nc" id="L228">    	}</span>
+    	else{
+<span class="nc" id="L230">    		fileReader.close();</span>
+<span class="nc" id="L231">    		return false;</span>
+    	}
+        
+<span class="nc" id="L234">        fileReader.close();</span>
+        
+<span class="nc" id="L236">        setList(contenu);</span>
+<span class="nc" id="L237">        this.fichier= chemin;</span>
+            
+		
+<span class="nc" id="L240">		return true;</span>
+	}
+	
+	/**
+	 * Affecte à la suite chainée les éléments contenu dans contenu
+	 * @param contenu String contenant les informations sur les noeuds de la chaine
+	 * @throws Exception
+	 */
+	private void setList(String contenu) throws Exception{
+<span class="nc" id="L249">		String split[]=contenu.split(&quot;: &quot;);</span>
+<span class="nc" id="L250">		String noeuds[]=split[1].split(&quot;, &quot;);</span>
+		Elem nd1;
+
+<span class="nc" id="L253">		this.reset();</span>
+		
+		
+<span class="nc bnc" id="L256" title="All 2 branches missed.">		for(int i=BEGININDEX; i&lt;noeuds.length+BEGININDEX; i++){</span>
+<span class="nc" id="L257">			nd1 = new Elem(Integer.parseInt(noeuds[i]));</span>
+<span class="nc" id="L258">			this.add(nd1);</span>
+		}
+<span class="nc" id="L260">	}</span>
+	
+	/*private boolean isFileEmpty(String chemin) throws Exception{
+		boolean isEmpty=true;
+        FileReader fileReader = new FileReader(chemin);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        if(bufferedReader.readLine()!=null){
+        	isEmpty=false;
+        }	
+        bufferedReader.close();
+        
+        return isEmpty;
+	}*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>
