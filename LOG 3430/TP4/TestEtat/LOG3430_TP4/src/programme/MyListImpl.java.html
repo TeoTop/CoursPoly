@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>MyListImpl.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">programme</a> &gt; <span class="el_source">MyListImpl.java</span></div><h1>MyListImpl.java</h1><pre class="source lang-java linenums">package programme;
+/**
+ * Implémentation de l'interface SuiteChaine.
+ * @see MyList
+ * @version 0.5
+ *
+ */
+public class MyListImpl implements MyList {
+	
+	
+	
+<span class="fc" id="L12">	private final int BEGININDEX = 0;</span>
+	
+	private Elem init;
+	
+	/**
+	 * Constructeur vide. Initialise attribut de la façon suiavnte : &lt;br&gt;
+	 *    - {@link #init} = null&lt;br&gt;
+	 *    
+	 */
+	public MyListImpl() {
+<span class="fc" id="L22">		super();</span>
+<span class="fc" id="L23">		this.init = null;</span>
+<span class="fc" id="L24">	}</span>
+	
+	
+	public Elem getInit() {
+<span class="fc" id="L28">		return init;</span>
+	}
+
+
+	/**
+	 * L'attribut {@link NoeudImp#index} et {@link NoeudImp#next} du noeud
+	 * peuvent être modfiés pour appartenir à la chaine.
+	 */
+	@Override
+	public void add(Elem element) throws Exception {
+		
+<span class="fc" id="L39">		Elem curser = null;</span>
+<span class="fc" id="L40">		Elem add = null;</span>
+		
+		/**
+		 * Vérification si la chaine est vide
+		 */
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		if(getSize() == 0){</span>
+<span class="fc" id="L46">			element.setIndex(BEGININDEX);</span>
+<span class="fc" id="L47">			element.setNext(null);</span>
+<span class="fc" id="L48">			init = element;</span>
+<span class="fc" id="L49">		} else {</span>
+<span class="fc" id="L50">			curser = getAt(BEGININDEX + getSize()-1);</span>
+<span class="fc" id="L51">			add = element.clone();</span>
+<span class="fc" id="L52">			add.setIndex(BEGININDEX + getSize());</span>
+<span class="fc" id="L53">			add.setNext(null);</span>
+<span class="fc" id="L54">			curser.setNext(add);</span>
+		}
+<span class="fc" id="L56">	}</span>
+
+	@Override
+	public void removeAt(int position) throws Exception {
+		
+<span class="fc" id="L61">		Elem curser = null;</span>
+		
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		if(position == BEGININDEX){</span>
+<span class="fc" id="L64">			curser = getAt(position);</span>
+<span class="fc" id="L65">			init = curser.getNext();</span>
+<span class="fc" id="L66">			curser = init;</span>
+<span class="fc" id="L67">		} else {</span>
+<span class="fc" id="L68">			curser = getAt(position-1);</span>
+<span class="fc" id="L69">			curser.setNext(curser.getNext().getNext());</span>
+<span class="fc" id="L70">			curser = curser.getNext();                  //pour la mise à jour</span>
+		}
+		
+		
+		/**
+		 * Mise a jour des index en partant du noeud modifié
+		 */
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		if(curser != null) {</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">			for(int i = curser.getIndex() ; i &lt;= getSize() + BEGININDEX ; i++) {</span>
+<span class="fc" id="L79">				curser.setIndex(curser.getIndex()-1);</span>
+<span class="fc" id="L80">				curser = curser.getNext();</span>
+			}
+		}
+<span class="fc" id="L83">	}</span>
+
+	/**
+	 * @throws Exception 
+	 */
+	@Override
+	public void removeItem(int element) throws Exception {
+<span class="fc" id="L90">		Elem curser = this.init;</span>
+		
+<span class="fc bfc" id="L92" title="All 4 branches covered.">		while(curser != null &amp;&amp; curser.getValue()!=element){</span>
+<span class="fc" id="L93">			curser = curser.getNext();</span>
+		}
+		
+<span class="fc bfc" id="L96" title="All 2 branches covered.">		if(curser != null) {removeAt(curser.getIndex());}</span>
+<span class="fc" id="L97">		else {throw new Exception();}</span>
+<span class="fc" id="L98">	}</span>
+
+	
+	@Override
+	public void setAt(int element, int position) throws Exception {
+<span class="fc" id="L103">		Elem curser = null;</span>
+		
+<span class="fc" id="L105">		curser = getAt(position);</span>
+		
+<span class="fc" id="L107">		curser.setValue(element);</span>
+<span class="fc" id="L108">	}</span>
+
+	@Override
+	public Elem getAt(int position) throws Exception {
+<span class="fc bfc" id="L112" title="All 4 branches covered.">		if(position &lt; BEGININDEX || position &gt;= getSize() + BEGININDEX){</span>
+<span class="fc" id="L113">			throw new Exception(&quot;Erreur getAt() : &quot;+ position +&quot; -- Position de chaine invalide\n&quot;);</span>
+		}
+		
+<span class="fc" id="L116">		Elem curser = this.init;</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">		while(curser.getIndex()!=position){</span>
+<span class="fc" id="L118">			curser = curser.getNext();</span>
+		}
+		
+<span class="fc" id="L121">		return curser;</span>
+	}
+
+	@Override
+	public int getSize() {
+<span class="fc" id="L126">		int taille = 0;</span>
+<span class="fc" id="L127">		Elem curser = this.init;</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">		while(curser!=null){</span>
+<span class="fc" id="L129">			curser = curser.getNext();</span>
+<span class="fc" id="L130">			taille++;</span>
+		}
+		
+<span class="fc" id="L133">		return taille;</span>
+	}
+
+	@Override
+	public void reset(){
+<span class="fc" id="L138">		this.init = null;</span>
+<span class="fc" id="L139">	}</span>
+	
+	
+	/**
+	 * String = noeuds + (&quot;, &quot;);
+	 */
+	public String toString(){
+<span class="fc" id="L146">		String str=&quot;&quot;;</span>
+		
+<span class="fc bfc" id="L148" title="All 2 branches covered.">		if(this.getSize()!=0)</span>
+		{
+<span class="fc" id="L150">			Elem curser = this.init;</span>
+			
+<span class="fc bfc" id="L152" title="All 2 branches covered.">			for(int i = BEGININDEX ; i &lt; getSize() + BEGININDEX ; i++) {</span>
+<span class="fc" id="L153">				str += curser.getValue() + &quot;, &quot;;</span>
+<span class="fc" id="L154">				curser = curser.getNext();</span>
+			}
+			
+<span class="fc" id="L157">			str = str.substring(0, str.length()-2);</span>
+		}
+		
+<span class="fc" id="L160">		return str;	</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>

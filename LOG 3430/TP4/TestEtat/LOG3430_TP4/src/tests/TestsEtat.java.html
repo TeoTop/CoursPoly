@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>TestsEtat.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">tests</a> &gt; <span class="el_source">TestsEtat.java</span></div><h1>TestsEtat.java</h1><pre class="source lang-java linenums">package tests;
+
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javax.naming.SizeLimitExceededException;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import programme.Elem;
+import programme.MyList;
+import programme.MyListImpl;
+import programme.SuiteChainee;
+import programme.SuiteChaineeImpl;
+import programme.Calculator;
+import programme.CalculatorImpl;
+
+import org.junit.Test;
+
+<span class="fc" id="L26">public class TestsEtat {</span>
+	private static String wrongFilePath;
+	private static String filePath;
+	private static String filePath2;
+	
+	@BeforeClass
+	public static void init(){
+<span class="fc" id="L33">		wrongFilePath=&quot;src/Timote/chaine.properties&quot;;</span>
+<span class="fc" id="L34">		filePath=&quot;src/Files/chaine.properties&quot;;</span>
+<span class="fc" id="L35">		filePath2=&quot;src/Files/chaine2.properties&quot;;</span>
+<span class="fc" id="L36">	}</span>
+	
+	@AfterClass
+	public static void end() throws FileNotFoundException, IOException{
+<span class="fc" id="L40">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="fc" id="L41">	}</span>
+	
+	@Before
+	public void reset() throws FileNotFoundException, IOException{
+<span class="fc" id="L45">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="fc" id="L46">	}</span>
+	/****
+	 *Vide: myListImpl.init==null
+	 *NonVide: myListImpl.init!=null
+	 *Failure: Etat final exception
+	 */
+	
+	/*********************************************************/
+	/*                Test SuiteChaineeImp                   */
+	/*********************************************************/
+	
+	/**
+	 * Sequence : MyListImpl(), reset()
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE1() {
+		try{
+<span class="fc" id="L64">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L65">			l.reset();</span>
+<span class="fc" id="L66">			assertNull(l.getInit());</span>
+<span class="fc" id="L67">		}</span>
+<span class="nc" id="L68">		catch(Exception e){</span>
+<span class="nc" id="L69">			e.printStackTrace();</span>
+<span class="nc" id="L70">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L72">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), toString()
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE2() {
+		try{
+<span class="fc" id="L81">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L82">			l.toString();</span>
+<span class="fc" id="L83">			assertNull(l.getInit());</span>
+<span class="fc" id="L84">		}</span>
+<span class="nc" id="L85">		catch(Exception e){</span>
+<span class="nc" id="L86">			e.printStackTrace();</span>
+<span class="nc" id="L87">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L89">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), getInit()
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE3() {
+		try{
+<span class="fc" id="L98">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L99">			assertNull(l.getInit());</span>
+<span class="fc" id="L100">		}</span>
+<span class="nc" id="L101">		catch(Exception e){</span>
+<span class="nc" id="L102">			e.printStackTrace();</span>
+<span class="nc" id="L103">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L105">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), getSize()
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE4() {
+		try{
+<span class="fc" id="L114">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L115">			assertEquals(l.getSize(),0);</span>
+<span class="fc" id="L116">		}</span>
+<span class="nc" id="L117">		catch(Exception e){</span>
+<span class="nc" id="L118">			e.printStackTrace();</span>
+<span class="nc" id="L119">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L121">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e==null]
+	 * Oracle: Failure
+	 */
+	@Test(expected = Exception.class)
+	public void TE5() throws Exception {
+<span class="nc" id="L129">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L130">		l.add(null);</span>
+<span class="nc" id="L131">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), removeAt(0)
+	 * Oracle: Failure
+	 */
+	@Test(expected = Exception.class)
+	public void TE6() throws Exception {
+<span class="nc" id="L139">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L140">		l.removeAt(0);</span>
+<span class="nc" id="L141">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), removeItem(0)
+	 * Oracle: Failure
+	 */
+	@Test(expected = Exception.class)
+	public void TE7() throws Exception {
+<span class="nc" id="L149">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L150">		l.removeItem(0);</span>
+<span class="nc" id="L151">	}</span>
+	/**
+	 * Sequence : MyListImpl(), setAt(0,0)
+	 * Oracle: Failure
+	 */
+	@Test(expected = Exception.class)
+	public void TE8() throws Exception {
+<span class="nc" id="L158">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L159">		l.setAt(0,0);</span>
+<span class="nc" id="L160">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), getAt(0)
+	 * Oracle: Failure
+	 */
+	@Test(expected = Exception.class)
+	public void TE9() throws Exception {
+<span class="nc" id="L168">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L169">		l.getAt(0);</span>
+<span class="nc" id="L170">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], reset()
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE10() {
+		try{
+<span class="fc" id="L179">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L180">			Elem e= new Elem(1);</span>
+<span class="fc" id="L181">			l.add(e);</span>
+<span class="fc" id="L182">			l.reset();</span>
+<span class="fc" id="L183">			assertNull(l.getInit());</span>
+<span class="fc" id="L184">		}</span>
+<span class="nc" id="L185">		catch(Exception e){</span>
+<span class="nc" id="L186">			e.printStackTrace();</span>
+<span class="nc" id="L187">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L189">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], removeItem(1)[e==init &amp;&amp; getSize()==1]
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE11() {
+		try{
+<span class="fc" id="L198">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L199">			Elem e= new Elem(1);</span>
+<span class="fc" id="L200">			l.add(e);</span>
+<span class="fc" id="L201">			l.removeItem(1);</span>
+<span class="fc" id="L202">			assertNull(l.getInit());</span>
+<span class="fc" id="L203">		}</span>
+<span class="nc" id="L204">		catch(Exception e){</span>
+<span class="nc" id="L205">			e.printStackTrace();</span>
+<span class="nc" id="L206">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L208">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], removeAt(i)[i==BEGININDEX &amp;&amp; getSize()==1]
+	 * Oracle: Vide
+	 */
+	@Test
+	public void TE12() {
+		try{
+<span class="fc" id="L217">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L218">			Elem e= new Elem(1);</span>
+<span class="fc" id="L219">			l.add(e);</span>
+<span class="fc" id="L220">			l.removeAt(0);</span>
+<span class="fc" id="L221">			assertNull(l.getInit());</span>
+<span class="fc" id="L222">		}</span>
+<span class="nc" id="L223">		catch(Exception e){</span>
+<span class="nc" id="L224">			e.printStackTrace();</span>
+<span class="nc" id="L225">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L227">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], add(e)[e!=null]
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE13() {
+		try{
+<span class="fc" id="L236">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L237">			Elem e= new Elem(1);</span>
+<span class="fc" id="L238">			l.add(e);</span>
+<span class="fc" id="L239">			l.add(e);</span>
+<span class="fc" id="L240">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L241">		}</span>
+<span class="nc" id="L242">		catch(Exception e){</span>
+<span class="nc" id="L243">			e.printStackTrace();</span>
+<span class="nc" id="L244">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L246">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], getAt(i)[i&gt;=BEGININDEX &amp;&amp; i&lt;getSize()+BEGININDEX]
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE14() {
+		try{
+<span class="fc" id="L255">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L256">			Elem e= new Elem(1);</span>
+<span class="fc" id="L257">			l.add(e);</span>
+<span class="fc" id="L258">			l.getAt(0);</span>
+<span class="fc" id="L259">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L260">		}</span>
+<span class="nc" id="L261">		catch(Exception e){</span>
+<span class="nc" id="L262">			e.printStackTrace();</span>
+<span class="nc" id="L263">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L265">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], setAt(e,i)[i&gt;=BEGININDEX &amp;&amp; i&lt;getSize()+BEGININDEX]
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE15() {
+		try{
+<span class="fc" id="L274">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L275">			Elem e= new Elem(1);</span>
+<span class="fc" id="L276">			l.add(e);</span>
+<span class="fc" id="L277">			l.setAt(2,0);</span>
+<span class="fc" id="L278">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L279">		}</span>
+<span class="nc" id="L280">		catch(Exception e){</span>
+<span class="nc" id="L281">			e.printStackTrace();</span>
+<span class="nc" id="L282">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L284">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], getInit()
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE16() {
+		try{
+<span class="fc" id="L293">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L294">			Elem e= new Elem(1);</span>
+<span class="fc" id="L295">			l.add(e);</span>
+<span class="fc" id="L296">			l.getInit();</span>
+<span class="fc" id="L297">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L298">		}</span>
+<span class="nc" id="L299">		catch(Exception e){</span>
+<span class="nc" id="L300">			e.printStackTrace();</span>
+<span class="nc" id="L301">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L303">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], toString()
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE17() {
+		try{
+<span class="fc" id="L312">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L313">			Elem e= new Elem(1);</span>
+<span class="fc" id="L314">			l.add(e);</span>
+<span class="fc" id="L315">			l.toString();</span>
+<span class="fc" id="L316">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L317">		}</span>
+<span class="nc" id="L318">		catch(Exception e){</span>
+<span class="nc" id="L319">			e.printStackTrace();</span>
+<span class="nc" id="L320">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L322">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], getSize()
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE18() {
+		try{
+<span class="fc" id="L331">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L332">			Elem e= new Elem(1);</span>
+<span class="fc" id="L333">			l.add(e);</span>
+<span class="fc" id="L334">			l.getSize();</span>
+<span class="fc" id="L335">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L336">		}</span>
+<span class="nc" id="L337">		catch(Exception e){</span>
+<span class="nc" id="L338">			e.printStackTrace();</span>
+<span class="nc" id="L339">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L341">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], add(e)[e!=null],removeAt(i)[i&gt;=BEGININDEX &amp;&amp; i&lt;getSize()+BEGININDEX &amp;&amp;getSize()&gt;1]
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE19() {
+		try{
+<span class="fc" id="L350">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L351">			Elem e= new Elem(1);</span>
+<span class="fc" id="L352">			l.add(e);</span>
+<span class="fc" id="L353">			l.add(e);</span>
+<span class="fc" id="L354">			l.add(e);</span>
+<span class="fc" id="L355">			l.removeAt(1);</span>
+<span class="fc" id="L356">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L357">		}</span>
+<span class="nc" id="L358">		catch(Exception e){</span>
+<span class="nc" id="L359">			e.printStackTrace();</span>
+<span class="nc" id="L360">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L362">	}</span>
+	
+	/**
+	 * Sequence : MyListImpl(), add(e)[e!=null], add(e)[e!=null],removeItem(e)[ NonVide contains e &amp;&amp;getSize()&gt;1]
+	 * Oracle: NonVide
+	 */
+	@Test
+	public void TE20() {
+		try{
+<span class="fc" id="L371">			MyList l = new MyListImpl();</span>
+<span class="fc" id="L372">			Elem e= new Elem(1);</span>
+<span class="fc" id="L373">			l.add(e);</span>
+<span class="fc" id="L374">			l.add(e);</span>
+<span class="fc" id="L375">			l.removeItem(1);</span>
+<span class="fc" id="L376">			assertNotNull(l.getInit());</span>
+<span class="fc" id="L377">		}</span>
+<span class="nc" id="L378">		catch(Exception e){</span>
+<span class="nc" id="L379">			e.printStackTrace();</span>
+<span class="nc" id="L380">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="fc" id="L382">	}</span>
+	
+	// 19 a 26
+
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), setAt(e2,i &lt; BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE21() throws Exception{
+<span class="nc" id="L393">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L394">		Elem e = new Elem(10);</span>
+<span class="nc" id="L395">		l.add(e);</span>
+<span class="nc" id="L396">		l.setAt(5,-1);</span>
+		
+<span class="nc" id="L398">	}</span>
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), setAt(e2,i &gt;= getsize() + BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE22() throws Exception{
+<span class="nc" id="L406">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L407">		Elem e = new Elem(10);</span>
+<span class="nc" id="L408">		l.add(e);</span>
+<span class="nc" id="L409">		l.setAt(5,2);</span>
+		
+<span class="nc" id="L411">	}</span>
+
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), getAt(i &lt; BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE23() throws Exception{
+<span class="nc" id="L420">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L421">		Elem e = new Elem(10);</span>
+<span class="nc" id="L422">		l.add(e);</span>
+<span class="nc" id="L423">		l.getAt(-1);</span>
+		
+<span class="nc" id="L425">	}</span>
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), getAt(i &gt;= getsize() + BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE24() throws Exception{
+<span class="nc" id="L433">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L434">		Elem e = new Elem(10);</span>
+<span class="nc" id="L435">		l.add(e);</span>
+<span class="nc" id="L436">		l.getAt(2);</span>
+		
+<span class="nc" id="L438">	}</span>
+
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), removeAt(i &lt; BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE25() throws Exception{
+<span class="nc" id="L447">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L448">		Elem e = new Elem(10);</span>
+<span class="nc" id="L449">		l.add(e);</span>
+<span class="nc" id="L450">		l.removeAt(-1);</span>
+		
+<span class="nc" id="L452">	}</span>
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), removeAt(i &gt;= getsize() + BEGININDEX )
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE26() throws Exception{
+<span class="nc" id="L460">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L461">		Elem e = new Elem(10);</span>
+<span class="nc" id="L462">		l.add(e);</span>
+<span class="nc" id="L463">		l.removeAt(2);</span>
+		
+<span class="nc" id="L465">	}</span>
+
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), removeItem(e2!=e1)
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE27() throws Exception{
+<span class="nc" id="L474">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L475">		Elem e1 = new Elem(10);</span>
+<span class="nc" id="L476">		l.add(e1);</span>
+<span class="nc" id="L477">		l.removeItem(5);</span>
+<span class="nc" id="L478">	}</span>
+
+
+	/**
+	* Sequence : MyListImpl(), add(e1!null), add(e2==null)
+	* Oracle : Failure
+	*/
+	@Test(expected = Exception.class)
+	public void TE28() throws Exception{
+<span class="nc" id="L487">		MyList l = new MyListImpl();</span>
+<span class="nc" id="L488">		Elem e = new Elem(10);</span>
+<span class="nc" id="L489">		l.add(e);</span>
+<span class="nc" id="L490">		l.add(null);</span>
+		
+<span class="nc" id="L492">	}</span>
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>

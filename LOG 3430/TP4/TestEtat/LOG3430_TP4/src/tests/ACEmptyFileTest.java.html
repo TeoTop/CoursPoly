@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ACEmptyFileTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">tests</a> &gt; <span class="el_source">ACEmptyFileTest.java</span></div><h1>ACEmptyFileTest.java</h1><pre class="source lang-java linenums">package tests;
+
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import programme.SuiteChainee;
+import programme.SuiteChaineeImpl;
+
+<span class="nc" id="L17">public class ACEmptyFileTest {</span>
+	
+	private static String wrongFilePath;
+	private static String filePath;
+	
+	@BeforeClass
+	public static void init(){
+<span class="nc" id="L24">		wrongFilePath=&quot;src/Timote/chaine.properties&quot;;</span>
+<span class="nc" id="L25">		filePath=&quot;src/Files/chaine.properties&quot;;</span>
+<span class="nc" id="L26">	}</span>
+	
+	@AfterClass
+	public static void end() throws FileNotFoundException, IOException{
+<span class="nc" id="L30">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L31">	}</span>
+	
+	@Before
+	public void reset() throws FileNotFoundException, IOException{
+<span class="nc" id="L35">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L36">	}</span>
+	
+	
+	public void setFile() throws FileNotFoundException, IOException{
+		//SuiteChaineeImpl set = new SuiteChaineeImpl(filePath, val1, val2, operateur, tailleListe, vide) 
+<span class="nc" id="L41">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -10
+	 * val2 = 10
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC1() {
+		try{
+<span class="nc" id="L53">			SuiteChainee s = new SuiteChaineeImpl(filePath,-10,10,&quot;add&quot;,0,true);</span>
+<span class="nc" id="L54">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L55">			assertEquals(s.getSize(), 0);</span>
+<span class="nc" id="L56">		}</span>
+<span class="nc" id="L57">		catch(Exception e){</span>
+<span class="nc" id="L58">			e.printStackTrace();</span>
+<span class="nc" id="L59">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L61">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 9
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC2() {
+		try{
+<span class="nc" id="L74">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,9,&quot;add&quot;,0,false);</span>
+<span class="nc" id="L75">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L76">			assertEquals(s.getSize(), 0);</span>
+<span class="nc" id="L77">		}</span>
+<span class="nc" id="L78">		catch(Exception e){</span>
+<span class="nc" id="L79">			e.printStackTrace();</span>
+<span class="nc" id="L80">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L82">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -8
+	 * val2 = 8
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC3() {
+		try{
+<span class="nc" id="L94">			SuiteChainee s = new SuiteChaineeImpl(filePath,-8,8,&quot;add&quot;,1,true);</span>
+<span class="nc" id="L95">			assertEquals(s.toString(), filePath + &quot; : -8&quot;);</span>
+<span class="nc" id="L96">			assertEquals(s.getSize(), 1);</span>
+<span class="nc" id="L97">		}</span>
+<span class="nc" id="L98">		catch(Exception e){</span>
+<span class="nc" id="L99">			e.printStackTrace();</span>
+<span class="nc" id="L100">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L102">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -7
+	 * val2 = 7
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC4() {
+		try{
+<span class="nc" id="L114">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,7,&quot;add&quot;,1,false);</span>
+<span class="nc" id="L115">			assertEquals(s.toString(), filePath + &quot; : -7&quot;);</span>
+<span class="nc" id="L116">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L117">		}</span>
+<span class="nc" id="L118">		catch(Exception e){</span>
+<span class="nc" id="L119">			e.printStackTrace();</span>
+<span class="nc" id="L120">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L122">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -6
+	 * val2 = 6
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC5() {
+		try{
+<span class="nc" id="L134">			SuiteChainee s = new SuiteChaineeImpl(filePath,-6,6,&quot;add&quot;,2,true);</span>
+<span class="nc" id="L135">			assertEquals(s.toString(), filePath + &quot; : -6, 6&quot;);</span>
+<span class="nc" id="L136">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L137">		}</span>
+<span class="nc" id="L138">		catch(Exception e){</span>
+<span class="nc" id="L139">			e.printStackTrace();</span>
+<span class="nc" id="L140">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L142">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -5
+	 * val2 = 5
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC6() {
+		try{
+<span class="nc" id="L155">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,5,&quot;add&quot;,2,false);</span>
+<span class="nc" id="L156">			assertEquals(s.toString(), filePath + &quot; : -5, 5&quot;);</span>
+<span class="nc" id="L157">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L158">		}</span>
+<span class="nc" id="L159">		catch(Exception e){</span>
+<span class="nc" id="L160">			e.printStackTrace();</span>
+<span class="nc" id="L161">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L163">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -4
+	 * val2 = -4
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC7() {
+		try{
+<span class="nc" id="L176">			SuiteChainee s = new SuiteChaineeImpl(filePath,-4,-4,&quot;add&quot;,3,true);</span>
+<span class="nc" id="L177">			assertEquals(s.toString(), filePath + &quot; : -4, -4, -8&quot;);</span>
+<span class="nc" id="L178">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L179">		}</span>
+<span class="nc" id="L180">		catch(Exception e){</span>
+<span class="nc" id="L181">			e.printStackTrace();</span>
+<span class="nc" id="L182">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L184">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 3
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC8() {
+		try{
+<span class="nc" id="L196">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,3,&quot;add&quot;,3,false);</span>
+<span class="nc" id="L197">			assertEquals(s.toString(), filePath + &quot; : 3, 3, 6&quot;);</span>
+<span class="nc" id="L198">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L199">		}</span>
+<span class="nc" id="L200">		catch(Exception e){</span>
+<span class="nc" id="L201">			e.printStackTrace();</span>
+<span class="nc" id="L202">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L204">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -2
+	 * val2 = 2
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC9() {
+		try{
+<span class="nc" id="L216">			SuiteChainee s = new SuiteChaineeImpl(filePath,-2,2,&quot;add&quot;,10,true);</span>
+<span class="nc" id="L217">			assertEquals(s.toString(), filePath + &quot; : -2, 2, 0, 2, 2, 4, 6, 10, 16, 26&quot;);</span>
+<span class="nc" id="L218">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L219">		}</span>
+<span class="nc" id="L220">		catch(Exception e){</span>
+<span class="nc" id="L221">			e.printStackTrace();</span>
+<span class="nc" id="L222">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L224">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = -1
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC10() {
+		try{
+<span class="nc" id="L236">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,-1,&quot;add&quot;,10,false);</span>
+<span class="nc" id="L237">			assertEquals(s.toString(), filePath + &quot; : 1, -1, 0, -1, -1, -2, -3, -5, -8, -13&quot;);</span>
+<span class="nc" id="L238">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L239">		}</span>
+<span class="nc" id="L240">		catch(Exception e){</span>
+<span class="nc" id="L241">			e.printStackTrace();</span>
+<span class="nc" id="L242">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L244">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 0
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC11() {
+		try{
+<span class="nc" id="L257">			SuiteChainee s = new SuiteChaineeImpl(filePath,0,0,&quot;add&quot;,0,true);</span>
+<span class="nc" id="L258">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L259">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L260">		}</span>
+<span class="nc" id="L261">		catch(Exception e){</span>
+<span class="nc" id="L262">			e.printStackTrace();</span>
+<span class="nc" id="L263">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L265">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC12() {
+		try{
+<span class="nc" id="L278">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,0,&quot;add&quot;,0,false);</span>
+<span class="nc" id="L279">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L280">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L281">		}</span>
+<span class="nc" id="L282">		catch(Exception e){</span>
+<span class="nc" id="L283">			e.printStackTrace();</span>
+<span class="nc" id="L284">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L286">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 2
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC13() {
+		try{
+<span class="nc" id="L298">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,0,&quot;add&quot;,1,true);</span>
+<span class="nc" id="L299">			assertEquals(s.toString(), filePath + &quot; : 2&quot;);</span>
+<span class="nc" id="L300">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L301">		}</span>
+<span class="nc" id="L302">		catch(Exception e){</span>
+<span class="nc" id="L303">			e.printStackTrace();</span>
+<span class="nc" id="L304">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L306">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC14() {
+		try{
+<span class="nc" id="L318">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,0,&quot;add&quot;,1,false);</span>
+<span class="nc" id="L319">			assertEquals(s.toString(), filePath + &quot; : 3&quot;);</span>
+<span class="nc" id="L320">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L321">		}</span>
+<span class="nc" id="L322">		catch(Exception e){</span>
+<span class="nc" id="L323">			e.printStackTrace();</span>
+<span class="nc" id="L324">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L326">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 4
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC15() {
+		try{
+<span class="nc" id="L338">			SuiteChainee s = new SuiteChaineeImpl(filePath,4,0,&quot;add&quot;,2,true);</span>
+<span class="nc" id="L339">			assertEquals(s.toString(), filePath + &quot; : 4, 0&quot;);</span>
+<span class="nc" id="L340">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L341">		}</span>
+<span class="nc" id="L342">		catch(Exception e){</span>
+<span class="nc" id="L343">			e.printStackTrace();</span>
+<span class="nc" id="L344">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L346">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 5
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC16() {
+		try{
+<span class="nc" id="L359">			SuiteChainee s = new SuiteChaineeImpl(filePath,5,0,&quot;add&quot;,2,false);</span>
+<span class="nc" id="L360">			assertEquals(s.toString(), filePath + &quot; : 5, 0&quot;);</span>
+<span class="nc" id="L361">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L362">		}</span>
+<span class="nc" id="L363">		catch(Exception e){</span>
+<span class="nc" id="L364">			e.printStackTrace();</span>
+<span class="nc" id="L365">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L367">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 6
+	 * val2 = 0
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC17() {
+		try{
+<span class="nc" id="L380">			SuiteChainee s = new SuiteChaineeImpl(filePath,6,0,&quot;add&quot;,3,true);</span>
+<span class="nc" id="L381">			assertEquals(s.toString(), filePath + &quot; : 6, 0, 6&quot;);</span>
+<span class="nc" id="L382">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L383">		}</span>
+<span class="nc" id="L384">		catch(Exception e){</span>
+<span class="nc" id="L385">			e.printStackTrace();</span>
+<span class="nc" id="L386">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L388">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -7
+	 * val2 = 0
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC18() {
+		try{
+<span class="nc" id="L400">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,0,&quot;add&quot;,3,false);</span>
+<span class="nc" id="L401">			assertEquals(s.toString(), filePath + &quot; : -7, 0, -7&quot;);</span>
+<span class="nc" id="L402">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L403">		}</span>
+<span class="nc" id="L404">		catch(Exception e){</span>
+<span class="nc" id="L405">			e.printStackTrace();</span>
+<span class="nc" id="L406">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L408">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 8
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC19() {
+		try{
+<span class="nc" id="L420">			SuiteChainee s = new SuiteChaineeImpl(filePath,8,0,&quot;add&quot;,10,true);</span>
+<span class="nc" id="L421">			assertEquals(s.toString(), filePath + &quot; : 8, 0, 8, 8, 16, 24, 40, 64, 104, 168&quot;);</span>
+<span class="nc" id="L422">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L423">		}</span>
+<span class="nc" id="L424">		catch(Exception e){</span>
+<span class="nc" id="L425">			e.printStackTrace();</span>
+<span class="nc" id="L426">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L428">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC20() {
+		try{
+<span class="nc" id="L440">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,0,&quot;add&quot;,10,false);</span>
+<span class="nc" id="L441">			assertEquals(s.toString(), filePath + &quot; : -9, 0, -9, -9, -18, -27, -45, -72, -117, -189&quot;);</span>
+<span class="nc" id="L442">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L443">		}</span>
+<span class="nc" id="L444">		catch(Exception e){</span>
+<span class="nc" id="L445">			e.printStackTrace();</span>
+<span class="nc" id="L446">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L448">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -10
+	 * val2 = 10
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC21() {
+		try{
+<span class="nc" id="L460">			SuiteChainee s = new SuiteChaineeImpl(filePath,-10,10,&quot;sub&quot;,0,true);</span>
+<span class="nc" id="L461">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L462">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L463">		}</span>
+<span class="nc" id="L464">		catch(Exception e){</span>
+<span class="nc" id="L465">			e.printStackTrace();</span>
+<span class="nc" id="L466">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L468">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 9
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC22() {
+		try{
+<span class="nc" id="L481">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,9,&quot;sub&quot;,0,false);</span>
+<span class="nc" id="L482">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L483">			assertEquals(s.getSize(), 0);</span>
+<span class="nc" id="L484">		}</span>
+<span class="nc" id="L485">		catch(Exception e){</span>
+<span class="nc" id="L486">			e.printStackTrace();</span>
+<span class="nc" id="L487">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L489">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -8
+	 * val2 = 8
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC23() {
+		try{
+<span class="nc" id="L501">			SuiteChainee s = new SuiteChaineeImpl(filePath,-8,8,&quot;sub&quot;,1,true);</span>
+<span class="nc" id="L502">			assertEquals(s.toString(), filePath + &quot; : -8&quot;);</span>
+<span class="nc" id="L503">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L504">		}</span>
+<span class="nc" id="L505">		catch(Exception e){</span>
+<span class="nc" id="L506">			e.printStackTrace();</span>
+<span class="nc" id="L507">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L509">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -7
+	 * val2 = 7
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC24() {
+		try{
+<span class="nc" id="L521">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,-7,&quot;sub&quot;,1,false);</span>
+<span class="nc" id="L522">			assertEquals(s.toString(), filePath + &quot; : -7&quot;);</span>
+<span class="nc" id="L523">			assertEquals(s.getSize(), 1);	</span>
+<span class="nc" id="L524">		}</span>
+<span class="nc" id="L525">		catch(Exception e){</span>
+<span class="nc" id="L526">			e.printStackTrace();</span>
+<span class="nc" id="L527">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L529">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -6
+	 * val2 = 6
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC25() {
+		try{
+<span class="nc" id="L541">			SuiteChainee s = new SuiteChaineeImpl(filePath,-6,6,&quot;sub&quot;,2,true);</span>
+<span class="nc" id="L542">			assertEquals(s.toString(), filePath + &quot; : -6, 6&quot;);</span>
+<span class="nc" id="L543">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L544">		}</span>
+<span class="nc" id="L545">		catch(Exception e){</span>
+<span class="nc" id="L546">			e.printStackTrace();</span>
+<span class="nc" id="L547">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L549">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -5
+	 * val2 = 5
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC26() {
+		try{
+<span class="nc" id="L562">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,5,&quot;sub&quot;,2,false);</span>
+<span class="nc" id="L563">			assertEquals(s.toString(), filePath + &quot; : -5, 5&quot;);</span>
+<span class="nc" id="L564">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L565">		}</span>
+<span class="nc" id="L566">		catch(Exception e){</span>
+<span class="nc" id="L567">			e.printStackTrace();</span>
+<span class="nc" id="L568">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L570">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -4
+	 * val2 = -4
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC27() {
+		try{
+<span class="nc" id="L583">			SuiteChainee s = new SuiteChaineeImpl(filePath,-4,-4,&quot;sub&quot;,3,true);</span>
+<span class="nc" id="L584">			assertEquals(s.toString(), filePath + &quot; : -4, -4, 0&quot;);</span>
+<span class="nc" id="L585">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L586">		}</span>
+<span class="nc" id="L587">		catch(Exception e){</span>
+<span class="nc" id="L588">			e.printStackTrace();</span>
+<span class="nc" id="L589">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L591">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 3
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC28() {
+		try{
+<span class="nc" id="L603">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,3,&quot;sub&quot;,3,false);</span>
+<span class="nc" id="L604">			assertEquals(s.toString(), filePath + &quot; : 3, 3, 0&quot;);</span>
+<span class="nc" id="L605">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L606">		}</span>
+<span class="nc" id="L607">		catch(Exception e){</span>
+<span class="nc" id="L608">			e.printStackTrace();</span>
+<span class="nc" id="L609">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L611">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -2
+	 * val2 = 2
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC29() {
+		try{
+<span class="nc" id="L623">			SuiteChainee s = new SuiteChaineeImpl(filePath,-2,2,&quot;sub&quot;,10,true);</span>
+<span class="nc" id="L624">			assertEquals(s.toString(), filePath + &quot; : -2, 2, -4, 6, -10, 16, -26, 42, -68, 110&quot;);</span>
+<span class="nc" id="L625">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L626">		}</span>
+<span class="nc" id="L627">		catch(Exception e){</span>
+<span class="nc" id="L628">			e.printStackTrace();</span>
+<span class="nc" id="L629">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L631">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = -1
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC30() {
+		try{
+<span class="nc" id="L643">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,-1,&quot;sub&quot;,10,false);</span>
+<span class="nc" id="L644">			assertEquals(s.toString(), filePath + &quot; : 1, -1, 2, -3, 5, -8, 13, -21, 34, -55&quot;);</span>
+<span class="nc" id="L645">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L646">		}</span>
+<span class="nc" id="L647">		catch(Exception e){</span>
+<span class="nc" id="L648">			e.printStackTrace();</span>
+<span class="nc" id="L649">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L651">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 0
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC31() {
+		try{
+<span class="nc" id="L663">			SuiteChainee s = new SuiteChaineeImpl(filePath,0,0,&quot;sub&quot;,0,true);</span>
+<span class="nc" id="L664">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L665">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L666">		}</span>
+<span class="nc" id="L667">		catch(Exception e){</span>
+<span class="nc" id="L668">			e.printStackTrace();</span>
+<span class="nc" id="L669">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L671">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC32() {
+		try{
+<span class="nc" id="L684">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,0,&quot;sub&quot;,0,false);</span>
+<span class="nc" id="L685">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L686">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L687">		}</span>
+<span class="nc" id="L688">		catch(Exception e){</span>
+<span class="nc" id="L689">			e.printStackTrace();</span>
+<span class="nc" id="L690">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L692">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 2
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC33() {
+		try{
+<span class="nc" id="L704">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,0,&quot;sub&quot;,1,true);</span>
+<span class="nc" id="L705">			assertEquals(s.toString(), filePath + &quot; : 2&quot;);</span>
+<span class="nc" id="L706">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L707">		}</span>
+<span class="nc" id="L708">		catch(Exception e){</span>
+<span class="nc" id="L709">			e.printStackTrace();</span>
+<span class="nc" id="L710">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L712">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC34() {
+		try{
+<span class="nc" id="L724">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,0,&quot;sub&quot;,1,false);</span>
+<span class="nc" id="L725">			assertEquals(s.toString(), filePath + &quot; : 3&quot;);</span>
+<span class="nc" id="L726">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L727">		}</span>
+<span class="nc" id="L728">		catch(Exception e){</span>
+<span class="nc" id="L729">			e.printStackTrace();</span>
+<span class="nc" id="L730">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L732">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 4
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC35() {
+		try{
+<span class="nc" id="L744">			SuiteChainee s = new SuiteChaineeImpl(filePath,4,0,&quot;sub&quot;,2,true);</span>
+<span class="nc" id="L745">			assertEquals(s.toString(), filePath + &quot; : 4, 0&quot;);</span>
+<span class="nc" id="L746">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L747">		}</span>
+<span class="nc" id="L748">		catch(Exception e){</span>
+<span class="nc" id="L749">			e.printStackTrace();</span>
+<span class="nc" id="L750">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L752">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 5
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC36() {
+		try{
+<span class="nc" id="L765">			SuiteChainee s = new SuiteChaineeImpl(filePath,5,0,&quot;sub&quot;,2,false);</span>
+<span class="nc" id="L766">			assertEquals(s.toString(), filePath + &quot; : 5, 0&quot;);</span>
+<span class="nc" id="L767">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L768">		}</span>
+<span class="nc" id="L769">		catch(Exception e){</span>
+<span class="nc" id="L770">			e.printStackTrace();</span>
+<span class="nc" id="L771">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L773">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 6
+	 * val2 = 0
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC37() {
+		try{
+<span class="nc" id="L786">			SuiteChainee s = new SuiteChaineeImpl(filePath,6,0,&quot;sub&quot;,3,true);</span>
+<span class="nc" id="L787">			assertEquals(s.toString(), filePath + &quot; : 6, 0, 6&quot;);</span>
+<span class="nc" id="L788">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L789">		}</span>
+<span class="nc" id="L790">		catch(Exception e){</span>
+<span class="nc" id="L791">			e.printStackTrace();</span>
+<span class="nc" id="L792">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L794">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -7
+	 * val2 = 0
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC38() {
+		try{
+<span class="nc" id="L806">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,0,&quot;sub&quot;,3,false);</span>
+<span class="nc" id="L807">			assertEquals(s.toString(), filePath + &quot; : -7, 0, -7&quot;);</span>
+<span class="nc" id="L808">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L809">		}</span>
+<span class="nc" id="L810">		catch(Exception e){</span>
+<span class="nc" id="L811">			e.printStackTrace();</span>
+<span class="nc" id="L812">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L814">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 8
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC39() {
+		try{
+<span class="nc" id="L826">			SuiteChainee s = new SuiteChaineeImpl(filePath,8,0,&quot;sub&quot;,10,true);</span>
+<span class="nc" id="L827">			assertEquals(s.toString(), filePath + &quot; : 8, 0, 8, -8, 16, -24, 40, -64, 104, -168&quot;);</span>
+<span class="nc" id="L828">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L829">		}</span>
+<span class="nc" id="L830">		catch(Exception e){</span>
+<span class="nc" id="L831">			e.printStackTrace();</span>
+<span class="nc" id="L832">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L834">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC40() {
+		try{
+<span class="nc" id="L846">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,0,&quot;sub&quot;,10,false);</span>
+<span class="nc" id="L847">			assertEquals(s.toString(), filePath + &quot; : -9, 0, -9, 9, -18, 27, -45, 72, -117, 189&quot;);</span>
+<span class="nc" id="L848">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L849">		}</span>
+<span class="nc" id="L850">		catch(Exception e){</span>
+<span class="nc" id="L851">			e.printStackTrace();</span>
+<span class="nc" id="L852">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L854">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -10
+	 * val2 = 10
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC41() {
+		try{
+<span class="nc" id="L866">			SuiteChainee s = new SuiteChaineeImpl(filePath,-10,10,&quot;mul&quot;,0,true);</span>
+<span class="nc" id="L867">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L868">			assertEquals(s.getSize(), 0);	</span>
+<span class="nc" id="L869">		}</span>
+<span class="nc" id="L870">		catch(Exception e){</span>
+<span class="nc" id="L871">			e.printStackTrace();</span>
+<span class="nc" id="L872">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L874">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 9
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC42() {
+		try{
+<span class="nc" id="L887">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,9,&quot;mul&quot;,0,false);</span>
+<span class="nc" id="L888">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L889">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L890">		}</span>
+<span class="nc" id="L891">		catch(Exception e){</span>
+<span class="nc" id="L892">			e.printStackTrace();</span>
+<span class="nc" id="L893">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L895">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -8
+	 * val2 = 8
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC43() {
+		try{
+<span class="nc" id="L907">			SuiteChainee s = new SuiteChaineeImpl(filePath,-8,8,&quot;mul&quot;,1,true);</span>
+<span class="nc" id="L908">			assertEquals(s.toString(), filePath + &quot; : -8&quot;);</span>
+<span class="nc" id="L909">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L910">		}</span>
+<span class="nc" id="L911">		catch(Exception e){</span>
+<span class="nc" id="L912">			e.printStackTrace();</span>
+<span class="nc" id="L913">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L915">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 =-7
+	 * val2 = 7
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC44() {
+		try{
+<span class="nc" id="L927">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,7,&quot;mul&quot;,1,false);</span>
+<span class="nc" id="L928">			assertEquals(s.toString(), filePath + &quot; : -7&quot;);</span>
+<span class="nc" id="L929">			assertEquals(s.getSize(), 1);	</span>
+<span class="nc" id="L930">		}</span>
+<span class="nc" id="L931">		catch(Exception e){</span>
+<span class="nc" id="L932">			e.printStackTrace();</span>
+<span class="nc" id="L933">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L935">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -6
+	 * val2 = 6
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC45() {
+		try{
+<span class="nc" id="L947">			SuiteChainee s = new SuiteChaineeImpl(filePath,-6,6,&quot;mul&quot;,2,true);</span>
+<span class="nc" id="L948">			assertEquals(s.toString(), filePath + &quot; : -6, 6&quot;);</span>
+<span class="nc" id="L949">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L950">		}</span>
+<span class="nc" id="L951">		catch(Exception e){</span>
+<span class="nc" id="L952">			e.printStackTrace();</span>
+<span class="nc" id="L953">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L955">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -5
+	 * val2 = 5
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC46() {
+		try{
+<span class="nc" id="L968">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,5,&quot;mul&quot;,2,false);</span>
+<span class="nc" id="L969">			assertEquals(s.toString(), filePath + &quot; : -5, 5&quot;);</span>
+<span class="nc" id="L970">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L971">		}</span>
+<span class="nc" id="L972">		catch(Exception e){</span>
+<span class="nc" id="L973">			e.printStackTrace();</span>
+<span class="nc" id="L974">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L976">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -4
+	 * val2 = -4
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC47() {
+		try{
+<span class="nc" id="L989">			SuiteChainee s = new SuiteChaineeImpl(filePath,-4,-4,&quot;mul&quot;,3,true);</span>
+<span class="nc" id="L990">			assertEquals(s.toString(), filePath + &quot; : -4, -4, 16&quot;);</span>
+<span class="nc" id="L991">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L992">		}</span>
+<span class="nc" id="L993">		catch(Exception e){</span>
+<span class="nc" id="L994">			e.printStackTrace();</span>
+<span class="nc" id="L995">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L997">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 3
+	 * taille = 3
+	 * etat = vide
+	 */
+	@Test
+	public void AC48() {
+		try{
+<span class="nc" id="L1009">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,3,&quot;mul&quot;,3,false);</span>
+<span class="nc" id="L1010">			assertEquals(s.toString(), filePath + &quot; : 3, 3, 9&quot;);</span>
+<span class="nc" id="L1011">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L1012">		}</span>
+<span class="nc" id="L1013">		catch(Exception e){</span>
+<span class="nc" id="L1014">			e.printStackTrace();</span>
+<span class="nc" id="L1015">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1017">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -2
+	 * val2 = 2
+	 * taille = 10
+	 * etat = vide
+	 */
+	/*@Test(expected = ArithmeticException.class)
+	public void AC49() throws Exception {
+		SuiteChainee s = new SuiteChaineeImpl(filePath,-2,2,&quot;mul&quot;,10,true);
+		fail(&quot;Erreur - Exception overflow MAXINT attendu&quot;);
+	}*/
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = -1
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC50() {
+		try{
+<span class="nc" id="L1042">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,-1,&quot;mul&quot;,10,false);</span>
+<span class="nc" id="L1043">			assertEquals(s.toString(), filePath + &quot; : 1, -1, -1, 1, -1, -1, 1, -1, -1, 1&quot;);</span>
+<span class="nc" id="L1044">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L1045">		}</span>
+<span class="nc" id="L1046">		catch(Exception e){</span>
+<span class="nc" id="L1047">			e.printStackTrace();</span>
+<span class="nc" id="L1048">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1050">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 0
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC51() {
+		try{
+<span class="nc" id="L1062">			SuiteChainee s = new SuiteChaineeImpl(filePath,0,0,&quot;mul&quot;,0,true);</span>
+<span class="nc" id="L1063">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L1064">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L1065">		}</span>
+<span class="nc" id="L1066">		catch(Exception e){</span>
+<span class="nc" id="L1067">			e.printStackTrace();</span>
+<span class="nc" id="L1068">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1070">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = 0
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC52() {
+		try{
+<span class="nc" id="L1083">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,0,&quot;mul&quot;,0,false);</span>
+<span class="nc" id="L1084">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L1085">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L1086">		}</span>
+<span class="nc" id="L1087">		catch(Exception e){</span>
+<span class="nc" id="L1088">			e.printStackTrace();</span>
+<span class="nc" id="L1089">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1091">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 2
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC53() {
+		try{
+<span class="nc" id="L1103">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,0,&quot;mul&quot;,1,true);</span>
+<span class="nc" id="L1104">			assertEquals(s.toString(), filePath + &quot; : 2&quot;);</span>
+<span class="nc" id="L1105">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L1106">		}</span>
+<span class="nc" id="L1107">		catch(Exception e){</span>
+<span class="nc" id="L1108">			e.printStackTrace();</span>
+<span class="nc" id="L1109">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1111">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 0
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC54() {
+		try{
+<span class="nc" id="L1123">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,0,&quot;mul&quot;,1,false);</span>
+<span class="nc" id="L1124">			assertEquals(s.toString(), filePath + &quot; : 3&quot;);</span>
+<span class="nc" id="L1125">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L1126">		}</span>
+<span class="nc" id="L1127">		catch(Exception e){</span>
+<span class="nc" id="L1128">			e.printStackTrace();</span>
+<span class="nc" id="L1129">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1131">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 4
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC55() {
+		try{
+<span class="nc" id="L1143">			SuiteChainee s = new SuiteChaineeImpl(filePath,4,0,&quot;mul&quot;,2,true);</span>
+<span class="nc" id="L1144">			assertEquals(s.toString(), filePath + &quot; : 4, 0&quot;);</span>
+<span class="nc" id="L1145">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L1146">		}</span>
+<span class="nc" id="L1147">		catch(Exception e){</span>
+<span class="nc" id="L1148">			e.printStackTrace();</span>
+<span class="nc" id="L1149">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1151">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 5
+	 * val2 = 0
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC56() {
+		try{
+<span class="nc" id="L1164">			SuiteChainee s = new SuiteChaineeImpl(filePath,5,0,&quot;mul&quot;,2,false);</span>
+<span class="nc" id="L1165">			assertEquals(s.toString(), filePath + &quot; : 5, 0&quot;);</span>
+<span class="nc" id="L1166">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L1167">		}</span>
+<span class="nc" id="L1168">		catch(Exception e){</span>
+<span class="nc" id="L1169">			e.printStackTrace();</span>
+<span class="nc" id="L1170">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1172">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 6
+	 * val2 = 0
+	 * taille = 9
+	 * etat = vide
+	 */
+	@Test
+	public void AC57() {
+		try{
+<span class="nc" id="L1185">			SuiteChainee s = new SuiteChaineeImpl(filePath,6,0,&quot;mul&quot;,3,true);</span>
+<span class="nc" id="L1186">			assertEquals(s.toString(), filePath + &quot; : 6, 0, 0&quot;);</span>
+<span class="nc" id="L1187">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L1188">		}</span>
+<span class="nc" id="L1189">		catch(Exception e){</span>
+<span class="nc" id="L1190">			e.printStackTrace();</span>
+<span class="nc" id="L1191">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1193">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -7
+	 * val2 = 0
+	 * taille = 9
+	 * etat = vide
+	 */
+	@Test
+	public void AC58() {
+		try{
+<span class="nc" id="L1205">			SuiteChainee s = new SuiteChaineeImpl(filePath,-7,0,&quot;mul&quot;,3,false);</span>
+<span class="nc" id="L1206">			assertEquals(s.toString(), filePath + &quot; : -7, 0, 0&quot;);</span>
+<span class="nc" id="L1207">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L1208">		}</span>
+<span class="nc" id="L1209">		catch(Exception e){</span>
+<span class="nc" id="L1210">			e.printStackTrace();</span>
+<span class="nc" id="L1211">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1213">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 8
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC59() {
+		try{
+<span class="nc" id="L1225">			SuiteChainee s = new SuiteChaineeImpl(filePath,8,0,&quot;mul&quot;,10,true);</span>
+<span class="nc" id="L1226">			assertEquals(s.toString(), filePath + &quot; : 8, 0, 0, 0, 0, 0, 0, 0, 0, 0&quot;);</span>
+<span class="nc" id="L1227">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L1228">		}</span>
+<span class="nc" id="L1229">		catch(Exception e){</span>
+<span class="nc" id="L1230">			e.printStackTrace();</span>
+<span class="nc" id="L1231">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1233">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -9
+	 * val2 = 0
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test
+	public void AC60() {
+		try{
+<span class="nc" id="L1245">			SuiteChainee s = new SuiteChaineeImpl(filePath,-9,0,&quot;mul&quot;,10,false);</span>
+<span class="nc" id="L1246">			assertEquals(s.toString(), filePath + &quot; : -9, 0, 0, 0, 0, 0, 0, 0, 0, 0&quot;);</span>
+<span class="nc" id="L1247">			assertEquals(s.getSize(), 10);		</span>
+<span class="nc" id="L1248">		}</span>
+<span class="nc" id="L1249">		catch(Exception e){</span>
+<span class="nc" id="L1250">			e.printStackTrace();</span>
+<span class="nc" id="L1251">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1253">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -5
+	 * val2 = -5
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC61() {
+		try{
+<span class="nc" id="L1265">			SuiteChainee s = new SuiteChaineeImpl(filePath,-5,-5,&quot;div&quot;,0,true);</span>
+<span class="nc" id="L1266">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L1267">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L1268">		}</span>
+<span class="nc" id="L1269">		catch(Exception e){</span>
+<span class="nc" id="L1270">			e.printStackTrace();</span>
+<span class="nc" id="L1271">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1273">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -4
+	 * val2 = -4
+	 * taille = 0
+	 * etat = vide
+	 */
+	@Test
+	public void AC62() {
+		try{
+<span class="nc" id="L1286">			SuiteChainee s = new SuiteChaineeImpl(filePath,-4,-4,&quot;div&quot;,0,false);</span>
+<span class="nc" id="L1287">			assertEquals(s.toString(), filePath + &quot; : &quot;);</span>
+<span class="nc" id="L1288">			assertEquals(s.getSize(), 0);		</span>
+<span class="nc" id="L1289">		}</span>
+<span class="nc" id="L1290">		catch(Exception e){</span>
+<span class="nc" id="L1291">			e.printStackTrace();</span>
+<span class="nc" id="L1292">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1294">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -3
+	 * val2 = -3
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC63() {
+		try{
+<span class="nc" id="L1306">			SuiteChainee s = new SuiteChaineeImpl(filePath,-3,-3,&quot;div&quot;,1,true);</span>
+<span class="nc" id="L1307">			assertEquals(s.toString(), filePath + &quot; : -3&quot;);</span>
+<span class="nc" id="L1308">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L1309">		}</span>
+<span class="nc" id="L1310">		catch(Exception e){</span>
+<span class="nc" id="L1311">			e.printStackTrace();</span>
+<span class="nc" id="L1312">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1314">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 2
+	 * val2 = -2
+	 * taille = 1
+	 * etat = vide
+	 */
+	@Test
+	public void AC64() {
+		try{
+<span class="nc" id="L1326">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,-2,&quot;div&quot;,1,false);</span>
+<span class="nc" id="L1327">			assertEquals(s.toString(), filePath + &quot; : 2&quot;);</span>
+<span class="nc" id="L1328">			assertEquals(s.getSize(), 1);		</span>
+<span class="nc" id="L1329">		}</span>
+<span class="nc" id="L1330">		catch(Exception e){</span>
+<span class="nc" id="L1331">			e.printStackTrace();</span>
+<span class="nc" id="L1332">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1334">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -1
+	 * val2 = -1
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC65() {
+		try{
+<span class="nc" id="L1346">			SuiteChainee s = new SuiteChaineeImpl(filePath,-1,-1,&quot;div&quot;,2,true);</span>
+<span class="nc" id="L1347">			assertEquals(s.toString(), filePath + &quot; : -1, -1&quot;);</span>
+<span class="nc" id="L1348">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L1349">		}</span>
+<span class="nc" id="L1350">		catch(Exception e){</span>
+<span class="nc" id="L1351">			e.printStackTrace();</span>
+<span class="nc" id="L1352">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1354">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 1
+	 * val2 = 1
+	 * taille = 2
+	 * etat = vide
+	 */
+	@Test
+	public void AC66() {
+		try{
+<span class="nc" id="L1367">			SuiteChainee s = new SuiteChaineeImpl(filePath,1,1,&quot;div&quot;,2,false);</span>
+<span class="nc" id="L1368">			assertEquals(s.toString(), filePath + &quot; : 1, 1&quot;);</span>
+<span class="nc" id="L1369">			assertEquals(s.getSize(), 2);		</span>
+<span class="nc" id="L1370">		}</span>
+<span class="nc" id="L1371">		catch(Exception e){</span>
+<span class="nc" id="L1372">			e.printStackTrace();</span>
+<span class="nc" id="L1373">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1375">	}</span>
+	
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 2
+	 * val2 = -2
+	 * taille = 9
+	 * etat = vide
+	 */
+	@Test
+	public void AC67() {
+		try{
+<span class="nc" id="L1388">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,-2,&quot;div&quot;,3,true);</span>
+<span class="nc" id="L1389">			assertEquals(s.toString(), filePath + &quot; : 2, -2, -1&quot;);</span>
+<span class="nc" id="L1390">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L1391">		}</span>
+<span class="nc" id="L1392">		catch(Exception e){</span>
+<span class="nc" id="L1393">			e.printStackTrace();</span>
+<span class="nc" id="L1394">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1396">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 3
+	 * val2 = 2
+	 * taille = 9
+	 * etat = vide
+	 */
+	@Test
+	public void AC68() {
+		try{
+<span class="nc" id="L1408">			SuiteChainee s = new SuiteChaineeImpl(filePath,3,2,&quot;div&quot;,3,false);</span>
+<span class="nc" id="L1409">			assertEquals(s.toString(), filePath + &quot; : 3, 2, 1&quot;);</span>
+<span class="nc" id="L1410">			assertEquals(s.getSize(), 3);		</span>
+<span class="nc" id="L1411">		}</span>
+<span class="nc" id="L1412">		catch(Exception e){</span>
+<span class="nc" id="L1413">			e.printStackTrace();</span>
+<span class="nc" id="L1414">			fail(&quot;Erreur - Exception inattendu&quot;);</span>
+		}
+<span class="nc" id="L1416">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = -4
+	 * val2 = 4
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void AC69() throws Exception {
+<span class="nc" id="L1427">		SuiteChainee s = new SuiteChaineeImpl(filePath,-4,4,&quot;div&quot;,10,true);</span>
+<span class="nc" id="L1428">		fail(&quot;Erreur - Exception overflow MAXINT ou MININT attendu&quot;);</span>
+<span class="nc" id="L1429">	}</span>
+	
+	/**
+	 * chemin = valide fichier vide
+	 * val1 = 5
+	 * val2 = 5
+	 * taille = 10
+	 * etat = vide
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void AC70() throws Exception {
+<span class="nc" id="L1440">		SuiteChainee s = new SuiteChaineeImpl(filePath,5,5,&quot;div&quot;,10,false);</span>
+<span class="nc" id="L1441">		fail(&quot;Erreur - Exception overflow MAXINT attendu&quot;);</span>
+<span class="nc" id="L1442">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>

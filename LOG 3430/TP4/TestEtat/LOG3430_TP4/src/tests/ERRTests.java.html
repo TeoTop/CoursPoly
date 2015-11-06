@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ERRTests.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestsEtat (2015-11-02 11:16:16)</a> &gt; <a href="../../index.html" class="el_group">LOG3430_TP4</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">tests</a> &gt; <span class="el_source">ERRTests.java</span></div><h1>ERRTests.java</h1><pre class="source lang-java linenums">package tests;
+
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import javax.naming.SizeLimitExceededException;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import programme.SuiteChainee;
+import programme.SuiteChaineeImpl;
+
+<span class="nc" id="L19">public class ERRTests {</span>
+	
+	private static String wrongFilePath;
+	private static String filePath;
+	
+	@BeforeClass
+	public static void init(){
+<span class="nc" id="L26">		wrongFilePath=&quot;src/Timote/chaine.properties&quot;;</span>
+<span class="nc" id="L27">		filePath=&quot;src/Files/chaine.properties&quot;;</span>
+<span class="nc" id="L28">	}</span>
+	
+	@AfterClass
+	public static void end() throws FileNotFoundException, IOException{
+<span class="nc" id="L32">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L33">	}</span>
+	
+	@Before
+	public void reset() throws FileNotFoundException, IOException{
+<span class="nc" id="L37">		new RandomAccessFile(filePath, &quot;rw&quot;).setLength(0);</span>
+<span class="nc" id="L38">	}</span>
+	
+	
+	public void setFile() throws FileNotFoundException, IOException{
+		//SuiteChaineeImpl set = new SuiteChaineeImpl(filePath, val1, val2, operateur, tailleListe, vide) 
+<span class="nc" id="L43">	}</span>
+	
+	/**
+	 * Test d'erreur : un chemin incorrect ou invalide vers un fichier
+	 * @throws Exception
+	 */
+	@Test(expected = FileNotFoundException.class)
+	public void ERRC_incorrectPath() throws Exception {
+<span class="nc" id="L51">			SuiteChainee s = new SuiteChaineeImpl(wrongFilePath,2,5,&quot;add&quot;,10,true);</span>
+<span class="nc" id="L52">			fail(&quot;Erreur - Chemin incorrect devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L53">	}</span>
+	
+	/**
+	 * Test d'erreur : operateur incorrect (différent de add, sub, mul ou div)
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void ERRC_incorrectOperateur() throws Exception {
+<span class="nc" id="L61">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,5,&quot;24&quot;,5,true);</span>
+<span class="nc" id="L62">			fail(&quot;Erreur - Operateur incorrect devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L63">	}</span>
+	
+	/**
+	 * Test d'erreur : valeur 1 superieur à MAXINT
+	 * @throws Exception
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void ERRC_incorrectVal1() throws Exception {
+<span class="nc" id="L71">			SuiteChainee s = new SuiteChaineeImpl(filePath,Integer.MAX_VALUE+1,2,&quot;add&quot;,5,true);</span>
+<span class="nc" id="L72">			fail(&quot;Erreur - Val1 incorrect devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L73">	}</span>
+	
+	/**
+	 * Test d'erreur : valeur 2 inférieur à MININT
+	 * @throws Exception
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void ERRC_incorrectVal2() throws Exception {
+<span class="nc" id="L81">			SuiteChainee s = new SuiteChaineeImpl(filePath,2,Integer.MIN_VALUE-1,&quot;sub&quot;,5,true);</span>
+<span class="nc" id="L82">			fail(&quot;Erreur - Val2 incorrect devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L83">	}</span>
+	
+	/**
+	 * Test d'erreur : taille de liste inférieur à 0 (test aux limites)
+	 * @throws Exception
+	 */
+	@Test(expected = SizeLimitExceededException.class)
+	public void ERRC_NegativeListSize() throws Exception {
+<span class="nc" id="L91">		SuiteChainee s = new SuiteChaineeImpl(filePath,2,3,&quot;add&quot;,-1,false);</span>
+<span class="nc" id="L92">		fail(&quot;Erreur - Taille de Liste negative et valeurs invalides devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L93">	}</span>
+	
+	/**
+	 * Test d'erreur : taille de liste supérieur à la taille max (test aux limites)
+	 * @throws Exception
+	 */
+	@Test(expected = SizeLimitExceededException.class)
+	public void ERRC_OverMaxSize() throws Exception {
+<span class="nc" id="L101">		SuiteChainee s = new SuiteChaineeImpl(filePath,2,3,&quot;add&quot;,11,false);</span>
+<span class="nc" id="L102">		fail(&quot;Erreur - Taille de Liste negative et valeurs invalides devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L103">	}</span>
+	
+	/**
+	 * Test d'erreur : division par zero
+	 * @throws Exception
+	 */
+	@Test(expected = ArithmeticException.class)
+	public void ERRC_DivisionByZero() throws Exception {
+<span class="nc" id="L111">		SuiteChainee s = new SuiteChaineeImpl(filePath,2,0,&quot;div&quot;,5,false);</span>
+<span class="nc" id="L112">		fail(&quot;Erreur - Val2 = 0 et operateur = div ; Division par zero devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L113">	}</span>
+	
+	/**
+	 * Test d'erreur : Fichier non vide avec un etat à true
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void ERRC_FileEmptyExpected() throws Exception {
+<span class="nc" id="L121">		SuiteChaineeImpl set = new SuiteChaineeImpl(filePath, 1, 2, &quot;add&quot;, 5, true);</span>
+<span class="nc" id="L122">		SuiteChainee s = new SuiteChaineeImpl(filePath,2,3,&quot;add&quot;,3,true);</span>
+<span class="nc" id="L123">		fail(&quot;Erreur - Taille de Liste negative et valeurs invalides devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L124">	}</span>
+	
+	/**
+	 * Test d'erreur : Fichier non vide et taille qui donne une taille cumulé de la chaine supérieur à la taille de chaine max autorisée.
+	 * @throws Exception
+	 */
+	@Test(expected = SizeLimitExceededException.class)
+	public void ERRC_OverMaxSizeAdd() throws Exception {
+<span class="nc" id="L132">		SuiteChaineeImpl set = new SuiteChaineeImpl(filePath, 1, 2, &quot;add&quot;, 5, true);</span>
+<span class="nc" id="L133">		SuiteChainee s = new SuiteChaineeImpl(filePath,2,3,&quot;add&quot;,7,false);</span>
+<span class="nc" id="L134">		fail(&quot;Erreur - Taille de Liste negative et valeurs invalides devrait generer une exception &quot;+s.toString());</span>
+<span class="nc" id="L135">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TestsEtat (2015-11-02 11:16:16)</div></body></html>
