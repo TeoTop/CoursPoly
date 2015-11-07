@@ -3,6 +3,7 @@ var Joueur = require('../Joueur.js');
 var Battle = require('../Battle.js');
 var aleaChoice = require("../aleaChoice.js");
 var router = express.Router();
+var database = require('../database.js');
 
 /* Affiche la page d'accueil */
 router.get('/', function(req, res, next) {
@@ -122,16 +123,37 @@ router.post('/new_game', function(req, res, next) {
 
   //on stock le joueur dans la session
   req.session.player = player;
-  
-  //redirige vers la page 1 du jeu
-  res.redirect('/chap/1/1');
+  database.insert(player, function(){
+    //redirige vers la page 1 du jeu
+    res.redirect('/chap/1/1');
+  });
 
+  //res.render('new_game', option);
 });
 
 
 /* Retourne le json correspondant à l'objet joueur stocker en session*/
-router.get('/player', function(req, res, next) {
-  res.json(req.session.player);
+router.get('/players', function(req, res, next) {
+  database.getAll(function(rep){
+    res.json(rep);
+  });
+});
+
+router.route('/players/:id')
+.get(function(req, res, next) {
+  database.getPlayer(parseInt(req.params.id), function(rep){
+    res.json(rep);
+  });
+})
+.put(function(req, res, next) {
+  database.updatePlayer(parseInt(req.params.id), req.body, function(rep){
+    res.json(rep);
+  });
+})
+.delete(function(req, res, next) {
+  database.deletePlayer(parseInt(req.params.id), function(rep){
+    res.json(rep);
+  });
 });
 
 
