@@ -1,51 +1,12 @@
 var express = require('express');
-var Joueur = require('../Joueur.js');
-var Battle = require('../Battle.js');
-var aleaChoice = require("../aleaChoice.js");
+var Joueur = require('../lib/objets/Joueur');
+var database = require('../lib/database');
 var router = express.Router();
-var database = require('../database.js');
+
 
 /* Affiche la page d'accueil */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Accueil' });
-});
-
-
-/* Retourne un json contenant le resultat de la fontion associé à la page éxécuté et les intervales de la page. Le numéro de la page est récupéré depuis l'URL */
-router.get('/choixAleatoire/:page', function(req, res, next) {
-  //json de retour, initialisé avec l'erreur si la page ne fait pas partie de page ayant un choix aléatoire
-  var retour = {choix: "Cette page ne contient pas de choix aléatoire", intervales: []};
-
-  //on boucle sur les objets du tableau contant les pages à choix aléatoire pour trouver l'objet correspondant à la page
-  for(var i = 0; i < aleaChoice.length; i++){
-    if(aleaChoice[i].id == req.params.page){
-      //on applique la fonction associé à l'objet/page
-      retour.choix = aleaChoice[i].fun();
-
-      //on copie les intervales de l'objet/page dans le json de retour
-      retour.intervales = aleaChoice[i].intervals;
-    }
-  }
-
-  // on retourne le resultat au format json
-  res.json(retour);
-});
-
-
-/* Retourne un json contenant le résultat d'un round de combat. L'habilité du joueur et de l'ennemi sont récupéré depuis l'URL. */
-router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
-    //création de l'objet Battle
-    var battle = new Battle();
-
-    //on set les habilités aux variables habilités de l'objet Battle
-    battle.playerHabilities = req.params.playerHab;
-    battle.ennemyHabilities = req.params.ennemyHab;
-
-    //on fait tourner les combats (ici juste 1 round; à modifer au prochain TP) et on récupère l'objet BattleResult
-    var result = battle.round();
-    
-    // on retourne le resultat au format json
-    res.json(result);
 });
 
 
@@ -78,6 +39,8 @@ router.post('/new_game', function(req, res, next) {
 
   //futur instanciation du joueur (stocker en session)
   var player;
+
+  console.log("FORM RECU");
 
   //vérification du nom : nom non null ou undefine et respecte le format (un mot => [caratère ou chiffre ou '_']{1..*})
   if(!name || !regex.test(name)){
@@ -118,43 +81,17 @@ router.post('/new_game', function(req, res, next) {
   }
 
   // on crée le joueur et on set ses capacités et objets qu'il possède
-  player = new Joueur();
+  player = new Joueur(name);
   player.setUp(kais, equipments, master);
 
-  //on stock le joueur dans la session
+  //on stock le joueur dans la session et la bd (stock avancement aussi)
   req.session.player = player;
-  database.insert(player, function(){
+  database.insertPlayer(player, function(){
     //redirige vers la page 1 du jeu
     res.redirect('/chap/1/1');
   });
 
   //res.render('new_game', option);
 });
-
-
-/* Retourne le json correspondant à l'objet joueur stocker en session*/
-router.get('/players', function(req, res, next) {
-  database.getAll(function(rep){
-    res.json(rep);
-  });
-});
-
-router.route('/players/:id')
-.get(function(req, res, next) {
-  database.getPlayer(parseInt(req.params.id), function(rep){
-    res.json(rep);
-  });
-})
-.put(function(req, res, next) {
-  database.updatePlayer(parseInt(req.params.id), req.body, function(rep){
-    res.json(rep);
-  });
-})
-.delete(function(req, res, next) {
-  database.deletePlayer(parseInt(req.params.id), function(rep){
-    res.json(rep);
-  });
-});
-
 
 module.exports = router;

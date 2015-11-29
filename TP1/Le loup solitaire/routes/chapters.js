@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Joueur = require('../Joueur.js');
+var Joueur = require('../lib/objets/Joueur');
 var fs = require('fs');
 
 /* Affiche la liste des pages (liste à compléter) */
@@ -32,7 +32,7 @@ router.get('/:chap/:section', function(req, res, next) {
 
   // Pour l'instant (test notamment), on créer une intance de joueur aléatoire que l'on garde en session si il n'en existe pas. 
   if(!req.session.player) {
-    player = new Joueur();
+    player = new Joueur("Default");
     req.session.player = player;
   }
 

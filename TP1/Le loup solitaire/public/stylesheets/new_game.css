@@ -47,7 +47,7 @@
 }
 
 
-.forms-controller .field-controller input[type="submit"] {
+.forms-controller .field-controller button {
   position: relative;
   height: 80px;
   width: 400px;
@@ -58,7 +58,7 @@
   font-size: 30px;
 }
 
-.forms-controller .field-controller input[type="submit"]:hover {
+.forms-controller .field-controller button:hover {
   font-size: 40px;
   cursor:pointer;
 }

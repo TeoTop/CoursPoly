@@ -5,7 +5,7 @@ block link
   -var selected = 'Accueil'; //default
   -var css;
 
-html
+html(ng-app='loneWolf')
   head
     title= title
 
@@ -16,8 +16,13 @@ html
 
     //- Style spécifique à la page affcihée
     link(rel='stylesheet', href='/stylesheets/'+css+'.css')
+    script(src='/js/angular.min.js')
+    script(src='/js/jquery-2.1.4.min.js')
+    script(src='/js/lone-wolf.js')
+    script(src='/js/controllers.js')
+    script(src='/js/filters.js')
 
-  body
+  body(ng-controller='GlobalCtrl as titre')
     //- Affiche le menu
     nav(id="general_menu", class="style_menu")
       ul
@@ -30,8 +35,8 @@ html
               a(href=val, title=key)=key
 
     //- Affiche le titre du jeu
-    h1.site_title
-      a(href="/" title="Le Loup Solitaire : Les Grottes de Kalte")
+    h1.site_title {{titre.title}}
+      a(href="/" title="{{titre.sayHello()}}")
         img(src="/images/title.png")
     
     

@@ -5,51 +5,52 @@ block link
   -var css = "game_page";
  
 block content
-  //- Affichage du menu contextuel pour le sac à dos
-  div(id="backpack_box" class="box context_content")
-    div(class="box-content")
-      h3 Sac à dos
-      table(class="grid grid-border")
-        each pack, key in session.player.backpack
-          if key%4 == 0
-            tr
-          td #[img(src="/images/"+pack+".png")]
-    a(href="#")
-
-  //- Affichage du menu contextuel pour les objets spéciales
-  div(id="special_object" class="box context_content")
-    div(class="box-content")
-      h3 Objets spéciaux
-      table(class="grid grid-border")
-       each spe, key in session.player.spe_object
-          if key%4 == 0
-            tr
-          td #[img(src="/images/"+spe+".png")]
-    a(href="#") 
   
-  //- Affichage principale pour l'histoire
-  div(id="story_flow" class="chapter-content")
-    h2 Menu
-    div(class="context_menu line")
-      div(class="backpack")
-       a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
-      div(class="special_object")
-       a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]       
+    //- Affichage du menu contextuel pour le sac à dos
+    div(id="backpack_box" class="box context_content")
+      div(class="box-content")
+        h3 Sac à dos
+        table(class="grid grid-border")
+          each pack, key in session.player.backpack
+            if key%4 == 0
+              tr
+            td #[img(src="/images/"+pack+".png")]
+      a(href="#")
 
-    h2 Page #{chap}
-    div(id="story")
-      block story
+    //- Affichage du menu contextuel pour les objets spéciales
+    div(id="special_object" class="box context_content")
+      div(class="box-content")
+        h3 Objets spéciaux
+        table(class="grid grid-border")
+         each spe, key in session.player.spe_object
+            if key%4 == 0
+              tr
+            td #[img(src="/images/"+spe+".png")]
+      a(href="#") 
     
-    div(id="picture" class="content-center")
-      block picture 
+    //- Affichage principale pour l'histoire
+    div(id="story_flow" class="chapter-content")
+      h2 Menu
+      div(class="context_menu line")
+        div(class="backpack")
+         a(href="#backpack_box") #[img(src="/images/backpack.png" title="backpack")]
+        div(class="special_object")
+         a(href="#special_object") #[img(src="/images/special_objects.png" title="backpack")]       
 
-    div(id="fight")
-      block fight
+      h2 Page #{chap}
+      div(id="story")
+        block story
+      
+      div(id="picture" class="content-center")
+        block picture 
 
-    if next_page
-      div(id="turn")
-        block turn
+      div(id="fight")
+        block fight
 
-  //- Affichage des stats du joueurs
-  include ./stats.jade 
+      if next_page
+        div(id="turn")
+          block turn
+
+    //- Affichage des stats du joueurs
+    include ./stats.jade 
     

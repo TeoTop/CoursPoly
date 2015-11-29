@@ -5,12 +5,12 @@ block link
   -var css = "new_game";
 
 block content
-  div(class="chapter-content")
+  div(class="chapter-content" ng-controller="PlayerCtrl as player")
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
 
       //-Formulaire de création du nouveau joueur
-      form(name="new-game", method="post", action="/new_game")
+      form(name="new-game")
 
         //- Affichage du message après retour d'un post
         if msgName
@@ -18,8 +18,8 @@ block content
 
         //- Nom du joueur
         div(class='field-controller')
-          h3 Name
-          input(id='name',type='text',placeholder='Name',name='name')
+          h3 Name {{player.name}}
+          input(id='name',type='text',placeholder='Name',name='name', ng-model="player.name")
         
         //- Sélection des compétences de Kai
         div(class='field-controller')
@@ -46,4 +46,4 @@ block content
                 | #{val}
 
         div(class='field-controller')
-          input(type='submit',name='submit',value='Commencer le jeu')
+          button(name='submit', ng-click="player.submitForm()") Commencer le jeu
