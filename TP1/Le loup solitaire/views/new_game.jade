@@ -10,40 +10,34 @@ block content
     div(class='forms-controller')
 
       //-Formulaire de création du nouveau joueur
-      form(name="new-game")
+      form(name="newGame")
 
         //- Affichage du message après retour d'un post
-        if msgName
-          span(class="error") #{msgName}
-
+        span(id="name_error" class="hide") Le nom est vide. Un nom ne peut contenir que des lettres, des chiffres et le caratère spécial '_'!
         //- Nom du joueur
         div(class='field-controller')
-          h3 Name {{player.name}}
+          h3 Name
           input(id='name',type='text',placeholder='Name',name='name', ng-model="player.name")
         
         //- Sélection des compétences de Kai
         div(class='field-controller')
-          h3 Discipline de Kai
-          if msgKai
-            span(class="error") #{msgKai}
-          each val, key in kais
-            div(class='checkbox-controller')
-              input(type="checkbox", id=key, name="kais", value=key)
-              label(for=key)
-                img(src="/images/"+key+".png") 
-                | #{val}
+          h3 Discipline de Kai       
+          span(id="kais_error" class="hide") Le nombre de compétences de Kai sélectionnées doit être exactement 5!
+          div(class='checkbox-controller' ng-repeat="(key, value) in player.kais")
+            input(type="checkbox", id="{{key}}", name="kais", value="{{key}}")
+            label(for="{{key}}")
+              img(src="/images/{{key}}.png") 
+              | {{value}}
 
         //- Sélection des équipements de départ
         div(class='field-controller')
           h3 Equipement
-          if msgWeapon
-            span(class="error") #{msgWeapon}
-          each val, key in equipments
-            div(class='checkbox-controller')
-              input(type="checkbox", id=key, name="equipments", value=key)
-              label(for=key)
-                img(src="/images/"+key+".png") 
-                | #{val}
+          span(id="equipments_error" class="hide") Le nombre d'armes ou objets sélectionnés doit être exactement 2!
+          div(class='checkbox-controller' ng-repeat="(key, value) in player.equipments")
+            input(type="checkbox", id="{{key}}", name="equipments", value="{{key}}")
+            label(for="{{key}}")
+              img(src="/images/{{key}}.png") 
+              | {{value}}
 
         div(class='field-controller')
           button(name='submit', ng-click="player.submitForm()") Commencer le jeu

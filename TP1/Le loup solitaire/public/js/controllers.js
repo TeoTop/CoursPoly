@@ -1,4 +1,12 @@
-angular.module('loneWolf').controller('GlobalCtrl', function() {
+var app = angular.module('monApp',[]);
+
+var config = {
+  headers : {
+    'Content-Type': 'application/json'
+  }
+};
+
+app.controller('GlobalCtrl', function() {
   this.title = "";
   this.sayHello = function() {
     return 'Hello ' + this.title + '!';
@@ -6,41 +14,61 @@ angular.module('loneWolf').controller('GlobalCtrl', function() {
 });
 
 
-angular.module('loneWolf').controller('PlayerCtrl', function() {
-  this.name = "";
-  this.kai = [];
-  this.weapon = [];
+app.controller('PlayerCtrl', function($http) {
+  var pc = this;
+  pc.name = "";
+  pc.kais = [];
+  pc.equipments = [];
 
-  this.addKai = function(l, e){
-    if(e == "kai") 
-      this.kai.push(e);
-    else if (e == "weapon")
-      this.weapon.push(e);
+  $http.get('/api/equipments').then(
+    function(rep){
+      pc.kais = rep.data.kais;
+      pc.equipments = rep.data.equipments;
+    },
+    function(rep){
+      console.log("Failed to get data from web services api/equipments");
+    });
 
-  }
+  pc.submitForm = function(){
+    var send = true;
 
-  this.removeKai = function(l, e){
-    if(e == "kai") 
-      $.grep(this.kai, function (v){
-        return v == e;
-      })
-    else if (e == "weapon")
-      $.grep(this.weapon, function (v){
-        return v == e;
-      })
-  }
+    //regex pour le nom
+    var regex = /^\w+$/;
 
-  this.submitForm = function(){
-    
-    /*if(kai.length != 5) 
-      return;
-    if(weapon.length != 2)
-      return;*/
+    if($("input[name='kais']:checked").length != 5){
+      $("#kais_error").attr('class', 'error');
+      send = false;
+    } else {
+      $("#kais_error").attr('class', 'hide');
+    }
 
-    if(!this.name)
-      return;
+    if($("input[name='equipments']:checked").length != 2) {
+      $("#equipments_error").attr('class', 'error');
+      send = false;
+    } else {
+      $("#equipments_error").attr('class', 'hide');
+    }
 
-    var parameter = JSON.stringify({name:this.name, kai:this.kai, weapon:this.weapon});
-    $http.post("/new_game", parameter);
+    if(!pc.name || !regex.test(pc.name)){
+      $("#name_error").attr('class', 'error');
+      send = false;
+    } else {
+      $("#name_error").attr('class', 'hide');
+    }
+
+    if(send){
+      var kais_sel = $("input[name='kais']:checked").map(function(){return this.value}).get();
+      var equipments_sel = $("input[name='equipments']:checked").map(function(){return this.value}).get();
+      var parameter = JSON.stringify({name:pc.name, kais:kais_sel, equipments:equipments_sel});
+      
+      $http.post('/new_game', parameter, config).then(
+        function(rep){
+            if(rep.data.ok)
+              window.location.replace("http://localhost:3000/chap/1/1");
+        }, 
+        function(){
+          alert("err");
+        });
+    }
   }
 });

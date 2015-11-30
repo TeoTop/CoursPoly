@@ -40,8 +40,6 @@ router.post('/new_game', function(req, res, next) {
   //futur instanciation du joueur (stocker en session)
   var player;
 
-  console.log("FORM RECU");
-
   //vérification du nom : nom non null ou undefine et respecte le format (un mot => [caratère ou chiffre ou '_']{1..*})
   if(!name || !regex.test(name)){
   	option.err=true;
@@ -76,7 +74,8 @@ router.post('/new_game', function(req, res, next) {
 
   // si une ou plusieurs données sont invalides, on retourne la page nouvelle partie avec les erreurs
   if(option.err){
-    res.render('new_game', option);
+    var data = {ok: false, option: option}
+    res.json(data);
     return;
   }
 
@@ -88,7 +87,8 @@ router.post('/new_game', function(req, res, next) {
   req.session.player = player;
   database.insertPlayer(player, function(){
     //redirige vers la page 1 du jeu
-    res.redirect('/chap/1/1');
+    var data = {ok: true}
+    res.json(data);
   });
 
   //res.render('new_game', option);

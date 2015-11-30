@@ -2,10 +2,11 @@ var express = require('express');
 var Battle = require('../lib/objets/Battle');
 var aleaChoice = require("../lib/aleaChoice");
 var database = require('../lib/database');
+var var_global = require('../lib/vars_global');
 var router = express.Router();
 
 /* Retourne un json contenant le resultat de la fontion associé à la page éxécuté et les intervales de la page. Le numéro de la page est récupéré depuis l'URL */
-router.get('/choixAleatoire/:page', function(req, res, next) {
+router.get('/choixAleatoire/:page', function (req, res, next) {
   //json de retour, initialisé avec l'erreur si la page ne fait pas partie de page ayant un choix aléatoire
   var retour = {choix: "Cette page ne contient pas de choix aléatoire", intervales: []};
 
@@ -90,5 +91,13 @@ router.route('/states/:id')
   });
 });
 
+router.get('/equipments', function(req, res, next) {
+  var data = {
+    kais : var_global.kais,
+    equipments : var_global.equipments
+  };
+
+  res.json(data);
+});
 
 module.exports = router;
