@@ -26,7 +26,7 @@ function getNextSequence(db, name, callback) {
 	Créer un avancement (id passé en paramètre) et retourne l'objet result de mongoDB
 **/
 function insertStateDB(db, state, callback){
-	db.collection('Player_State').insertOne(state, function(err,rep){ 
+	db.collection('Player_StateV2').insertOne(state, function(err,rep){ 
 	    db.close();
 	    if(err) callback(err); 
 	    callback(rep);
@@ -37,7 +37,7 @@ function insertStateDB(db, state, callback){
 	Supprime un avancement (id passé en paramètre) et retourne l'objet result de mongoDB
 **/
 function deleteStateDB(db, id, callback){
-	db.collection('Player_State').deleteOne({playerId: id}, function(err,rep){ 
+	db.collection('Player_StateV2').deleteOne({playerId: id}, function(err,rep){ 
 	    db.close();
 	    if(err) callback(err); 
 	    callback(rep);
@@ -56,19 +56,18 @@ module.exports = {
 	insertPlayer : function(player, callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			
-			getNextSequence(db, "playerId", function(seq){
+
+			var tmp = JSON.parse(JSON.stringify(player));
+			delete tmp.state;
+
+			db.collection('PlayersV2').insertOne(tmp, function(err, insert) {
+				if(err) callback(err); 
+
 				var tmpState = JSON.parse(JSON.stringify(player.state));
-				tmpState.playerId = seq;
+				tmpState.playerId = insert.insertedId;
+				player.id = insert.insertedId;
 				
-				var tmp = JSON.parse(JSON.stringify(player));
-				delete tmp.state;
-				tmp._id=seq;
-				
-				db.collection('Players').insertOne(tmp, function(err) {
-					if(err) callback(err); 
-					insertStateDB(db,tmpState,callback);
-				});
+				insertStateDB(db,tmpState,callback);
 			});
 	    });
 	},
@@ -79,7 +78,7 @@ module.exports = {
 	getAllPlayer : function(callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Players').find().toArray(function(err,players){ 
+			db.collection('PlayersV2').find().toArray(function(err,players){ 
 			    db.close();
 			    if(err) callback(err); 
 			    callback(players);
@@ -93,7 +92,10 @@ module.exports = {
 	getPlayer : function(id,callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Players').find({_id: id}).limit(1).next(function(err,player){ 
+			
+			var selId = ObjectId(id);
+
+			db.collection('PlayersV2').find({_id: selId}).limit(1).next(function(err,player){ 
 				db.close();
 				if(err) callback(err); 
 				(player) ? callback(player): callback({});
@@ -107,7 +109,10 @@ module.exports = {
 	updatePlayer : function(id,updates,callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Players').updateOne({_id: id}, {$set : updates}, function(err,rep){
+
+			var selId = ObjectId(id);
+
+			db.collection('PlayersV2').updateOne({_id: selId}, {$set : updates}, function(err,rep){
 			    db.close();
 			    if(err) callback(err); 
 			    callback(rep);
@@ -121,9 +126,12 @@ module.exports = {
 	deletePlayer : function(id,callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Players').deleteOne({_id: id}, function(err,rep){ 
+
+			var selId = ObjectId(id);
+
+			db.collection('PlayersV2').deleteOne({_id: selId}, function(err,rep){ 
 			    if(err) callback(err);
-			    deleteStateDB(db, id, callback);
+			    deleteStateDB(db, selId, callback);
 			});
 	    });
 	},
@@ -159,7 +167,10 @@ module.exports = {
 	getState : function(id,callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Player_State').find({playerId: id}).limit(1).next(function(err,state){ 
+
+			var selId = ObjectId(id);
+
+			db.collection('Player_StateV2').find({playerId: selId}).limit(1).next(function(err,state){ 
 				db.close();
 				if(err) callback(err); 
 				(state) ? callback(state): callback({});
@@ -173,7 +184,10 @@ module.exports = {
 	updateState : function(id,updates,callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			db.collection('Player_State').updateOne({playerId: id}, {$set : updates}, function(err,rep){
+
+			var selId = ObjectId(id);
+
+			db.collection('Player_StateV2').updateOne({playerId: selId}, {$set : updates}, function(err,rep){
 			    db.close();
 			    if(err) callback(err); 
 			    callback(rep);

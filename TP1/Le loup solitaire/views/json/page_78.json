@@ -1,15 +1,18 @@
 {
-  "id":78,
-  "text":
-  [
-    "Vous vous préparez en hâte et vous sortez de la tente. Le vents'est intensifié et il emporte la neige poudreuse en petitstourbillons qui réduisent considérablement la visibilité. Uneombre sur votre droite trahit la présence du Bakanal qui bonditsur vous. Vous n'avez plus le temps d'éviter son Assaut, et il vousfaut le combattre jusqu'à la mort."
-  ],
-  "battle": {"name": "Bakanal", "hability": 19, "endurance": 30, "escape": false},
-  "info": "",
-  "choice": [],
+  "all":false,
+  "info_page":{
+    "id":78,
+    "text":
+    [
+      "Vous vous préparez en hâte et vous sortez de la tente. Le vents'est intensifié et il emporte la neige poudreuse en petitstourbillons qui réduisent considérablement la visibilité. Uneombre sur votre droite trahit la présence du Bakanal qui bonditsur vous. Vous n'avez plus le temps d'éviter son Assaut, et il vousfaut le combattre jusqu'à la mort."
+    ],
+    "battle": {"name": "Bakanal", "hability": 19, "endurance": 30, "escape": false},
+    "info": "",
+    "choice": [],
+    "image":"/images/picture_page_78.png"
+  },
   "next_page":
   [
     {"id": 245, "text": "Si vous êtes vainqueur, rendez-vous au "}
-  ],
-  "image":"/images/picture_page_78.png"
+  ]
 }

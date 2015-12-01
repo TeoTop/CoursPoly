@@ -19,9 +19,14 @@ module.exports = {
 		pages : tableau entier
 	**/
 	aleaChoice: function(interval, pages){
-		var alea = getRandom(interval[0], interval[interval.length-1]);
+		var choice = {};	
+		var alea = this.getRandom(interval[0], interval[interval.length-1]);
+		
 		for(var i = 0; i < interval.length-1; i++) 
-			if(alea >= interval[i] && alea <= interval[i-1])
-				return pages[i].id;
+			if(alea >= interval[i] && alea <= interval[i+1]){
+				choice.alea=alea;
+				choice.page=pages[i];
+				return choice;
+			}
 	}
 };

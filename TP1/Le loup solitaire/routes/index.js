@@ -74,7 +74,7 @@ router.post('/new_game', function(req, res, next) {
 
   // si une ou plusieurs données sont invalides, on retourne la page nouvelle partie avec les erreurs
   if(option.err){
-    var data = {ok: false, option: option}
+    var data = {ok: false, option: option};
     res.json(data);
     return;
   }
@@ -87,11 +87,14 @@ router.post('/new_game', function(req, res, next) {
   req.session.player = player;
   database.insertPlayer(player, function(){
     //redirige vers la page 1 du jeu
-    var data = {ok: true}
+    req.session.currentPage = 1;
+    var data = {ok: true, url:"http://localhost:3000/chap"};
+    var cookiesSave = []; //(req.cookies.playerId) ? req.cookies.playerId.saves : [];
+    cookiesSave.push(player.id);
+
+    res.cookie('playerId', {saves:cookiesSave}, { domain: '.localhost'});
     res.json(data);
   });
-
-  //res.render('new_game', option);
 });
 
 module.exports = router;

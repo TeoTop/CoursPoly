@@ -1,12 +1,16 @@
 {
-  "id":273,
-  "text":
-  [
-  	"Cette page n'est pas encore implémentée."
-  ],
-  "battle": {},
-  "info": "",
-  "choice":[],
+  "all":true,
+  "info_page":{
+    "id":273,
+    "text":
+    [
+    	"Cette page n'est pas encore implémentée."
+    ],
+    "battle": {},
+    "info": "",
+    "choice":[],
+    "image":""
+  },
   "next_page":
   [
   ]

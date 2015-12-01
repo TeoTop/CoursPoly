@@ -1,11 +1,15 @@
 {
-  "id":62,
-  "text": [],
-  "battle": {},
-  "info": "",
-  "choice": [],
-  "next_page":
-  [
-    {"id": 288, "text": "Rendez-vous au "}
-  ]
+	"all":true,
+	"info_page":{
+		"id":62,
+		"text": [],
+		"battle": {},
+		"info": "",
+		"choice": [],
+		"image":""
+	},
+	"next_page":
+	[
+		{"id": 288, "text": "Rendez-vous au "}
+	]
 }

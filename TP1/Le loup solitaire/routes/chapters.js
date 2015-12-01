@@ -5,17 +5,24 @@ var fs = require('fs');
 
 /* Affiche la liste des pages (liste à compléter) */
 router.get('/', function(req, res, next) {
-  res.render('list_pages', { title: 'Liste des chapitres' });
+  res.render('chapter', { title: 'Lone Wolf' });
 });
-
 
 /* Route dynamique pour les chapitres 
 *  :page : numéro de la page
 *  Retourne le json de la page correspondante
 */
 router.get('/:page', function(req, res, next) {
-  var page = JSON.parse(fs.readFileSync('views/json/page_'+req.params.page+'.json', 'utf8'));
-  res.json(page);
+  var option = { title: 'Lone Wolf' };
+
+  if((req.session.currentPage && req.session.currentPage != req.params.page) || !req.session.currentPage){
+    option.message = "Un problème est apparu";
+    option.error = {};
+    res.render('error', option);
+  }
+    
+  
+  res.render('chapter', option);
 });
 
 

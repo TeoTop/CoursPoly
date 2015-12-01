@@ -1,17 +1,21 @@
 {
-  "id":12,
-  "text":"text",
-  "battle": {},
-  "info": "",
-  "choice":
-  [
-    {"intitule":"3 Repas", "type":"RATION", "quantite":3},
-    {"intitule":"Couverture en fourrure", "type":"FOURRURE", "quantite":1},
-    {"intitule":"Corde", "type":"CORDE", "quantite":1}
-  ],
+  "all":false,
+  "info_page":{
+    "id":12,
+    "text":"text",
+    "battle": {},
+    "info": "",
+    "choice":
+    [
+      {"intitule":"3 Repas", "type":"RATION", "quantite":3},
+      {"intitule":"Couverture en fourrure", "type":"FOURRURE", "quantite":1},
+      {"intitule":"Corde", "type":"CORDE", "quantite":1}
+    ],
+    "image":""
+  },
   "next_page":
   [
-    {"id": 180, "text": "Si vous souhaitez tirer votre épéeet aller voir de quoi il s'agit, rendez-vous au "},
+    {"id": 180, "text": "Si vous souhaitez tirer votre épée et aller voir de quoi il s'agit, rendez-vous au "},
     {"id": 259, "text": "Si vous préférez retenir votre souffle en restant aussi immobile que possible, rendez-vous au "}
   ]
 }

@@ -5,25 +5,29 @@ block link
   -var css = "new_game";
 
 block content
-  div(class="chapter-content" ng-controller="PlayerCtrl as player")
+  div(class="chapter-content" ng-controller="NewGameCtrl as ngc")
+    h2 Partie sauvegardé
+    div(class='forms-controller' ng-repeat="save in ngc.cookieId.saves")
+      input(type='text', name='save', value="{{save}}" readonly)
+
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
 
       //-Formulaire de création du nouveau joueur
-      form(name="newGame")
+      form(name="newGame" ng-submit="ngc.submitForm()")
 
         //- Affichage du message après retour d'un post
         span(id="name_error" class="hide") Le nom est vide. Un nom ne peut contenir que des lettres, des chiffres et le caratère spécial '_'!
         //- Nom du joueur
         div(class='field-controller')
           h3 Name
-          input(id='name',type='text',placeholder='Name',name='name', ng-model="player.name")
+          input(id='name',type='text',placeholder='Name',name='name', ng-model="ngc.name")
         
         //- Sélection des compétences de Kai
         div(class='field-controller')
           h3 Discipline de Kai       
           span(id="kais_error" class="hide") Le nombre de compétences de Kai sélectionnées doit être exactement 5!
-          div(class='checkbox-controller' ng-repeat="(key, value) in player.kais")
+          div(class='checkbox-controller' ng-repeat="(key, value) in ngc.kais")
             input(type="checkbox", id="{{key}}", name="kais", value="{{key}}")
             label(for="{{key}}")
               img(src="/images/{{key}}.png") 
@@ -33,11 +37,11 @@ block content
         div(class='field-controller')
           h3 Equipement
           span(id="equipments_error" class="hide") Le nombre d'armes ou objets sélectionnés doit être exactement 2!
-          div(class='checkbox-controller' ng-repeat="(key, value) in player.equipments")
+          div(class='checkbox-controller' ng-repeat="(key, value) in ngc.equipments")
             input(type="checkbox", id="{{key}}", name="equipments", value="{{key}}")
             label(for="{{key}}")
               img(src="/images/{{key}}.png") 
               | {{value}}
 
         div(class='field-controller')
-          button(name='submit', ng-click="player.submitForm()") Commencer le jeu
+          input(type="submit" value="Commencer le jeu")

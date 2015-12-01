@@ -5,31 +5,29 @@ block link
   -var css = "game_page";
  
 block content
-  
+  div(id="storyBoard" ng-controller="PlayerCtrl as pc")
     //- Affichage du menu contextuel pour le sac à dos
     div(id="backpack_box" class="box context_content")
       div(class="box-content")
         h3 Sac à dos
-        table(class="grid grid-border")
-          each pack, key in session.player.backpack
-            if key%4 == 0
-              tr
-            td #[img(src="/images/"+pack+".png")]
+        table(class="grid grid-border" ng-repeat="object in pc.backpack")
+          //-if $index%4 == 0
+            tr
+          td #[img(src="/images/{{object}}.png")]
       a(href="#")
 
     //- Affichage du menu contextuel pour les objets spéciales
     div(id="special_object" class="box context_content")
       div(class="box-content")
         h3 Objets spéciaux
-        table(class="grid grid-border")
-         each spe, key in session.player.spe_object
-            if key%4 == 0
-              tr
-            td #[img(src="/images/"+spe+".png")]
+        table(class="grid grid-border" ng-repeat="sobject in pc.spe_object")
+          //-if $index%4 == 0
+            tr
+          td #[img(src="/images/{{sobject}}.png")]
       a(href="#") 
     
     //- Affichage principale pour l'histoire
-    div(id="story_flow" class="chapter-content")
+    div(id="story_flow" class="chapter-content" ng-controller="CurrentPageCtrl as cpc")
       h2 Menu
       div(class="context_menu line")
         div(class="backpack")
@@ -39,17 +37,20 @@ block content
 
       h2 Page #{chap}
       div(id="story")
-        block story
+        p(ng-repeat="txt in cpc.info_page.text").
+          {{txt}}
       
-      div(id="picture" class="content-center")
-        block picture 
+      div(id="picture" class="content-center" ng-if="cpc.info_page.image")
+        img(src="{{cpc.info_page.image}}")
 
-      div(id="fight")
-        block fight
+      div(id="fight" ng-if="cpc.info_page.battle.lenght")
+      
+      div(ng-if="!cpc.all")
+        a(href="" ng-click="cpc.validation()") Continuer ...
 
-      if next_page
-        div(id="turn")
-          block turn
+      div(id="turn" ng-if="cpc.all")
+        p(ng-repeat="next in cpc.next_page") {{next.text}}
+          a(href="" ng-click="cpc.nextPage(next.id)") {{next.id}}
 
     //- Affichage des stats du joueurs
     include ./stats.jade 
