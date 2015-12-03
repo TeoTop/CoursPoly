@@ -43,9 +43,12 @@ block content
       div(id="picture" class="content-center" ng-if="cpc.info_page.image")
         img(src="{{cpc.info_page.image}}")
 
-      div(id="fight" ng-if="cpc.info_page.battle.lenght")
-      
-      div(ng-if="!cpc.all")
+      div(id="fight" ng-if="cpc.info_page.battle")
+        p Choisir une option
+        button(class="button") Combattre
+        button(class="button" ng-click="cpc.validation()") Fuir
+
+      div(ng-if="!cpc.all && !cpc.info_page.battle")
         a(href="" ng-click="cpc.validation()") Continuer ...
 
       div(id="turn" ng-if="cpc.all")
