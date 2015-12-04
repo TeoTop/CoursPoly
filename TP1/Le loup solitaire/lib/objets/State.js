@@ -1,3 +1,4 @@
+var database = require('../database');
 var var_globals = require('../vars_global');
 var common_functions = require('../commonFunctions');
 var Battle = require('./Battle');
@@ -10,7 +11,7 @@ function State() {
 	this.currentPage = 1;
 	this.pastPages = [];
 	this.battles = [];
-	this.alea_choices = [ {"page":999, "choices":[1,3]} ];
+	this.alea_choices = [];
 }
 
 /**
@@ -30,5 +31,14 @@ State.prototype.addCombat = function(battle) {
 State.prototype.addChoice = function(choice) {
 	this.alea_choices.push(choice);
 }
+
+State.prototype.load = function(gameId, callback) {
+	var tmp = this;
+	database.getState(gameId, function(rep){
+		for(var k in rep) tmp[k]=rep[k];
+		callback();
+	});
+}
+
 
 module.exports = State;

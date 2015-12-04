@@ -87,12 +87,9 @@ router.post('/new_game', function(req, res, next) {
   req.session.player = player;
   database.insertPlayer(player, function(){
     //redirige vers la page 1 du jeu
-    req.session.currentPage = 1;
     var data = {ok: true, url:"http://localhost:3000/chap"};
-    var cookiesSave = []; //(req.cookies.playerId) ? req.cookies.playerId.saves : [];
-    cookiesSave.push(player.id);
 
-    res.cookie('playerId', {saves:cookiesSave}, { domain: '.localhost'});
+    res.cookie('gameId', player.id, { domain: '.localhost'});
     res.json(data);
   });
 });

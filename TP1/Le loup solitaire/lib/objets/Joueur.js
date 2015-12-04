@@ -1,3 +1,4 @@
+var database = require('../database');
 var var_globals = require('../vars_global');
 var common_functions = require('../commonFunctions');
 var State = require('./State');
@@ -72,6 +73,14 @@ Joueur.prototype.backPackFull = function() {
 //Définie la taille max des objets spéciaux que peut posséder le joueur (8)
 Joueur.prototype.objectFull = function() {
 	return (this.spe_object.length >= 8) ? true : false;
+}
+
+Joueur.prototype.load = function(gameId, callback) {
+	var tmp = this;
+	database.getPlayer(gameId, function(rep){
+		for(var k in rep) tmp[k]=rep[k];
+		tmp.state.load(gameId, callback);
+    });
 }
 
 module.exports = Joueur;

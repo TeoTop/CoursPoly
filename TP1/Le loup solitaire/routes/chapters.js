@@ -13,16 +13,7 @@ router.get('/', function(req, res, next) {
 *  Retourne le json de la page correspondante
 */
 router.get('/:page', function(req, res, next) {
-  var option = { title: 'Lone Wolf' };
-
-  if((req.session.currentPage && req.session.currentPage != req.params.page) || !req.session.currentPage){
-    option.message = "Un problème est apparu";
-    option.error = {};
-    res.render('error', option);
-  }
-    
-  
-  res.render('chapter', option);
+  res.render('chapter', { title: 'Lone Wolf' });
 });
 
 

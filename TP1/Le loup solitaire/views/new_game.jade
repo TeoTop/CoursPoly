@@ -6,9 +6,19 @@ block link
 
 block content
   div(class="chapter-content" ng-controller="NewGameCtrl as ngc")
-    h2 Partie sauvegardé
-    div(class='forms-controller' ng-repeat="save in ngc.cookieId.saves")
-      input(type='text', name='save', value="{{save}}" readonly)
+    div(class='forms-controller' ng-if="ngc.saves.one")
+      h2 Partie sauvegardée
+      table(class='field-controller saves')
+        tr
+          th Nom
+          th Chapitre
+          th
+        tr(ng-repeat="save in ngc.saves")
+          td {{save}}
+          td
+          //-td(ng-model="ngc.save.chapter")
+          td
+            button(class="btn-sup") X
 
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')
