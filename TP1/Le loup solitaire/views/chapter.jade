@@ -43,9 +43,35 @@ block content
       div(id="picture" class="content-center" ng-if="cpc.info_page.image")
         img(src="{{cpc.info_page.image}}")
 
-      div(id="fight" ng-if="cpc.info_page.battle.lenght")
-      
-      div(ng-if="!cpc.all")
+      div(id="fight" ng-if="cpc.info_page.battle")
+        p Choisir une option
+        button(class="button" ng-click="cpc.battle()") Combattre
+        button(class="button" ng-click="cpc.validation()") Fuir
+
+        h3 Combat en cours
+        table(class="battleHistory")
+         thead
+            tr
+                th Tour
+                th Endurance
+                th Dmg
+                th(id="battleInvariantLeftHeader") Ratio
+                th(id="battleInvariantRightHeader") Number
+                th Dmg
+                th Endurance
+         tbody
+          cpc.battle_rounds.forEach(function (round)) {
+            tr
+                td 1
+                td 2
+                td 3
+                td 4
+                td round.randomNumber
+                td 6
+                td 7      
+          }   
+
+      div(ng-if="!cpc.all && !cpc.info_page.battle")
         a(href="" ng-click="cpc.validation()") Continuer ...
 
       div(id="turn" ng-if="cpc.all")

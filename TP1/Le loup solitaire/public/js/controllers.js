@@ -206,41 +206,51 @@ app.controller('NewGameCtrl', function($cookies, $http, game, storage) {
   }
 });
 
-app.controller('CurrentPageCtrl', function($cookies, $http) {
-  var cpc = this;
-  cpc.info_page = {};
-  cpc.next_page = [];
+app.controller('CurrentPageCtrl', function ($cookies, $http) {
+    var cpc = this;
+    cpc.info_page = {};
+    cpc.next_page = [];
+    cpc.battle_rounds = [];
 
-  $http.get('/api/page').then(
-    function(rep){
-      if(!rep.data.error){
-        cpc.all = rep.data.all;
-        cpc.info_page = rep.data.info_page;
-        cpc.next_page = rep.data.next_page;    
-      }
+    $http.get('/api/page').then(
+    function (rep) {
+        if (!rep.data.error) {
+            cpc.all = rep.data.all;
+            cpc.info_page = rep.data.info_page;
+            cpc.next_page = rep.data.next_page;
+        }
     },
-    function(rep){
-      console.log("Failed to get data from web services api/equipments");
+    function (rep) {
+        console.log("Failed to get data from web services api/equipments");
     });
-  
-  cpc.nextPage = function(page){
-    console.log(page);
-    $http.get('/api/page/'+page).then(
-    function(rep){
-      if(!rep.data.error){
-        cpc.all = rep.data.all;
-        cpc.info_page = rep.data.info_page;
-        cpc.next_page = rep.data.next_page;
-      }
-    },
-    function(rep){
-      console.log("Failed to get data from web services api/equipments");
-    });
-  }
 
-  cpc.validation = function(){
-    cpc.all = true;
-  }
+    cpc.nextPage = function (page) {
+        console.log(page);
+        $http.get('/api/page/' + page).then(
+    function (rep) {
+        if (!rep.data.error) {
+            cpc.all = rep.data.all;
+            cpc.info_page = rep.data.info_page;
+            cpc.next_page = rep.data.next_page;
+        }
+    },
+    function (rep) {
+        console.log("Failed to get data from web services api/equipments");
+    });
+    }
+
+    cpc.validation = function () {
+        cpc.all = true;
+    }
+
+    cpc.battle = function () {
+        var battle = new Battle();
+        battle.playerHabilities = 12; // A changer pour tester
+        battle.ennemyHabilities = cpc.battle.hability;
+
+        var result = battle.round();
+        cpc.battle_rounds.push(result);
+    }
 });
 
 
