@@ -133,6 +133,12 @@ app.controller('ChapterCtrl', function ($cookies, $http, player, game, kais, wea
 
     cc.validation = function () {
         cc.all = true;
+        cc.game.all = true;
+    }
+
+    cc.fuir = function () {
+        cc.all = true;
+        cc.battleOver = true;
     }
 
     cc.battle = function () {
