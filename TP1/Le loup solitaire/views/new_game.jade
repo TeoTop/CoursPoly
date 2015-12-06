@@ -6,7 +6,7 @@ block link
 
 block content
   div(class="chapter-content" ng-controller="NewGameCtrl as ngc")
-    div(class='forms-controller' ng-if="ngc.saves.one")
+    div(class='forms-controller' ng-show="ngc.saves.length")
       h2 Partie sauvegardée
       table(class='field-controller saves')
         tr
@@ -14,11 +14,10 @@ block content
           th Chapitre
           th
         tr(ng-repeat="save in ngc.saves")
-          td {{save}}
+          td(ng-click="ngc.loadGame(save._id)") {{save.name}}
+          td(ng-click="ngc.loadGame(save._id)") {{save.state.currentPage}}
           td
-          //-td(ng-model="ngc.save.chapter")
-          td
-            button(class="btn-sup") X
+            button(class="btn-sup" ng-click="ngc.deleteSave(save._id)") X
 
     h2 Creation d'une nouvelle partie
     div(class='forms-controller')

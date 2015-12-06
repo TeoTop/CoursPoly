@@ -5,12 +5,12 @@ block link
   -var css = "game_page";
  
 block content
-  div(id="storyBoard" ng-controller="PlayerCtrl as pc")
+  div(id="storyBoard" ng-controller="ChapterCtrl as cc")
     //- Affichage du menu contextuel pour le sac à dos
     div(id="backpack_box" class="box context_content")
       div(class="box-content")
         h3 Sac à dos
-        table(class="grid grid-border" ng-repeat="object in pc.backpack")
+        table(class="grid grid-border" ng-repeat="object in cc.backpack")
           //-if $index%4 == 0
             tr
           td #[img(src="/images/{{object}}.png")]
@@ -20,14 +20,14 @@ block content
     div(id="special_object" class="box context_content")
       div(class="box-content")
         h3 Objets spéciaux
-        table(class="grid grid-border" ng-repeat="sobject in pc.spe_object")
+        table(class="grid grid-border" ng-repeat="sobject in cc.spe_object")
           //-if $index%4 == 0
             tr
           td #[img(src="/images/{{sobject}}.png")]
       a(href="#") 
     
     //- Affichage principale pour l'histoire
-    div(id="story_flow" class="chapter-content" ng-controller="CurrentPageCtrl as cpc")
+    div(id="story_flow" class="chapter-content")
       h2 Menu
       div(class="context_menu line")
         div(class="backpack")
@@ -37,16 +37,16 @@ block content
 
       h2 Page #{chap}
       div(id="story")
-        p(ng-repeat="txt in cpc.info_page.text").
+        p(ng-repeat="txt in cc.game.info_page.text").
           {{txt}}
       
-      div(id="picture" class="content-center" ng-if="cpc.info_page.image")
-        img(src="{{cpc.info_page.image}}")
+      div(id="picture" class="content-center" ng-if="cc.game.info_page.image")
+        img(src="{{cc.game.info_page.image}}")
 
-      div(id="fight" ng-if="cpc.info_page.battle")
+      div(id="fight" ng-if="cc.game.info_page.battle")
         p Choisir une option
-        button(class="button" ng-click="cpc.battle()") Combattre
-        button(class="button" ng-click="cpc.validation()") Fuir
+        button(class="button" ng-click="cc.battle()") Combattre
+        button(class="button" ng-click="cc.validation()") Fuir
 
         h3 Combat en cours
         table(class="battleHistory")
@@ -60,23 +60,21 @@ block content
                 th Dmg
                 th Endurance
          tbody
-          cpc.battle_rounds.forEach(function (round)) {
-            tr
-                td 1
-                td 2
-                td 3
-                td 4
-                td round.randomNumber
-                td 6
-                td 7      
-          }   
+          tr(ng-repeat="battle in cc.battle_rounds")
+              td 1
+              td 2
+              td 3
+              td 4
+              td round.randomNumber
+              td 6
+              td 7         
 
-      div(ng-if="!cpc.all && !cpc.info_page.battle")
-        a(href="" ng-click="cpc.validation()") Continuer ...
+      div(ng-if="!cc.all && !cc.game.info_page.battle")
+        a(href="" ng-click="cc.validation()") Continuer ...
 
-      div(id="turn" ng-if="cpc.all")
-        p(ng-repeat="next in cpc.next_page") {{next.text}}
-          a(href="" ng-click="cpc.nextPage(next.id)") {{next.id}}
+      div(id="turn" ng-if="cc.game.all")
+        p(ng-repeat="next in cc.game.next_page") {{next.text}}
+          a(href="" ng-click="cc.nextPage(next.id)") {{next.id}}
 
     //- Affichage des stats du joueurs
     include ./stats.jade 

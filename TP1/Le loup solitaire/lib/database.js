@@ -5,45 +5,6 @@ var client = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://group39:thegroup39@ds049864.mongolab.com:49864/lone_wolf_bd';
 
-/**
-	Auto-increment pour les ids simplifiés des joueurs et état de joueur. Trouve l'id dans count, augmente la sequence de 1 et retourne la séquence modifiée.
-**/
-function getNextSequence(db, name, callback) {
-	db.collection('Count').findOneAndUpdate(
-		{ _id: name },
-		{ $inc: { seq: 1 } },
-		{ 
-			returnOriginal: false,
-		  	upsert: true
-		},
-		function(err, ret){
-			callback(ret.value.seq);
-		}
-	);
-}
-
-/**
-	Créer un avancement (id passé en paramètre) et retourne l'objet result de mongoDB
-**/
-function insertStateDB(db, state, callback){
-	db.collection('Player_StateV2').insertOne(state, function(err,rep){ 
-	    db.close();
-	    if(err) callback(err); 
-	    callback(rep);
-	});
-}
-
-/**
-	Supprime un avancement (id passé en paramètre) et retourne l'objet result de mongoDB
-**/
-function deleteStateDB(db, id, callback){
-	db.collection('Player_StateV2').deleteOne({playerId: id}, function(err,rep){ 
-	    db.close();
-	    if(err) callback(err); 
-	    callback(rep);
-	});
-}
-
 
 /**
 	Si une erreur se produit dans la base de données, l'objet MongoError est retourné
@@ -57,17 +18,10 @@ module.exports = {
 	    client.connect(url, function (err, db){
 			if (err) return;
 
-			var tmp = JSON.parse(JSON.stringify(player));
-			delete tmp.state;
-
-			db.collection('PlayersV2').insertOne(tmp, function(err, insert) {
+			db.collection('PlayersV2').insertOne(player, function(err, rep) {
 				if(err) callback(err); 
-
-				var tmpState = JSON.parse(JSON.stringify(player.state));
-				tmpState.playerId = insert.insertedId;
-				player.id = insert.insertedId;
-				
-				insertStateDB(db,tmpState,callback);
+				player._id = rep.insertedId;
+				callback(rep);
 			});
 	    });
 	},
@@ -112,7 +66,7 @@ module.exports = {
 
 			var selId = ObjectId(id);
 
-			db.collection('PlayersV2').updateOne({_id: selId}, {$set : updates}, function(err,rep){
+			db.collection('PlayersV2').updateOne({_id: selId}, {$set : updates}, {upsert:true},function(err,rep){
 			    db.close();
 			    if(err) callback(err); 
 			    callback(rep);
@@ -131,35 +85,11 @@ module.exports = {
 
 			db.collection('PlayersV2').deleteOne({_id: selId}, function(err,rep){ 
 			    if(err) callback(err);
-			    deleteStateDB(db, selId, callback);
+			    callback(rep);
 			});
 	    });
 	},
 
-	/**
-		Insérer un nouvel avancement sans joueur rattaché (auto increment _id, peut etre modifié par la suite pour utilisé ObjectID de mongoDB  
-																								comme cookie -> index sur stateId(actuellement _id))
-	**/
-	insertState : function(state, callback) {
-	    client.connect(url, function (err, db){
-			if (err) return;
-			insertStateDB(db, state, callback);			
-	    });
-	},
-
-	/**
-		Récupérer tous les avancements et renvoie un tableau d'objets state (json) (si on met en place un système de sauvegarde multiple pour chaque joueur)
-	**/
-	/*getAllState : function(callback) {
-	    client.connect(url, function (err, db){
-			if (err) return;
-			db.collection('Players').find().toArray(function(err,players){ 
-			    db.close();
-			    if(err) callback(err); 
-			    callback(players);
-			});
-	    });
-	},*/
 
 	/**
 		Récupérer un avancement (id passé en paramètre) et retourne un objet state ({} si avancement non trouvé)
@@ -170,7 +100,7 @@ module.exports = {
 
 			var selId = ObjectId(id);
 
-			db.collection('Player_StateV2').find({playerId: selId}).limit(1).next(function(err,state){ 
+			db.collection('PlayersV2').find({_id: selId}).project({ state: 1 }).limit(1).next(function(err,state){ 
 				db.close();
 				if(err) callback(err); 
 				(state) ? callback(state): callback({});
@@ -186,23 +116,33 @@ module.exports = {
 			if (err) return;
 
 			var selId = ObjectId(id);
-
-			db.collection('Player_StateV2').updateOne({playerId: selId}, {$set : updates}, function(err,rep){
+			console.log(updates);
+			db.collection('PlayersV2').updateOne({_id: selId}, {$set : updates}, {upsert:true}, function(err,rep){
 			    db.close();
+			    console.log(rep);
 			    if(err) callback(err); 
 			    callback(rep);
 			});
 	    });
 	},
 
+
 	/**
-		Supprime un avancement sans supprimer le joueur (id passé en paramètre) et retourne l'objet result de mongoDB 
-		Peut etre transformé en reset plus tard
+		Récupérer tous les parties passé en paramètre est retroune des info (nom, chapitre courrant et id de la partie)
 	**/
-	/*deleteState : function(id,callback) {
+	getSaves : function(savesId, callback) {
 	    client.connect(url, function (err, db){
 			if (err) return;
-			deleteStateDB(db, id, callback);
+
+			var dbIds = savesId.map(function (id){
+				return ObjectId(id);
+			});
+
+			db.collection('PlayersV2').find({_id: { $in: dbIds} }).project({name:1, "state.currentPage":1 }).toArray(function(err,players){ 
+			    db.close();
+			    if(err) callback(err); 
+			    callback(players);
+			});
 	    });
-	}*/
+	},
 };

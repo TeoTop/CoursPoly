@@ -4,7 +4,7 @@ var Joueur = require('../lib/objets/Joueur');
 var fs = require('fs');
 
 /* Affiche la liste des pages (liste à compléter) */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('chapter', { title: 'Lone Wolf' });
 });
 
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 *  :page : numéro de la page
 *  Retourne le json de la page correspondante
 */
-router.get('/:page', function(req, res, next) {
+router.get('/:page', function (req, res, next) {
   res.render('chapter', { title: 'Lone Wolf' });
 });
 
@@ -22,7 +22,7 @@ router.get('/:page', function(req, res, next) {
 *  :section : correspond à la partie de la page à afficher (1 -> première partie, 2-> toute la page)
 *  Retourne le jade de la page correspondante
 */
-router.get('/:chap/:section', function(req, res, next) {
+/*router.get('/:chap/:section', function (req, res, next) {
 
   //variable pour le rendu de la bonne page jade (page -> jade correspondant, option -> paramètres passés au jade)
   var page = 'pages/page_'+req.params.chap; 
@@ -47,6 +47,6 @@ router.get('/:chap/:section', function(req, res, next) {
   res.locals.session = req.session;
   res.render(page, option);
   
-});
+});*/
 
 module.exports = router;

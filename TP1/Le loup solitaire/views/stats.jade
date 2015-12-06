@@ -1,27 +1,31 @@
 //-Affichage des stats, compétence et armes du joueur. On affiche aussi la liste des combats du joueur.
 div(id="stats" class="stats-menu content-center")
     div(class="adv_box_stats line") 
-      div #[img(src="/images/endurance.png" title="Endurance")] #[br] {{pc.player.life}} / {{pc.player.lifeMax}}
-      div #[img(src="/images/hability.png" title="Habilité")] #[br] {{pc.player.dexter}}
-      div(ng-model="pc.gold") #[img(src="/images/bourse.png" title="Or")] #[br] {{pc.player.gold}} / {{pc.player.goldMax}}
+      div #[img(src="/images/endurance.png" title="Endurance")] #[br] {{cc.player.life}} / {{cc.player.lifeMax}} 
+        span(ng-show="cc.player.lifeBonus") (+{{cc.player.lifeBonus }})
+      div #[img(src="/images/hability.png" title="Habilité")] #[br] {{cc.player.dexter}}
+        span(ng-show="cc.player.dexterBonus") (+{{cc.player.dexterBonus}})
+      div(ng-model="cc.gold") #[img(src="/images/bourse.png" title="Or")] #[br] {{cc.player.gold}} / {{cc.player.goldMax}}
 
     //-On affiche les compétences de Kai du joueur
     h3 Disciplines Kai
-    label Click me: 
-      input(type="checkbox" ng-model="checked" ng-init="checked=true")
    
     table(class="kais-stat")
       //-Jade n'implément l'utilisation conditionnelle d'élément. On doit passer les balises HTML en utilisant le text plain de Jade
-      tr(ng-if="checked")
-        td(ng-repeat="(key, value) in pc.player.kais")
-          img(src="/images/{{value}}.png" title="{{key}}")
+      tr(ng-repeat="k in cc.displayKais")
+        td(ng-repeat="(key, value) in k" colspan="{{cc.colspan(k.length)}}")
+          img(src="/images/{{value}}.png" title="{{cc.kaiName(value)}}")
         
 
     //-On affiche les armes du joueur
-      h3 Équipements
-      div(class="line")
-        each weapon in session.player.weapons
-          div #[img(src="/images/"+weapon+".png" title=weapons[weapon])]
+    h3 Armes
+
+    table(class="weapons-stat")
+      //-Jade n'implément l'utilisation conditionnelle d'élément. On doit passer les balises HTML en utilisant le text plain de Jade
+      tr
+        td(ng-repeat="(key, value) in cc.player.weapons")
+          img(src="/images/{{value}}.png" title="{{cc.weaponName(value)}}")
+    
 
     //-On affiche les combats du joueur tout au long de l'histoire (n'est pas encore dynamique). 
     h3 Historique des combats

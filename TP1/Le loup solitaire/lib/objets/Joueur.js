@@ -13,9 +13,10 @@ function Joueur(name) {
 
 	this.lifeMax = common_functions.getRandom(19,19);
 	this.life = this.lifeMax;
+	this.lifeBonus = 0;
 		
 	this.dexter = common_functions.getRandom(10,19);
-	this.dexterMaster = this.dexter + 2;
+	this.dexterBonus = 0;
 	this.master = -1;
 
 	this.gold = common_functions.getRandom(10,19);
@@ -30,12 +31,13 @@ function Joueur(name) {
 /**
 	Initialise les stats du joueur lors d'une nouvelle partie
 **/
-Joueur.prototype.setUp = function(kais, equips, master) {
-	if(equips.indexOf('WASTCOST') != -1) this.lifeMax+= 2;
-	this.life = this.lifeMax
+Joueur.prototype.setUp = function (kais, equips, master) {
+	if(equips.indexOf('WASTCOST') != -1) this.lifeBonus+= 2;
+	this.life = this.lifeMax + this.lifeBonus;
 
 	//arme maitrisée
 	this.master = master;
+	if(equips.indexOf(master) != -1) this.dexterBonus+= 2;
 
 	//compétence de kai
 	this.kais = kais;
@@ -50,7 +52,7 @@ Joueur.prototype.setUp = function(kais, equips, master) {
 	Ajoute une arme, un objet spécial ou un objet à la liste correspondante. Vérifie le nombre arme/objet(spé) que possède déjà le joueur et 
 	si il existe bien dans le jeu
 **/
-Joueur.prototype.addEquip = function(equip) {
+Joueur.prototype.addEquip = function (equip) {
 	if(var_globals.weapons.hasOwnProperty(equip) && !this.weaponsFull()){
 		this.weapons.push(equip);
   	} else if(var_globals.spe_object.hasOwnProperty(equip)  && !this.objectFull()){
@@ -61,26 +63,38 @@ Joueur.prototype.addEquip = function(equip) {
 }
 
 //Définie la taille max des armes que peut posséder le joueur (2)
-Joueur.prototype.weaponsFull = function() {
+Joueur.prototype.weaponsFull = function () {
 	return (this.weapons.length >= 2) ? true : false;
 }
 
 //Définie la taille max des objets que peut posséder le joueur (8)
-Joueur.prototype.backPackFull = function() {
+Joueur.prototype.backPackFull = function () {
 	return (this.backpack.length >= 8) ? true : false;
 }
 
 //Définie la taille max des objets spéciaux que peut posséder le joueur (8)
-Joueur.prototype.objectFull = function() {
+Joueur.prototype.objectFull = function () {
 	return (this.spe_object.length >= 8) ? true : false;
 }
 
-Joueur.prototype.load = function(gameId, callback) {
+Joueur.prototype.load = function (gameId, callback) {
 	var tmp = this;
-	database.getPlayer(gameId, function(rep){
-		for(var k in rep) tmp[k]=rep[k];
-		tmp.state.load(gameId, callback);
+	database.getPlayer(gameId, function (rep){
+		for(var k in rep) 
+			if(k!='state')
+				tmp[k]=rep[k];
+
+		tmp.state.load(rep['state'], callback);
+		callback(rep);
     });
+}
+
+Joueur.prototype.loadFromSession = function (player) {
+	for(var k in player) 
+		if(k!='state')
+			this[k]=player[k];
+
+	this.state.load(player['state']);
 }
 
 module.exports = Joueur;
