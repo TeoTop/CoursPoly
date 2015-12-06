@@ -6,7 +6,6 @@
     [
       "Vous cachez le cadavre sous l'escalier et vous vous hâtez de le fouiller. Vous y découvrez une Épée d'Os et un Disque de Pierre Bleue. Si vous souhaitez conserver l'un ou l'autre de ces objets (ou les deux), inscrivez-les sur votre Feuille d'Aventure dans la case Objets Spéciaux. Vous abandonnez ensuite le cadavre et vous montez l'escalier quatre à quatre."
     ],
-    "battle": {},
     "info": "Vous êtes affamé, et il vous faut prendre un Repas avant de continuer, sinon, vous perdrez 3 points d'ENDURANCE. N'oubliez pas de rayer ce Repas de votre Feuille d'Aventure.",
     "choice": [
       {"intitule":"Épée d'Os", "type":"BONESWORD", "quantite":1},

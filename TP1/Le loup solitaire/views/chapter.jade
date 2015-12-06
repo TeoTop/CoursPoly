@@ -45,7 +45,7 @@ block content
 
       div(id="fight" ng-if="cc.game.info_page.battle")
         p Choisir une option
-        button(class="button" ng-click="cc.battle()") Combattre
+        button(class="button" ng-click="cc.addRound()") Combattre
         button(class="button" ng-click="cc.validation()") Fuir
 
         h3 Combat en cours
@@ -60,16 +60,16 @@ block content
                 th Dmg
                 th Endurance
          tbody
-          tr(ng-repeat="battle in cc.battle_rounds")
-              td 1
-              td 2
-              td 3
-              td 4
-              td round.randomNumber
-              td 6
-              td 7         
+          tr(ng-repeat="round in cc.battle.rounds")
+              td tour
+              td {{round.playerEndurance}}
+              td {{round.ennemyEnduranceLose}}
+              td {{round.combatRatio}}
+              td {{round.randomNumer}}
+              td {{round.playerEnduranceLose}}
+              td {{round.ennemyEndurance}}         
 
-      div(ng-if="!cc.all && !cc.game.info_page.battle")
+      div(ng-if="(!cc.all && !cc.game.info_page.battle) || (cc.game.info_page.battle && cc.battleOver)")
         a(href="" ng-click="cc.validation()") Continuer ...
 
       div(id="turn" ng-if="cc.game.all")

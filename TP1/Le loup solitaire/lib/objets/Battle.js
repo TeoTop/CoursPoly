@@ -15,35 +15,44 @@ function Battle() {
 }
 
 /**
+    Méthode permettant de faire un combat au complet
+**/
+Battle.prototype.fight = function () {
+    while (this.playerEndurance > 0 && this.ennemyEndurance > 0) {
+        this.round();
+    }
+}
+
+/**
     Méthode permettant de calculer les damages lors d'un round.
 **/
 Battle.prototype.round = function () {
 
     /**
-        Obejt JS interne : Créer pour retourner le résultat d'un round (service web combat)
+    Obejt JS interne : Créer pour retourner le résultat d'un round (service web combat)
     **/
     function RoundResult() {
         this.combatRatio = 0;
         this.randomNumber = 0;
-        //this.playerEndurance = 0;
+        this.playerEndurance = 0;
         this.playerEnduranceLose = 0;
-        //this.ennemyEndurance = 0;
+        this.ennemyEndurance = 0;
         this.ennemyEnduranceLose = 0;
     }
 
     // On calcule le ratio pour déterminer qui a l'avantage dans le round (on bloque la différence à (-)11)
     var combatRatio = this.playerHabilities - this.ennemyHabilities;
-    if(combatRatio < -11) combatRatio = -11;
-    else if(combatRatio > 11) combatRatio = 11;
+    if (combatRatio < -11) combatRatio = -11;
+    else if (combatRatio > 11) combatRatio = 11;
 
     // On détermine le chiffre aléatoire pour le round (entre 0 et 9 inclus)
     var randomNumber = common_functions.getRandom(0, 9);
 
     // On récupère les dégats de chaque combattant
     var tableResult;
-    if(combatRatio > 0){
+    if (combatRatio > 0) {
         tableResult = combatRatioPos[randomNumber][Math.abs(combatRatio)];
-  	} else{
+    } else {
         tableResult = combatRatioNeg[randomNumber][Math.abs(combatRatio)];
     }
 
@@ -52,10 +61,12 @@ Battle.prototype.round = function () {
 
     result.combatRatio = combatRatio;
     result.randomNumber = randomNumber;
-    //result.ennemyEndurance = this.ennemyEndurance;
     result.ennemyEnduranceLose = tableResult[0];
-    //result.playerEndurance = this.playerEndurance;
+    result.ennemyEndurance = this.ennemyEndurance - result.ennemyEnduranceLose;
     result.playerEnduranceLose = tableResult[1];
+    result.playerEndurance = this.playerEndurance - result.playerEnduranceLose;
+
+    this.rounds.push(result);
 
     return result;
 }
