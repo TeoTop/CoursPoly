@@ -79,6 +79,7 @@ app.controller('NewGameCtrl', function ($cookies, $http, kais, equipments, saves
 
 app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game, kais, weapons) {
     var cc = this;
+<<<<<<< HEAD
     cc.displayBackpack = false;
     cc.displayObject = false;
     cc.displayHeal = false;
@@ -104,25 +105,48 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
         if(i%4==3){
           tab.push(tmp.slice());
           tmp = [];
+=======
+    cc.shownRounds = [];
+    cc.battleOver = false;
+
+    player.load().then(function (rep) {
+        cc.player = rep;
+        cc.displayKais = cc.customKais(cc.player.kais)
+        console.log(cc.displayKais);
+        game.load().then(function (rep) {
+            cc.game = rep;
+        });
+    });
+
+    cc.customKais = function (kais) {
+        var tab = [];
+        var tmp = [];
+        console.log(kais);
+        for (i = 0; i < kais.length; i++) {
+            tmp.push(kais[i]);
+            if (i % 4 == 3) {
+                tab.push(tmp.slice());
+                tmp = [];
+            }
+>>>>>>> 5afa2f918f8826e541415831b2213e08fe9ad812
         }
-      }
 
-      if(tmp.length != 0)
-        tab.push(tmp.slice());
+        if (tmp.length != 0)
+            tab.push(tmp.slice());
 
-      return tab;
+        return tab;
     };
 
-    cc.colspan = function (l){
-      return 4 / l;
+    cc.colspan = function (l) {
+        return 4 / l;
     };
 
-    cc.kaiName = function (k){
-      return kais[k];
+    cc.kaiName = function (k) {
+        return kais[k];
     };
 
-    cc.weaponName = function (w){
-      return weapons[w];
+    cc.weaponName = function (w) {
+        return weapons[w];
     };
 
     cc.nextPage = function (page) {
@@ -166,12 +190,35 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
       }
     }
 
+    cc.fuir = function () {
+        cc.all = true;
+        cc.battleOver = true;
+    }
+
+
     cc.battle = function () {
         var battle = new Battle();
         battle.playerHabilities = 12; // A changer pour tester
-        battle.ennemyHabilities = cc.battle.hability;
+        battle.ennemyHabilities = 10;
+        battle.playerEndurance = 10;
+        battle.ennemyEndurance = 10;
 
-        var result = battle.round();
-        cc.battle_rounds.push(result);
+        battle.fight();
+        cc.battleResult = battle;
+        return battle;
+    }
+
+    cc.addRound = function () {
+
+        if (cc.battleResult == null) {
+            cc.battle();
+        }
+
+        if (cc.shownRounds.length < cc.battleResult.rounds.length) {
+            cc.shownRounds.push(cc.battleResult.rounds[cc.shownRounds.length]);
+        }
+        else {
+            cc.battleOver = true;
+        }
     }
 });
