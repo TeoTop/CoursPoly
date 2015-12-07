@@ -89,7 +89,7 @@ router.post('/new_game', function (req, res, next) {
     //redirige vers la page 1 du jeu
     var data = {ok: true, url:"http://localhost:3000/chap"};
 
-    res.cookie('gameId', player._id, { domain: '.localhost'});
+    res.cookie('gameId', player._id, { domain: '.localhost' });
     res.json(data);
   });
 });

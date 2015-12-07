@@ -97,4 +97,13 @@ Joueur.prototype.loadFromSession = function (player) {
 	this.state.load(player['state']);
 }
 
+Joueur.prototype.save = function (player, callback) {
+  var id = player._id;
+  delete player._id;
+  database.updatePlayer(id, player, function (rep){
+  	player._id = id;
+  	callback(rep);
+  });
+}
+
 module.exports = Joueur;

@@ -1,5 +1,6 @@
 {
-  "all":true,
+  "all":false,
+  "end":true,
   "info_page":{
     "id":339,
     "text":

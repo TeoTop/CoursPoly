@@ -8,6 +8,7 @@
     ],
     "battle": {},
     "info": "Attention vous venez de perdre 2 points d'endurance",
+    "endurance":{"val":-2},
     "choice":[],
     "image":""
   },

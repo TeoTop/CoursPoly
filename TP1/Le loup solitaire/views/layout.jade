@@ -23,12 +23,13 @@ html(ng-app="monApp")
     //-Angular JS
     script(src='/js/angular.min.js')
     script(src="/js/angular-cookies.min.js")
-    script(src="/js/angular-route.min.js")
     script(src='/js/lone-wolf.js')
     script(src='/js/providers.js')
     script(src='/js/controllers.js')
 
-  body(ng-controller="GlobalCtrl as titre")
+    base(href="/")
+
+  body(ng-controller="GlobalCtrl as gc")
     //- Affiche le menu
     nav(id="general_menu", class="style_menu")
       ul
@@ -41,8 +42,8 @@ html(ng-app="monApp")
               a(href=val, title=key)=key
 
     //- Affiche le titre du jeu
-    h1.site_title {{titre.title}}
-      a(href="/" title="{{titre.sayHello()}}")
+    h1.site_title
+      a(href="/" title="Le loup solitaire : La légende de Kalt")
         img(src="/images/title.png")
     
     

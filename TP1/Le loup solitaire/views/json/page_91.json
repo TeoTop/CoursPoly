@@ -1,5 +1,5 @@
 {
-  "all":true,
+  "all":false,
   "info_page":{
     "id":91,
     "text":
@@ -8,7 +8,7 @@
       "« Lorsque l'huile pénètre dans la peau, on perd l'odorat», dit Irian. Il recommande aux autres de se frictionner à leur tour avec l'huile de Bakanal ; cette substance apporte une protection particulièrement efficace contre les températures glaciales de Kalte, et elle pourrait bien se révéler particulièrement utile dans un proche avenir. Lorsque vous revenez sous votre tente, les chiens Kanu ne semblent pas apprécier l'odeur que vous dégagez: quand vous passez près d'eux, ils se mettent à gémir et enfouissent leur museau dans la neige."
     ],
     "battle": {},
-    "info": "",
+    "info": "Huile de bakanal a été ajoutée parmis vos objets spéciaux",
     "choice": [],
     "image":""
   },

@@ -1,5 +1,5 @@
 {
-  "all":false,
+  "all":true,
   "info_page":{
     "id":134,
     "text":
@@ -13,10 +13,9 @@
     "choice": [],
     "image":""
   },
+  "alea":true,
   "next_page":
   [
-    {"id": 57, "text": "Si vous tirez un chiffre entre 0 et 3, "},
-    {"id": 188, "text": "Entre 4 et 6, "},
-    {"id": 331, "text": "Entre 7 et 9, "}
+    {"id": 0, "text": "Rendez vous au chapitre "}
   ]
 }

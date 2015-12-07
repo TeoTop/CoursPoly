@@ -116,10 +116,9 @@ module.exports = {
 			if (err) return;
 
 			var selId = ObjectId(id);
-			console.log(updates);
+
 			db.collection('PlayersV2').updateOne({_id: selId}, {$set : updates}, {upsert:true}, function(err,rep){
 			    db.close();
-			    console.log(rep);
 			    if(err) callback(err); 
 			    callback(rep);
 			});

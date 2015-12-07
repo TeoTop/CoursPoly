@@ -33,11 +33,13 @@
   height: 100%;
 }
 
-.box .box-content, .choice_box .box-content {
+.box .box-content {
   position: fixed;
   z-index:20;
   width: 40%;
-  height: 50%;
+  height: 40%;
+  min-width: 500px;
+  min-height: 350px;
   top:25%;
   left:30%;
   padding: 20px 20px;
@@ -45,7 +47,7 @@
   text-align: center;  
 }
 
-.box a, .choice_box span {
+.box a {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -56,13 +58,15 @@
   opacity:0.5;
 }
 
-.choice_box p {
-    margin: 50px auto;
+.box p {
+  margin: 80px auto 20px;
 }
 
-.choice_box span {
-  pointer-events: none;
-  cursor: default;
+.box label {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  bottom: 100px;
 }
 
 .grid {
@@ -70,9 +74,10 @@
 }
 
 .grid td {
-  width: 100px;
   height: 100px;
+  width: 100px;
   padding: 10px;
+  vertical-align: middle;
 }
 
 .grid-border td{
@@ -168,4 +173,23 @@
   width: 150px;
   font-size: 20px;
   margin: 2px;
+}
+
+.interaction {
+  margin-top:30px;
+}
+
+.interaction div {
+  margin: 20px 30px;
+  font-size: 25px;
+}
+
+.interaction label {
+  display: inline-block;
+  margin-right:30px;
+  margin-bottom: 20px;
+}
+
+.interaction button {
+  margin: 20px 30px;
 }

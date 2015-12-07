@@ -14,26 +14,13 @@ function State() {
 	this.alea_choices = [];
 }
 
-State.prototype.saveDB = function (id){
-	var state = {
-		state:{
-			currentPage: this.currentPage,
-			pastPages: this.pastPages,
-			battles: this.battles,
-			alea_choices: this.alea_choices
-		}
-	}
-
-	database.updateState(id, state, function (rep){});
-}
 
 /**
 	Modifie la page courante du joueur et ajoute l'ancienne page à pastPages
 **/
-State.prototype.changePage = function (id, page) {
+State.prototype.changePage = function (page) {
 	this.pastPages.push(this.currentPage);
 	this.currentPage = page;
-	this.saveDB(id);
 }
 
 //Ajoute un nouveau combat (objet Battle) à l'historique des combats
@@ -62,6 +49,19 @@ State.prototype.loadFromId = function (gameId, callback) {
     });
 }
 
+
+State.prototype.save = function (id){
+	var state = {
+		state:{
+			currentPage: this.currentPage,
+			pastPages: this.pastPages,
+			battles: this.battles,
+			alea_choices: this.alea_choices
+		}
+	}
+
+	database.updateState(id, state, function (rep){});
+}
 
 
 

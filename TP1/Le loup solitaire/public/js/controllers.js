@@ -1,8 +1,4 @@
 app.controller('GlobalCtrl', function () {
-  this.title = "";
-  this.sayHello = function () {
-    return 'Hello ' + this.title + '!';
-  };
 });
 
 
@@ -71,7 +67,7 @@ app.controller('NewGameCtrl', function ($cookies, $http, kais, equipments, saves
           }
         }, 
         function (){
-          alert("Une erreur c'est produite sur le serveur lors de la création du joueur!");
+          console.log("Une erreur c'est produite sur le serveur lors de la création du joueur!");
         });
     } else {
       window.location.hash = first_error;
@@ -81,22 +77,28 @@ app.controller('NewGameCtrl', function ($cookies, $http, kais, equipments, saves
 
 
 
-app.controller('ChapterCtrl', function ($cookies, $http, player, game, kais, weapons) {
+app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game, kais, weapons) {
     var cc = this;
+    cc.displayBackpack = false;
+    cc.displayObject = false;
+    cc.displayHeal = false;
 
     player.load().then(function(rep) {
       cc.player = rep;
-      cc.displayKais = cc.customKais(cc.player.kais)
-      console.log(cc.displayKais);
+      cc.displayKais = cc.customKais(cc.player.kais);
+
       game.load().then(function(rep) {
+        $location.path(cc.player.state.currentPage).replace();
         cc.game = rep;
+        cc.healing = (cc.player.kais.indexOf('HEALING') != -1 && cc.game.info_page.id != 1) ? true : false;
+        cc.next = cc.game.all;
       });
     });
 
     cc.customKais = function (kais){
       var tab = [];
       var tmp = [];
-      console.log(kais);
+
       for(i=0 ; i<kais.length ; i++){
         tmp.push(kais[i]);
         if(i%4==3){
@@ -125,12 +127,43 @@ app.controller('ChapterCtrl', function ($cookies, $http, player, game, kais, wea
 
     cc.nextPage = function (page) {
       game.loadPage(page).then(function(rep) {
+        $location.path(page).replace();
         cc.game = rep;
+        $('html,body').animate({scrollTop: $("#storyBoard").offset().top},'slow');
+        if(cc.player.kais.indexOf('HEALING') != -1){
+          cc.healing = (!cc.displayHeal) ? true : false;
+          cc.player.life += 2;
+          if(cc.player.life > cc.player.lifeMax + cc.player.lifeBonus)
+            cc.player.life = cc.player.lifeMax + cc.player.lifeBonus;
+        }
+        cc.next = cc.game.all;
       });
     }
 
-    cc.validation = function () {
-        cc.all = true;
+    cc.validation = function (action) {
+      cc.next = true;
+
+      if(action == ''){
+        game.use();
+      }
+
+      if(action == 'CHOICE'){
+        var sel_objet = $("input[name='sel_objet']:checked").map(function (){ 
+          var tmp = {}; 
+          tmp.nom = this.id;
+          tmp.nb = this.value; 
+          return tmp;
+        }).get();
+        console.log(sel_objet);
+        game.addObject(sel_objet);
+        game.use();
+      }
+
+      if(action == 'END'){
+        player.delete().then(function (){
+          window.location.assign('/');
+        })
+      }
     }
 
     cc.battle = function () {

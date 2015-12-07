@@ -9,13 +9,14 @@
     	"Utilisez la Table de Hasard pour obtenir un chiffre. Si votre total d'ENDURANCE actuel est inférieur à 10, vous ôterez 2 au chiffre obtenu. Si ce total est supérieur à 20, vous ajouterez 1 au chiffre donné par la Table."
     ],
     "battle": {},
-    "info": "Vous êtes affamé, et il vous faut prendre un Repas avant de continuer, sinon, vous perdrez 3 points d'ENDURANCE. N'oubliez pas de rayer ce Repas de votre Feuille d'Aventure.",
+    "info": "Vous êtes affamé, et il vous faut prendre un Repas avant de continuer, sinon, vous perdrez 3 points d'ENDURANCE.",
+    "endurance":{"val":-3, "cdt":"RATION"},
     "choice": [],
     "image":""
   },
+  "alea":true,
   "next_page":
   [
-    {"id": 248, "text": "Si le total obtenu se situe entre -2 et 2, "},
-    {"id": 191, "text": "S'il est de 3 à 10, "}
+    {"id": 0, "text": "Rendez vous au chapitre "}
   ]
 }

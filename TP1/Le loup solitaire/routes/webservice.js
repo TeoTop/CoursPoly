@@ -18,7 +18,7 @@ router.get('/choixAleatoire/:page', function (req, res, next) {
     if(aleaChoice[i].id == req.params.page){
       //on applique la fonction associé à l'objet/page
       retour.choix = common_functions.aleaChoice(aleaChoice[i].interval, aleaChoice[i].next_page);
-      console.log(retour);
+
       //on copie les intervales de l'objet/page dans le json de retour
       retour.intervales = aleaChoice[i].intervals;
     }
@@ -131,31 +131,6 @@ router.route('/states/:id')
 });
 
 
-
-
-
-router.get('/kais', function (req, res, next) {
-  var data = {
-    kais : var_global.kais,
-  };
-
-  res.json(data);
-});
-
-
-
-
-router.get('/equipments', function (req, res, next) {
-  var data = {
-    equipments : var_global.equipments
-  };
-
-  res.json(data);
-});
-
-
-
-
 router.get('/page', function (req, res, next) {
   var file = 'views/json/page_error.json';
 
@@ -174,14 +149,20 @@ router.get('/page', function (req, res, next) {
 *  Retourne le json de la page correspondante
 */
 router.get('/page/:page', function (req, res, next) {
-  player = new Joueur("");
-  player.loadFromSession(req.session.player);
-
-  player.state.changePage(req.session.player._id, req.params.page);
-  req.session.player = player;
-
   var page = JSON.parse(fs.readFileSync('views/json/page_'+req.params.page+'.json', 'utf8'));
   res.json(page);
+});
+
+
+router.post('/player/save', function (req, res, next) {
+  player = new Joueur("");
+  player.loadFromSession(req.body);
+
+  player.save(player, function (rep){
+    req.session.player = player;
+    console.log(req.session.player);
+    res.json(rep);
+  });
 });
 
 

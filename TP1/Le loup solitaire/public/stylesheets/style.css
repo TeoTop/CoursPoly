@@ -140,14 +140,6 @@ fieldset {
   display: inline-block;
 }
 
-.context_content {
-  display: none;
-}
-
-.context_content:target {
-  display: block;
-}
-
 .show{
   display: block;
 }

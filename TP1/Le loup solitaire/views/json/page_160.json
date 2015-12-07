@@ -16,7 +16,7 @@
   "next_page":
   [
     {"id": 78, "text": "Si vous souhaitez sortir de la tente pour vous lancer à l'attaquedu Bakanal, rendez-vous au "},
-	  {"id": 204, "text": "Si vous maîtrisez la Discipline Kaï de la Chasse, rendez-vous au "},
-    {"id": 318, "text": "Si vous maîtrisez la Discipline Kaï de la Communication Animale, rendez-vous au "}
+	  {"id": 204, "text": "Si vous maîtrisez la Discipline Kaï de la Chasse, rendez-vous au ", "cdt":"HUNTING"},
+    {"id": 318, "text": "Si vous maîtrisez la Discipline Kaï de la Communication Animale, rendez-vous au ", "cdt":"ANIMALKINSHIP"}
   ]
 }

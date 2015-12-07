@@ -2,7 +2,7 @@
 
 
 app.provider("game", function (){
-  this.$get = function ($http, $q){
+  this.$get = function ($http, $q, player, spe_object, backpack){
     var game = {
       story: {},
       load: function (){
@@ -13,6 +13,9 @@ app.provider("game", function (){
           function (rep){
             if (!rep.data.error) {
               tmp.story = rep.data;
+              tmp.checkPath();
+              tmp.checkEndurance();
+              tmp.checkAlea(tmp.story.info_page.id);
             } else {
 
             }
@@ -30,22 +33,86 @@ app.provider("game", function (){
         var tmp = this;
         var deferred = $q.defer();
 
-        $http.get('/api/page/'+page).then(
-          function (rep){
-            if (!rep.data.error) {
-              tmp.story = rep.data;
-            } else {
+        player.player.state.pastPages.push(player.player.state.currentPage);
+        player.player.state.currentPage = page;
 
+        player.save().then(function(rep) {
+          $http.get('/api/page/'+page).then(
+            function (rep){
+              if (!rep.data.error) {
+                tmp.story = rep.data;
+                tmp.checkPath();
+                tmp.checkEndurance();
+                tmp.checkAlea(page);
+              } else {
+
+              }
+
+              deferred.resolve(tmp.story);
+            },
+            function (rep){
+              console.log("Erreur lors du chargement de l'histoire !");
+              deferred.reject();
+            });
+        });
+        return deferred.promise;
+      },
+      checkPath: function (){
+        this.story.next_page = this.story.next_page.filter(function( obj ) {
+          if(!obj.cdt || player.player.kais.indexOf(obj.cdt) != -1 || player.player.spe_object.indexOf(obj.cdt) != -1)
+            return obj;
+        });
+      },
+      checkEndurance: function (){
+          if(this.story.info_page.endurance && this.story.info_page.endurance.val){
+            var i = player.player.backpack.indexOf(this.story.info_page.endurance.cdt);
+            if(i != -1){
+              player.player.backpack.splice(i,1);
+              return;
             }
 
-            deferred.resolve(tmp.story);
-          },
-          function (rep){
-            console.log("Erreur lors du chargement de l'histoire !");
-            deferred.reject();
-          });
+            player.player.life += this.story.info_page.endurance.val;
+          }
+      },
+      checkAlea: function (page){
+        var tmp = this;
 
-        return deferred.promise;
+        if(this.story.alea){
+          $http.get('/api/choixAleatoire/'+page).then(
+            function (rep){
+              tmp.story.next_page[0].id = rep.data.choix.page;
+            },
+            function (rep){
+              console.log("Erreur lors du choix aléatoire !");
+              deferred.reject();
+            });
+        }
+      },
+      use: function (){
+        if(this.story.info_page.use){
+          for(u = 0 ; u < this.story.info_page.use.length ; u++){
+            var i = player.player.backpack.indexOf(this.story.info_page.use[u]);
+            if(i != -1){
+              player.player.backpack.splice(i,1);
+            }
+          }
+        }
+      },
+      addObject: function (objects){
+        for(o = 0 ; o < objects.length ; o++){      
+          var i = backpack[objects[o].nom];
+          var j = spe_object[objects[o].nom];
+
+          if(i){
+            for(n = 0 ; n < objects[o].nb ; n++)
+              player.player.backpack.push(objects[o].nom);
+          }
+
+          if(j){
+            for(n = 0 ; n < objects[o].nb ; n++)
+              player.player.spe_object.push(objects[o].nom);
+          }
+        }
       }
     }
 
@@ -55,7 +122,7 @@ app.provider("game", function (){
 });
 
 app.provider("player", function (){
-  this.$get = function ($http, $q, state){
+  this.$get = function ($http, $q, storage, state){
     var player = {
       player: {},
       load: function (){
@@ -63,27 +130,58 @@ app.provider("player", function (){
         var deferred = $q.defer();
 
         $http.get('/api/player').then(
-        function (rep){
-          if(!rep.data.error){
-             tmp.player = rep.data;
-          } else {
+          function (rep){
+            if(!rep.data.error){
+               tmp.player = rep.data;
+            } else {
+                
+            }
             
-          }
-          
-          deferred.resolve(tmp.player);
-        },
-        function (rep){
-          console.log("Erreur lors du chargement du joueur !");
-          deferred.reject();
-        });
+            deferred.resolve(tmp.player);
+          },
+          function (rep){
+            console.log("Erreur lors du chargement du joueur !");
+            deferred.reject();
+          });
 
         return deferred.promise;
       },
       save: function (){
-          
+        var tmp = this;
+        var deferred = $q.defer();
+
+        $http.post('/api/player/save', tmp.player, config).then(
+          function (rep){
+            if(!rep.data.error){
+              
+            } else {
+                
+            }
+            
+            deferred.resolve();
+          },
+          function (rep){
+            console.log("Erreur lors de la sauvegarde du joueur !");
+            deferred.reject();
+          });
+
+        return deferred.promise;
       },
       delete: function (){
-          
+        var tmp = this;
+        var deferred = $q.defer();
+
+        $http.delete('/api/players/'+tmp.player._id).then(
+          function (rep){
+            storage.deleteGame(tmp.player._id);
+            deferred.resolve(tmp.saves);
+          },
+          function (rep){
+            console.log("Une erreur c'est produite lors de la suppression de la partie !");
+            deferred.reject();
+          });
+
+        return deferred.promise;
       }
     }
  
@@ -220,7 +318,7 @@ app.provider("storage", function (){
         return;
       },
       loadGame: function (id){
-        $cookies.put('gameId', id, { domain: '.localhost'});
+        $cookies.put('gameId', 'j:"'+id+'"', { domain: '.localhost'});
         return $cookies.get('gameId');
       },
       gameId: function (){
