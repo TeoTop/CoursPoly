@@ -56,13 +56,8 @@ block content
       div(id="picture" class="content-center" ng-if="cc.game.info_page.image")
         img(src="{{cc.game.info_page.image}}")
 
-      div(ng-if="(!cc.all && !cc.game.info_page.battle) || (cc.game.info_page.battle && cc.battleOver)")
-      //-div(id="fight" ng-if="cc.game.info_page.battle")
-        p Choisir une option
-        button(class="button" ng-click="cc.addRound()") Combattre
-        button(class="button" ng-click="cc.fuir()") Fuir
-
-        h3 Combat en cours
+      div(id="fight" ng-if="cc.game.info_page.battle.name")
+        h3 Combat entre {{cc.player.name}} et {{cc.game.info_page.battle.name}}
         table(class="battleHistory")
          thead
             tr
@@ -74,24 +69,28 @@ block content
                 th Dmg
                 th Endurance
          tbody
-          tr(ng-repeat="round in cc.battle.rounds")
-              td tour
+          tr(ng-repeat="round in cc.shownRounds")
+              td {{$index+1}}
               td {{round.playerEndurance}}
               td {{round.ennemyEnduranceLose}}
               td {{round.combatRatio}}
               td {{round.randomNumer}}
               td {{round.playerEnduranceLose}}
-              td {{round.ennemyEndurance}}         
+              td {{round.ennemyEndurance}}  
 
-      div(ng-if="!cc.game.all && !cc.game.info_page.battle.name" class="interaction")
+        button(class="button button-fight" ng-if="!cc.next" ng-click="cc.addRound()") Combattre
+        button(class="button button-fight" ng-if="cc.puissance" ng-click="cc.addRound()") Puissance
+        button(class="button button-fight" ng-if="!cc.next" ng-click="cc.fuir()") Fuir  
+        button(class="button button-fight" ng-if="!cc.next" ng-click="cc.battle()") Finir     
+
+      div(ng-if="!cc.game.all && (!cc.game.info_page.battle.name || (cc.next && cc.game.end))" class="interaction")
         fieldset
           div(ng-if="cc.game.info_page.choice.length")
             label(ng-repeat="c in cc.game.info_page.choice")
               input(type="checkbox" id="{{c.type}}" name="sel_objet" value="{{c.quantite}}")
               | {{c.intitule}}
 
-          div(ng-if="cc.game.info_page.info")
-            {{cc.game.info_page.info}}
+          div(ng-if="cc.game.info_page.info") {{cc.game.info_page.info}}
 
           div(ng-if="cc.game.end") Vous êtes mort !
 
@@ -100,7 +99,7 @@ block content
           button(ng-if="cc.game.end" ng-click="cc.validation('END')") Continuer
         //-a(href="" ng-click="cc.validation()") Continuer ...
 
-      div(id="turn" ng-if="cc.next")
+      div(id="turn" ng-if="cc.next && !cc.game.end")
         p(ng-repeat="next in cc.game.next_page") {{next.text}}
           a(href="" ng-click="cc.nextPage(next.id)") {{next.id}}
 

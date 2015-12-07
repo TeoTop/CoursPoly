@@ -32,19 +32,21 @@ router.get('/choixAleatoire/:page', function (req, res, next) {
 
 
 /* Retourne un json contenant le résultat d'un round de combat. L'habilité du joueur et de l'ennemi sont récupéré depuis l'URL. */
-router.get('/combat/:playerHab/:ennemyHab', function (req, res, next) {
+router.get('/combat/:playerHab/:playerLife/:ennemyHab/:ennemyLife', function (req, res, next) {
     //création de l'objet Battle
     var battle = new Battle();
 
     //on set les habilités aux variables habilités de l'objet Battle
     battle.playerHabilities = req.params.playerHab;
     battle.ennemyHabilities = req.params.ennemyHab;
+    battle.playerEndurance = req.params.playerLife;
+    battle.ennemyEndurance = req.params.ennemyLife;
 
     //on fait tourner les combats (ici juste 1 round; à modifer au prochain TP) et on récupère l'objet BattleResult
-    var result = battle.round();
+    var result = battle.fight();
     
     // on retourne le resultat au format json
-    res.json(result);
+    res.json(battle);
 });
 
 

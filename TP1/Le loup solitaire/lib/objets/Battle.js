@@ -18,9 +18,15 @@ function Battle() {
     Méthode permettant de faire un combat au complet
 **/
 Battle.prototype.fight = function () {
-    while (this.playerEndurance > 0 && this.ennemyEndurance > 0) {
-        this.round();
-    }
+    do {
+        var res = this.round();
+        this.rounds.push(res);
+    } while (this.playerEndurance > 0 && this.ennemyEndurance > 0);
+
+    if(this.playerEndurance <= 0)
+        this.result = 0;
+    else
+        this.result = 1;
 }
 
 /**
@@ -34,10 +40,10 @@ Battle.prototype.round = function () {
     function RoundResult() {
         this.combatRatio = 0;
         this.randomNumber = 0;
-        this.playerEndurance = 0;
         this.playerEnduranceLose = 0;
-        this.ennemyEndurance = 0;
         this.ennemyEnduranceLose = 0;
+        this.playerEndurance = 0;
+        this.ennemyEndurance = 0;
     }
 
     // On calcule le ratio pour déterminer qui a l'avantage dans le round (on bloque la différence à (-)11)
@@ -59,14 +65,18 @@ Battle.prototype.round = function () {
     // Initialisation du résultat du round
     var result = new RoundResult();
 
+    result.ennemyEndurance = this.ennemyEndurance;
+    result.playerEndurance = this.playerEndurance;
+
     result.combatRatio = combatRatio;
     result.randomNumber = randomNumber;
-    result.ennemyEnduranceLose = tableResult[0];
-    result.ennemyEndurance = this.ennemyEndurance - result.ennemyEnduranceLose;
-    result.playerEnduranceLose = tableResult[1];
-    result.playerEndurance = this.playerEndurance - result.playerEnduranceLose;
 
-    this.rounds.push(result);
+    result.ennemyEnduranceLose = tableResult[0];
+    this.ennemyEndurance -= result.ennemyEnduranceLose;
+    
+
+    result.playerEnduranceLose = tableResult[1];
+    this.playerEndurance -= result.playerEnduranceLose;
 
     return result;
 }
@@ -76,8 +86,8 @@ Battle.prototype.round = function () {
 **/
 var combatRatioNeg = [
 [[12,0],[11,0],[11,0],[10,0],[10,0],[9,0],[9,0],[8,0],[8,0],[7,0],[7,0],[6,0]],
-[[3,5],[2,5],[2,5],[1,6],[1,6],[0,6],[0,6],[0,8],[0,8],[0,-1],[0,-1],[0,-1]],
-[[4,4],[3,5],[3,5],[2,5],[2,5],[1,6],[1,6],[0,7],[0,7],[0,8],[0,8], [0,-1]],
+[[3,5],[2,5],[2,5],[1,6],[1,6],[0,6],[0,6],[0,8],[0,8],[0,1000],[0,1000],[0,1000]],
+[[4,4],[3,5],[3,5],[2,5],[2,5],[1,6],[1,6],[0,7],[0,7],[0,8],[0,8], [0,1000]],
 [[5,4],[4,4],[4,4],[3,5],[3,5],[2,5],[2,5],[1,6],[1,6],[0,7],[0,7],[0,8]],
 [[6,3],[5,4],[5,4],[4,4],[4,4],[3,5],[3,5],[2,6],[2,6],[1,7],[1,7],[0,8]],
 [[7,2],[6,3],[6,3],[5,4],[5,4],[4,4],[4,4],[3,5],[3,5],[2,6],[2,6],[1,7]],
@@ -88,7 +98,7 @@ var combatRatioNeg = [
 ];
 
 var combatRatioPos = [
-[[12,0],[14,0],[14,0],[16,0],[16,0],[18,0],[18,0],[-1,0],[-1,0],[-1,0],[-1,0],[-1,0]],
+[[12,0],[14,0],[14,0],[16,0],[16,0],[18,0],[18,0],[1000,0],[1000,0],[1000,0],[1000,0],[1000,0]],
 [[3,5], [4,5], [4,5], [5,4] ,[5,4] ,[6,4] ,[6,4] ,[7,4] ,[7,4] ,[8,3] ,[8,3] ,[9,3] ],
 [[4,4], [5,4], [5,4], [6,3] ,[6,3] ,[7,3] ,[7,3] ,[8,3] ,[8,3] ,[9,3] ,[9,3] ,[10,2]],
 [[5,4], [6,3], [6,3], [7,3] ,[7,3] ,[8,3] ,[8,3] ,[9,2] ,[9,2] ,[10,2] ,[10,2] ,[11,2]],
@@ -96,8 +106,8 @@ var combatRatioPos = [
 [[7,2], [8,2], [8,2], [9,2] ,[9,2] ,[10,2],[10,2],[11,2],[11,2],[12,2] ,[12,2] ,[14,1]],
 [[8,2], [9,2], [9,2], [10,2],[10,2],[11,1],[11,1],[12,1],[12,1],[14,1] ,[14,1] ,[16,1]],
 [[9,1], [10,1],[10,1],[11,1],[11,1],[12,0],[12,0],[14,0],[14,0],[16,0] ,[16,0] ,[18,0]],
-[[10,0],[11,0],[11,0],[12,0],[12,0],[14,0],[14,0],[16,0],[16,0],[18,0] ,[18,0] ,[-1,0]],
-[[11,0],[12,0],[12,0],[14,0],[14,0],[16,0],[16,0],[18,0],[18,0],[-1,0],[-1,0],[-1,0]]
+[[10,0],[11,0],[11,0],[12,0],[12,0],[14,0],[14,0],[16,0],[16,0],[18,0] ,[18,0] ,[1000,0]],
+[[11,0],[12,0],[12,0],[14,0],[14,0],[16,0],[16,0],[18,0],[18,0],[1000,0],[1000,0],[1000,0]]
 ];
 
 module.exports = Battle;

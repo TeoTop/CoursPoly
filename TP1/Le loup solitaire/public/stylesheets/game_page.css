@@ -193,3 +193,7 @@
 .interaction button {
   margin: 20px 30px;
 }
+
+.button-fight {
+  width:150px !important;
+}

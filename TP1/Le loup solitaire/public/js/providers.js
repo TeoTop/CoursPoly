@@ -16,6 +16,7 @@ app.provider("game", function (){
               tmp.checkPath();
               tmp.checkEndurance();
               tmp.checkAlea(tmp.story.info_page.id);
+              tmp.fight();
             } else {
 
             }
@@ -44,6 +45,7 @@ app.provider("game", function (){
                 tmp.checkPath();
                 tmp.checkEndurance();
                 tmp.checkAlea(page);
+                tmp.fight();
               } else {
 
               }
@@ -112,6 +114,20 @@ app.provider("game", function (){
             for(n = 0 ; n < objects[o].nb ; n++)
               player.player.spe_object.push(objects[o].nom);
           }
+        }
+      },
+      fight: function (){
+        var tmp = this;
+        if(this.story.info_page.battle && this.story.info_page.battle.name){
+          $http.get('api/combat/'+player.player.dexter+'/'+player.player.life+'/'+tmp.story.info_page.battle.hability+'/'+tmp.story.info_page.battle.endurance).then(
+            function (rep){
+              tmp.story.currentBattle = rep.data;
+              player.player.state.battles.push({ennemy: tmp.story.info_page.battle.name, fight:rep.data});
+            },
+            function (rep){
+              console.log("Erreur lors du combat !");
+              deferred.reject();
+            });
         }
       }
     }

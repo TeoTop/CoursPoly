@@ -79,10 +79,12 @@ app.controller('NewGameCtrl', function ($cookies, $http, kais, equipments, saves
 
 app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game, kais, weapons) {
     var cc = this;
-<<<<<<< HEAD
+
     cc.displayBackpack = false;
     cc.displayObject = false;
     cc.displayHeal = false;
+    cc.counter = 0;
+    cc.shownRounds = [];
 
     player.load().then(function(rep) {
       cc.player = rep;
@@ -92,6 +94,7 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
         $location.path(cc.player.state.currentPage).replace();
         cc.game = rep;
         cc.healing = (cc.player.kais.indexOf('HEALING') != -1 && cc.game.info_page.id != 1) ? true : false;
+        cc.puissance = (cc.player.kais.indexOf('MINDBLAST') != -1) ? true : false;
         cc.next = cc.game.all;
       });
     });
@@ -105,36 +108,13 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
         if(i%4==3){
           tab.push(tmp.slice());
           tmp = [];
-=======
-    cc.shownRounds = [];
-    cc.battleOver = false;
-
-    player.load().then(function (rep) {
-        cc.player = rep;
-        cc.displayKais = cc.customKais(cc.player.kais)
-        console.log(cc.displayKais);
-        game.load().then(function (rep) {
-            cc.game = rep;
-        });
-    });
-
-    cc.customKais = function (kais) {
-        var tab = [];
-        var tmp = [];
-        console.log(kais);
-        for (i = 0; i < kais.length; i++) {
-            tmp.push(kais[i]);
-            if (i % 4 == 3) {
-                tab.push(tmp.slice());
-                tmp = [];
-            }
->>>>>>> 5afa2f918f8826e541415831b2213e08fe9ad812
         }
+      }
 
-        if (tmp.length != 0)
-            tab.push(tmp.slice());
+      if (tmp.length != 0)
+          tab.push(tmp.slice());
 
-        return tab;
+      return tab;
     };
 
     cc.colspan = function (l) {
@@ -153,13 +133,21 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
       game.loadPage(page).then(function(rep) {
         $location.path(page).replace();
         cc.game = rep;
+
         $('html,body').animate({scrollTop: $("#storyBoard").offset().top},'slow');
+
+        cc.puissance = (cc.player.kais.indexOf('MINDBLAST') != -1) ? true : false;
+
         if(cc.player.kais.indexOf('HEALING') != -1){
           cc.healing = (!cc.displayHeal) ? true : false;
           cc.player.life += 2;
           if(cc.player.life > cc.player.lifeMax + cc.player.lifeBonus)
             cc.player.life = cc.player.lifeMax + cc.player.lifeBonus;
         }
+
+        cc.counter = 0;
+        cc.shownRounds = [];
+        cc.battleOver = false;
         cc.next = cc.game.all;
       });
     }
@@ -191,34 +179,32 @@ app.controller('ChapterCtrl', function ($cookies, $http, $location, player, game
     }
 
     cc.fuir = function () {
-        cc.all = true;
-        cc.battleOver = true;
+      cc.all = true;
+      cc.next = true;
     }
 
 
     cc.battle = function () {
-        var battle = new Battle();
-        battle.playerHabilities = 12; // A changer pour tester
-        battle.ennemyHabilities = 10;
-        battle.playerEndurance = 10;
-        battle.ennemyEndurance = 10;
+      cc.shownRounds = cc.game.currentBattle.rounds;
+      cc.next = true;
+      cc.player.life = cc.game.currentBattle.playerEndurance;
 
-        battle.fight();
-        cc.battleResult = battle;
-        return battle;
+      if(!cc.game.currentBattle.result)
+        cc.game.end = true;
     }
 
     cc.addRound = function () {
+      if(cc.counter < cc.game.currentBattle.rounds.length){
+        cc.shownRounds.push(cc.game.currentBattle.rounds[cc.counter++]);
+      }
 
-        if (cc.battleResult == null) {
-            cc.battle();
-        }
+      if(cc.counter == cc.game.currentBattle.rounds.length){
+        cc.next = true;
+        cc.player.life = cc.game.currentBattle.playerEndurance;
 
-        if (cc.shownRounds.length < cc.battleResult.rounds.length) {
-            cc.shownRounds.push(cc.battleResult.rounds[cc.shownRounds.length]);
-        }
-        else {
-            cc.battleOver = true;
-        }
+        if(!cc.game.currentBattle.result)
+          cc.game.end = true;
+      }
+        
     }
 });
